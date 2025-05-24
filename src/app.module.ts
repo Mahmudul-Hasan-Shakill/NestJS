@@ -1,16 +1,45 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { CommentModule } from './comment/comment.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-
-import config from 'ormconfig';
-
+import { ConfigService, ConfigModule } from '@nestjs/config';
+import { getDatabaseConfig } from 'ormconfig';
+import { RoleModule } from './role/role.module';
+import { ServerModule } from './core_system/server/server.module';
+import { AmcModule } from './core_system/amc/amc.module';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 @Module({
-  imports: [UserModule, CommentModule, TypeOrmModule.forRoot(config), AuthModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000, //60 seconds
+          limit: 10,
+        },
+      ],
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) =>
+        getDatabaseConfig(configService),
+      inject: [ConfigService],
+    }),
+    AuthModule,
+    UserModule,
+    RoleModule,
+    ServerModule,
+    AmcModule,
+  ],
+  controllers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

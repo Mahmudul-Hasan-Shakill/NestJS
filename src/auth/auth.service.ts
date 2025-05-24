@@ -3,9 +3,9 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../../src/user/user.service';
 import * as bcrypt from 'bcrypt';
-import { UserEntity } from 'src/user/entity/user.entity';
+import { UserEntity } from '../user/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 

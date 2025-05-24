@@ -1,8 +1,8 @@
 import { ConfigService } from '@nestjs/config';
-import { AmcEntity } from 'src/core_system/amc/entity/amc.entity';
-import { ServerEntity } from 'src/core_system/server/entity/server.entity';
-import { RoleEntity } from 'src/role/entities/role.entity';
-import { UserEntity } from 'src/user/entity/user.entity';
+import { AmcEntity } from './src/core_system/amc/entity/amc.entity';
+import { ServerEntity } from './src/core_system/server/entity/server.entity';
+import { RoleEntity } from './src/role/entities/role.entity';
+import { UserEntity } from './src/user/entity/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 export const getDatabaseConfig = (

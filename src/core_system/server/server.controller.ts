@@ -12,7 +12,7 @@ import { ServerService } from './server.service';
 import { CreateServerDto } from './dto/server.dto';
 import { UpdateServerDto } from './dto/server.dto';
 import { ServerEntity } from './entity/server.entity';
-import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
 
 @Controller('server')
 export class ServerController {

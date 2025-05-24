@@ -12,7 +12,7 @@ import { AmcService } from './amc.service';
 import { CreateAmcDto } from './dto/amc.dto';
 import { UpdateAmcDto } from './dto/amc.dto';
 import { AmcEntity } from './entity/amc.entity';
-import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
 
 @Controller('amc')
 export class AmcController {

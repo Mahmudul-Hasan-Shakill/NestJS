@@ -11,7 +11,7 @@ import {
   ValidationPipe,
   Post,
 } from '@nestjs/common';
-import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtGuard } from '../auth/guards/jwt-auth.guard';
 import { RoleService } from './role.service';
 import { RoleDto } from './dtos/role.dto';
 import { UpdateRoleDto } from './dtos/update-role.dto';

@@ -3,12 +3,13 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { ConfigService, ConfigModule } from '@nestjs/config';
-import { getDatabaseConfig } from 'ormconfig';
+import { getDatabaseConfig } from '../ormconfig';
 import { RoleModule } from './role/role.module';
 import { ServerModule } from './core_system/server/server.module';
 import { AmcModule } from './core_system/amc/amc.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { AppController } from './app.controller';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -34,7 +35,7 @@ import { APP_GUARD } from '@nestjs/core';
     ServerModule,
     AmcModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,

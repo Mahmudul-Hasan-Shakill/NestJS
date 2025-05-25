@@ -73,37 +73,33 @@ export class UserService {
   // }
 
   async create(createUserDto: CreateUserDto) {
-    try {
-      const user = this.userRepo.create(createUserDto);
-      await this.userRepo.save(user);
-
-      await this.sendAccountEmail(
-        user.email,
-        user.pin,
-        'Account Created',
-        'Your account has been created successfully.',
-      );
-
-      const { password, ...result } = user;
-      return {
-        isSuccessful: true,
-        message: 'User created successfully',
-        data: result,
-      };
-    } catch (error) {
-      // Log the error for debugging
-      console.error('Error creating user:', error);
-
-      // Handle specific error cases
-      if (error.code === '23505') {
-        // Unique violation error code for PostgreSQL
-        throw new ConflictException('Email or PIN already exists');
-      }
-
-      throw new InternalServerErrorException(
-        'An error occurred while creating the user',
-      );
+    // Check if the pin already exists
+    const existingUser = await this.userRepo.findOne({
+      where: { pin: createUserDto.pin },
+    });
+    if (existingUser) {
+      throw new ConflictException('PIN already exists');
     }
+
+    // Create and save the new user
+    const user = this.userRepo.create(createUserDto);
+    await this.userRepo.save(user);
+
+    // Send account creation email
+    await this.sendAccountEmail(
+      user.email,
+      user.pin,
+      'Account Created',
+      'Your account has been created successfully.',
+    );
+
+    // Exclude the password from the response
+    const { password, ...result } = user;
+    return {
+      isSuccessful: true,
+      message: 'User created successfully',
+      data: result,
+    };
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
@@ -188,22 +184,6 @@ export class UserService {
     };
   }
 
-  // async resetPassword(pin: string): Promise<any> {
-  //   const user = await this.userRepo.findOne({ where: { pin } });
-  //   if (!user) {
-  //     throw new NotFoundException('User not found.');
-  //   }
-  //   const newPassword = 'Bbl@12345';
-  //   const hashedPassword = await bcrypt.hash(newPassword, 10);
-  //   user.password = hashedPassword; // Set the new hashed password
-  //   user.isReset = true; // Mark as password reset required
-  //   await this.userRepo.save(user);
-  //   return {
-  //     isSuccessful: true,
-  //     message: 'Password has been reset successfully. Default password is set.',
-  //   };
-  // }
-
   async resetPassword(pin: string): Promise<any> {
     const user = await this.userRepo.findOne({ where: { pin } });
     if (!user) {
@@ -274,22 +254,6 @@ export class UserService {
       },
     });
 
-    // const htmlContent = `
-    //   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f4f4f4; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    //     <div style="text-align: center; background-color: #007bff; padding: 15px; border-radius: 10px 10px 0 0;">
-    //       <h1 style="color: #ffffff; margin: 0; font-size: 24px;">User Notification</h1>
-    //     </div>
-    //     <div style="padding: 20px; background-color: #ffffff; border-radius: 0 0 10px 10px;">
-    //       <p style="font-size: 14px; color: #333;">${introMessage}</p>
-    //       <p style="font-size: 14px; color: #333;">Your default password is:</p>
-    //       <p style="text-align: center; font-size: 22px; font-weight: bold; color: #ff4500; background-color: #ffe5e5; padding: 10px; border-radius: 5px;">Bbl@12345</p>
-    //       <p style="font-size: 14px; color: #333;">Your PIN is:</p>
-    //       <p style="text-align: center; font-size: 20px; font-weight: bold; color: #007bff;">${pin}</p>
-    //       <p style="font-size: 14px; color: #333;">Please change your password after logging in.</p>
-    //       <p style="font-size: 14px; color: #333;">Thanks,<br>Core Systems</p>
-    //     </div>
-    //   </div>
-    // `;
     htmlContent = htmlContent
       .replace('{{PIN}}', pin)
       .replace('{{PASSWORD}}', 'Bbl@12345')
@@ -305,10 +269,8 @@ export class UserService {
     return new Promise((resolve, reject) => {
       transporter.sendMail(mailOptions, (error) => {
         if (error) {
-          console.error('Email send error:', error);
           return reject(new Error('Failed to send email.'));
         }
-        console.log('Email sent successfully to:', email);
         resolve(true);
       });
     });

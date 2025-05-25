@@ -18,8 +18,9 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
+  @IsOptional()
   @IsString()
-  password: string;
+  password?: string = 'Bbl@12345';
 
   @IsString()
   @IsNotEmpty()
@@ -52,5 +53,5 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  password?: string; // Ensure this is included for password updates
+  password?: string;
 }

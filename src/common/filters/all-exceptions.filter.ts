@@ -16,6 +16,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
+
     const status =
       exception instanceof HttpException
         ? exception.getStatus()
@@ -26,12 +27,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
         ? exception.getResponse()
         : 'Internal server error';
 
-    // Log the exception for debugging
-    this.logger.error(
-      `Exception thrown at ${request.method} ${request.url}: ${JSON.stringify(
-        message,
-      )}`,
-    );
+    // 🔍 Log full exception details
+    this.logger.error(`Exception thrown at ${request.method} ${request.url}`);
 
     response.status(status).json({
       statusCode: status,

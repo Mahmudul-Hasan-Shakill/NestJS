@@ -3,7 +3,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as morgan from 'morgan';
 import * as compression from 'compression';
@@ -41,21 +40,7 @@ async function bootstrap() {
   );
 
   // Helmet middleware for securing HTTP headers
-  app.use(
-    helmet({
-      contentSecurityPolicy: {
-        directives: {
-          defaultSrc: ["'self'"], // Only allow resources from the same origin
-          styleSrc: ["'self'", 'https:'], // Avoid 'unsafe-inline' if possible
-          scriptSrc: ["'self'"], // Avoid 'unsafe-inline' and 'unsafe-eval' if possible
-        },
-      },
-      crossOriginResourcePolicy: { policy: 'cross-origin' }, // Allow cross-origin resource sharing
-      frameguard: { action: 'deny' }, // Prevent clickjacking
-      referrerPolicy: { policy: 'no-referrer' }, // No referrer information
-      // Add more security headers as needed
-    }),
-  );
+  app.use(helmet());
 
   // HTTP request logging
   app.use(morgan('combined'));
@@ -63,17 +48,7 @@ async function bootstrap() {
   // Enable response compression
   app.use(compression());
 
-  // Rate limiting middleware to prevent abuse
-  // app.use(
-  //   rateLimit({
-  //     windowMs: 10 * 60 * 1000, // 10 minutes
-  //     max: 500, // Limit each IP to 500 requests per windowMs
-  //     message:
-  //       'Too many requests from this IP, please try again after 15 minutes',
-  //   }),
-  // );
-
-  // CORS configuration
+  // // CORS configuration
   const allowedOrigins =
     configService.get<string>('CORS_ORIGIN')?.split(',') || [];
   app.enableCors({
@@ -105,7 +80,7 @@ async function bootstrap() {
       res: { setTimeout: (arg0: number) => void },
       next: () => void,
     ) => {
-      res.setTimeout(5000); // Set timeout to 5 seconds
+      res.setTimeout(10000); // Set timeout to 10 seconds
       next();
     },
   );

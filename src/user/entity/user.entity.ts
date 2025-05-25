@@ -15,7 +15,7 @@ export class UserEntity {
   @Column({ nullable: false, unique: true })
   email: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, default: 'Bbl@12345' })
   password: string;
 
   @Column({ nullable: true })

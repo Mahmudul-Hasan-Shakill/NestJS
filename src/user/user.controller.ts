@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Patch,
@@ -23,12 +24,6 @@ export class UserController {
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.userService.findOne(id);
-  }
-
-  @SkipThrottle()
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
   }
 
   @Throttle({ default: { limit: 3, ttl: 60000 } })
@@ -89,6 +84,21 @@ export class UserController {
     }
   }
 
+  // @UseGuards(JwtGuard)
+  // @Patch('reset-password/:pin')
+  // async resetPassword(@Param('pin') pin: string) {
+  //   try {
+  //     const result = await this.userService.resetPassword(pin);
+  //     return result;
+  //   } catch (error) {
+  //     if (error instanceof HttpException) {
+  //       throw error;
+  //     }
+  //     console.error('Unexpected error in resetPassword:', error);
+  //     throw new HttpException('An unexpected error occurred.', 500);
+  //   }
+  // }
+
   @UseGuards(JwtGuard)
   @Patch('reset-password/:pin')
   async resetPassword(@Param('pin') pin: string) {
@@ -100,7 +110,10 @@ export class UserController {
         throw error;
       }
       console.error('Unexpected error in resetPassword:', error);
-      throw new HttpException('An unexpected error occurred.', 500);
+      throw new HttpException(
+        'An unexpected error occurred while resetting the password.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 

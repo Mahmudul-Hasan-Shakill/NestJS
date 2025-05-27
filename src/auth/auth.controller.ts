@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { RefreshJwtGuard } from './guards/refresh-jwt-auth.guard';
 import { JwtGuard } from './guards/jwt-auth.guard';
 import { LoginDto } from './dtos/login.dto';
+import { ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -13,6 +14,7 @@ export class AuthController {
     private userService: UserService,
   ) {}
 
+  @ApiSecurity('csrf-token')
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     const user = await this.authService.validateUser(
@@ -22,6 +24,8 @@ export class AuthController {
     return this.authService.login(user);
   }
 
+  @ApiBearerAuth('access-token')
+  @ApiSecurity('csrf-token')
   @UseGuards(JwtGuard)
   @Post('register')
   async registerUser(@Body() createUserDto: CreateUserDto) {
@@ -34,6 +38,8 @@ export class AuthController {
     return this.authService.refreshToken(req.user);
   }
 
+  @ApiBearerAuth('access-token')
+  @ApiSecurity('csrf-token')
   @UseGuards(JwtGuard)
   @Post('logout')
   async logout(@Request() req: any) {

@@ -14,11 +14,11 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 async function bootstrap() {
   // Create the Nest application
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService); // Access configuration service
-  const logger = new Logger('Bootstrap'); // Initialize logger for bootstrapping
+  const configService = app.get(ConfigService);
+  const logger = new Logger('Bootstrap');
 
   // Parse cookies
-  app.use(cookieParser()); // CSRF protection middleware
+  app.use(cookieParser());
 
   app.use(
     csurf({
@@ -33,9 +33,9 @@ async function bootstrap() {
   // Global validation pipe to validate incoming requests
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // Strip properties that are not defined in the DTO
-      forbidNonWhitelisted: true, // Reject requests with non-whitelisted properties
-      transform: true, // Automatically transform payloads to DTO instances
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
     }),
   );
 
@@ -48,15 +48,16 @@ async function bootstrap() {
   // Enable response compression
   app.use(compression());
 
-  // // CORS configuration
+  // CORS configuration
   const allowedOrigins =
     configService.get<string>('CORS_ORIGIN')?.split(',') || [];
+
   app.enableCors({
-    origin: allowedOrigins, // Allow specified origins
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS', // Allowed HTTP methods
-    allowedHeaders: 'Content-Type, Accept, Authorization', // Allowed headers
-    exposedHeaders: 'Authorization', // Expose Authorization header to client
+    origin: allowedOrigins,
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-CSRF-Token'],
+    exposedHeaders: 'Authorization',
   });
 
   // Set a global prefix for all routes
@@ -86,14 +87,39 @@ async function bootstrap() {
   );
 
   // Swagger Options
-  const options = new DocumentBuilder()
-    .addBearerAuth()
+  // const options = new DocumentBuilder()
+  //   .setTitle('Inventory Management System')
+  //   .setDescription('API description of Inventory Management System')
+  //   .setVersion('1.0')
+  //   .build();
+  // const document = SwaggerModule.createDocument(app, options);
+  // SwaggerModule.setup(`${prefix}/docs`, app, document);
+
+  const config = new DocumentBuilder()
     .setTitle('Inventory Management System')
     .setDescription('API description of Inventory Management System')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        in: 'header',
+      },
+      'access-token',
+    )
+    .addApiKey(
+      {
+        type: 'apiKey',
+        name: 'X-CSRF-Token',
+        in: 'header',
+      },
+      'csrf-token',
+    )
     .build();
-  const document = SwaggerModule.createDocument(app, options);
-  // Swagger path: http://localhost:4000/api/docs
+
+  const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(`${prefix}/docs`, app, document);
 
   // Start the application on the specified port

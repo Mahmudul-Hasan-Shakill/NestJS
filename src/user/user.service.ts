@@ -61,17 +61,6 @@ export class UserService {
     };
   }
 
-  // async create(createUserDto: CreateUserDto) {
-  //   const user = this.userRepo.create(createUserDto);
-  //   await this.userRepo.save(user);
-  //   const { password, ...result } = user;
-  //   return {
-  //     isSuccessful: true,
-  //     message: 'User created successfully',
-  //     data: result,
-  //   };
-  // }
-
   async create(createUserDto: CreateUserDto) {
     // Check if the pin already exists
     const existingUser = await this.userRepo.findOne({
@@ -266,12 +255,24 @@ export class UserService {
       html: htmlContent,
     };
 
+    // return new Promise((resolve, reject) => {
+    //   transporter.sendMail(mailOptions, (error) => {
+    //     if (error) {
+    //       return reject(new Error('Failed to send email.'));
+    //     }
+    //     resolve(true);
+    //   });
+    // });
     return new Promise((resolve, reject) => {
       transporter.sendMail(mailOptions, (error) => {
         if (error) {
           return reject(new Error('Failed to send email.'));
         }
-        resolve(true);
+
+        // Set a timeout after sending the email
+        setTimeout(() => {
+          resolve(true);
+        }, 10000); // Adjust the timeout duration as needed (5000 ms = 5 seconds)
       });
     });
   }

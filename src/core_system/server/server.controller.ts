@@ -13,7 +13,10 @@ import { CreateServerDto } from './dto/server.dto';
 import { UpdateServerDto } from './dto/server.dto';
 import { ServerEntity } from './entity/server.entity';
 import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
+import { ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 
+@ApiBearerAuth('access-token')
+@ApiSecurity('csrf-token')
 @Controller('server')
 export class ServerController {
   constructor(private readonly serverService: ServerService) {}

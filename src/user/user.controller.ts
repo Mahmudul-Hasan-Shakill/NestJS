@@ -8,14 +8,16 @@ import {
   Param,
   ParseIntPipe,
   Patch,
-  Post,
   UseGuards,
 } from '@nestjs/common';
 import { JwtGuard } from '../auth/guards/jwt-auth.guard';
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { UpdateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
-import { SkipThrottle, Throttle } from '@nestjs/throttler';
+import { Throttle } from '@nestjs/throttler';
+import { ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 
+@ApiBearerAuth('access-token')
+@ApiSecurity('csrf-token')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -83,21 +85,6 @@ export class UserController {
       throw new HttpException('An unexpected error occurred.', 500);
     }
   }
-
-  // @UseGuards(JwtGuard)
-  // @Patch('reset-password/:pin')
-  // async resetPassword(@Param('pin') pin: string) {
-  //   try {
-  //     const result = await this.userService.resetPassword(pin);
-  //     return result;
-  //   } catch (error) {
-  //     if (error instanceof HttpException) {
-  //       throw error;
-  //     }
-  //     console.error('Unexpected error in resetPassword:', error);
-  //     throw new HttpException('An unexpected error occurred.', 500);
-  //   }
-  // }
 
   @UseGuards(JwtGuard)
   @Patch('reset-password/:pin')

@@ -4,6 +4,7 @@ import { ServerEntity } from './src/core_system/server/entity/server.entity';
 import { RoleEntity } from './src/role/entities/role.entity';
 import { UserEntity } from './src/user/entity/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { DynamicSchemaEntity } from 'src/dynamic_schema/entity/dynamic-schema.entity';
 
 export const getDatabaseConfig = (
   configService: ConfigService,
@@ -15,7 +16,13 @@ export const getDatabaseConfig = (
     username: configService.get<string>('DB_USER'),
     password: configService.get<string>('DB_PASSWORD'),
     database: configService.get<string>('DB_DATABASE'),
-    entities: [UserEntity, RoleEntity, ServerEntity, AmcEntity],
+    entities: [
+      UserEntity,
+      RoleEntity,
+      ServerEntity,
+      AmcEntity,
+      DynamicSchemaEntity,
+    ],
     synchronize: true,
   };
 };

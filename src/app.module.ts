@@ -10,6 +10,9 @@ import { AmcModule } from './core_system/amc/amc.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
+import { DynamicSchemaEntity } from './dynamic_schema/entity/dynamic-schema.entity';
+import { DynamicSchemaController } from './dynamic_schema/dynamic-schema.controller';
+import { DynamicSchemaService } from './dynamic_schema/dynamic-schema.service';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -29,18 +32,20 @@ import { AppController } from './app.controller';
         getDatabaseConfig(configService),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([DynamicSchemaEntity]),
     AuthModule,
     UserModule,
     RoleModule,
     ServerModule,
     AmcModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, DynamicSchemaController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
+    DynamicSchemaService,
   ],
 })
 export class AppModule {}

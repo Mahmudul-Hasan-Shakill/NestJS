@@ -4,7 +4,7 @@ import { ServerEntity } from './src/core_system/server/entity/server.entity';
 import { RoleEntity } from './src/role/entities/role.entity';
 import { UserEntity } from './src/user/entity/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { DynamicSchemaEntity } from 'src/dynamic_schema/entity/dynamic-schema.entity';
+import { DynamicSchemaEntity } from './src/dynamic_schema/entity/dynamic-schema.entity';
 
 export const getDatabaseConfig = (
   configService: ConfigService,

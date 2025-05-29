@@ -9,6 +9,7 @@ import * as compression from 'compression';
 import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
 import * as csurf from 'csurf';
+import { Request, Response, NextFunction } from 'express';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
@@ -20,15 +21,49 @@ async function bootstrap() {
   // Parse cookies
   app.use(cookieParser());
 
-  app.use(
-    csurf({
-      cookie: {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'strict',
-      },
-    }),
-  );
+  // CORS configuration
+  const allowedOrigins =
+    configService.get<string>('CORS_ORIGIN')?.split(',') || [];
+
+  app.enableCors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-CSRF-Token'],
+    exposedHeaders: 'Authorization',
+  });
+
+  // CSRF protection middleware
+  // const csrfProtection = csurf({
+  //   cookie: {
+  //     httpOnly: true,
+  //     secure: false,
+  //     sameSite: 'strict',
+  //   },
+  // });
+
+  // app.use((req: Request, res: Response, next: NextFunction) => {
+  //   const excludedPaths = [
+  //     '/auth/refresh',
+  //     '/csrf/token',
+  //     '/docs',
+  //     '/docs-json',
+  //     '/favicon.ico',
+  //   ];
+
+  //   // Check if the request path is in the excluded paths
+  //   if (excludedPaths.some((path) => req.path.startsWith(path))) {
+  //     return next(); // Skip CSRF protection
+  //   }
+
+  //   // Apply CSRF protection
+  //   csrfProtection(req, res, (err: any) => {
+  //     if (err) {
+  //       return next(err); // Pass the error to the next middleware
+  //     }
+  //     next();
+  //   });
+  // });
 
   // Global validation pipe to validate incoming requests
   app.useGlobalPipes(
@@ -47,18 +82,6 @@ async function bootstrap() {
 
   // Enable response compression
   app.use(compression());
-
-  // CORS configuration
-  const allowedOrigins =
-    configService.get<string>('CORS_ORIGIN')?.split(',') || [];
-
-  app.enableCors({
-    origin: allowedOrigins,
-    credentials: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-CSRF-Token'],
-    exposedHeaders: 'Authorization',
-  });
 
   // Set a global prefix for all routes
   const prefix = configService.get<string>('PREFIX');
@@ -87,17 +110,11 @@ async function bootstrap() {
   );
 
   // Swagger Options
-  // const options = new DocumentBuilder()
-  //   .setTitle('Inventory Management System')
-  //   .setDescription('API description of Inventory Management System')
-  //   .setVersion('1.0')
-  //   .build();
-  // const document = SwaggerModule.createDocument(app, options);
-  // SwaggerModule.setup(`${prefix}/docs`, app, document);
-
   const config = new DocumentBuilder()
     .setTitle('Inventory Management System')
-    .setDescription('API description of Inventory Management System')
+    .setDescription(
+      'API documentation for the Inventory Management System, which allows users to manage inventory items, track stock levels, and handle orders efficiently.',
+    )
     .setVersion('1.0')
     .addBearerAuth(
       {
@@ -109,14 +126,15 @@ async function bootstrap() {
       },
       'access-token',
     )
-    .addApiKey(
-      {
-        type: 'apiKey',
-        name: 'X-CSRF-Token',
-        in: 'header',
-      },
-      'csrf-token',
-    )
+    // .addApiKey(
+    //   {
+    //     type: 'apiKey',
+    //     name: 'X-CSRF-Token',
+    //     in: 'header',
+    //   },
+    //   'csrf-token',
+    // )
+    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

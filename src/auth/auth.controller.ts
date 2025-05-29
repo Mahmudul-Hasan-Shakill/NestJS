@@ -14,7 +14,7 @@ export class AuthController {
     private userService: UserService,
   ) {}
 
-  @ApiSecurity('csrf-token')
+  // @ApiSecurity('csrf-token')
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     const user = await this.authService.validateUser(
@@ -25,13 +25,14 @@ export class AuthController {
   }
 
   @ApiBearerAuth('access-token')
-  @ApiSecurity('csrf-token')
+  // @ApiSecurity('csrf-token')
   @UseGuards(JwtGuard)
   @Post('register')
   async registerUser(@Body() createUserDto: CreateUserDto) {
     return await this.userService.create(createUserDto);
   }
 
+  // @ApiSecurity('csrf-token')
   @UseGuards(RefreshJwtGuard)
   @Post('refresh')
   async refreshToken(@Request() req: any) {
@@ -39,7 +40,7 @@ export class AuthController {
   }
 
   @ApiBearerAuth('access-token')
-  @ApiSecurity('csrf-token')
+  // @ApiSecurity('csrf-token')
   @UseGuards(JwtGuard)
   @Post('logout')
   async logout(@Request() req: any) {

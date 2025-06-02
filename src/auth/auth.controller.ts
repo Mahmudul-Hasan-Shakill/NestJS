@@ -66,7 +66,6 @@ export class AuthController {
   }
 
   @ApiBearerAuth('access-token')
-  // @ApiSecurity('csrf-token')
   @UseGuards(JwtGuard)
   @Post('register')
   async registerUser(@Body() createUserDto: CreateUserDto) {

@@ -8,8 +8,6 @@ import * as morgan from 'morgan';
 import * as compression from 'compression';
 import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
-import * as csurf from 'csurf';
-import { Request, Response, NextFunction } from 'express';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
@@ -29,41 +27,10 @@ async function bootstrap() {
     origin: allowedOrigins,
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-CSRF-Token'],
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
     exposedHeaders: 'Authorization',
+    optionsSuccessStatus: 200,
   });
-
-  // CSRF protection middleware
-  // const csrfProtection = csurf({
-  //   cookie: {
-  //     httpOnly: true,
-  //     secure: false,
-  //     sameSite: 'strict',
-  //   },
-  // });
-
-  // app.use((req: Request, res: Response, next: NextFunction) => {
-  //   const excludedPaths = [
-  //     '/auth/refresh',
-  //     '/csrf/token',
-  //     '/docs',
-  //     '/docs-json',
-  //     '/favicon.ico',
-  //   ];
-
-  //   // Check if the request path is in the excluded paths
-  //   if (excludedPaths.some((path) => req.path.startsWith(path))) {
-  //     return next(); // Skip CSRF protection
-  //   }
-
-  //   // Apply CSRF protection
-  //   csrfProtection(req, res, (err: any) => {
-  //     if (err) {
-  //       return next(err); // Pass the error to the next middleware
-  //     }
-  //     next();
-  //   });
-  // });
 
   // Global validation pipe to validate incoming requests
   app.useGlobalPipes(
@@ -98,16 +65,16 @@ async function bootstrap() {
   app.enableShutdownHooks();
 
   // Middleware to set a timeout for requests
-  app.use(
-    (
-      _req: any,
-      res: { setTimeout: (arg0: number) => void },
-      next: () => void,
-    ) => {
-      res.setTimeout(10000); // Set timeout to 10 seconds
-      next();
-    },
-  );
+  // app.use(
+  //   (
+  //     _req: any,
+  //     res: { setTimeout: (arg0: number) => void },
+  //     next: () => void,
+  //   ) => {
+  //     res.setTimeout(5000); // Set timeout to 10 seconds
+  //     next();
+  //   },
+  // );
 
   // Swagger Options
   const config = new DocumentBuilder()
@@ -126,14 +93,6 @@ async function bootstrap() {
       },
       'access-token',
     )
-    // .addApiKey(
-    //   {
-    //     type: 'apiKey',
-    //     name: 'X-CSRF-Token',
-    //     in: 'header',
-    //   },
-    //   'csrf-token',
-    // )
     .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .build();
 

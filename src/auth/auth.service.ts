@@ -32,7 +32,7 @@ export class AuthService {
     // Check if the user account is active
     if (!user.isActive) {
       throw new UnauthorizedException(
-        'User account is inactive. Contact IT Division for assistance.',
+        'Account is Inactive. Contact Pranto for Assistance.',
       );
     }
 

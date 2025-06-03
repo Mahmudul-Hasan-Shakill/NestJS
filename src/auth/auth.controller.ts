@@ -17,6 +17,7 @@ import { LoginDto } from './dtos/login.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { EncryptionService } from './strategies/encryption.service';
 
 @Controller('auth')
 export class AuthController {
@@ -24,6 +25,7 @@ export class AuthController {
     private authService: AuthService,
     private userService: UserService,
     private configService: ConfigService,
+    private encryptionService: EncryptionService,
   ) {}
 
   // @Post('login')
@@ -45,12 +47,28 @@ export class AuthController {
     const loginResult = await this.authService.login(user);
 
     const accessToken = loginResult.data.access_token;
+    const userRole = this.encryptionService.encrypt(loginResult.data.role);
+    const userPin = this.encryptionService.encrypt(loginResult.data.pin);
 
     const accessTime = this.configService.get<string>('ACCESS_TIME');
     const accessTimeMs = parseInt(accessTime) * 1000;
 
     res.cookie('ACSTKN', accessToken, {
       httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      maxAge: accessTimeMs,
+    });
+
+    res.cookie('USRROLE', userRole, {
+      httpOnly: false,
+      secure: true,
+      sameSite: 'none',
+      maxAge: accessTimeMs,
+    });
+
+    res.cookie('USRPIN', userPin, {
+      httpOnly: false,
       secure: true,
       sameSite: 'none',
       maxAge: accessTimeMs,

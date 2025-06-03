@@ -13,6 +13,7 @@ import { AppController } from './app.controller';
 import { DynamicSchemaEntity } from './dynamic_schema/entity/dynamic-schema.entity';
 import { DynamicSchemaController } from './dynamic_schema/dynamic-schema.controller';
 import { DynamicSchemaService } from './dynamic_schema/dynamic-schema.service';
+import { EncryptionService } from './auth/strategies/encryption.service';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -46,6 +47,8 @@ import { DynamicSchemaService } from './dynamic_schema/dynamic-schema.service';
       useClass: ThrottlerGuard,
     },
     DynamicSchemaService,
+    EncryptionService,
   ],
+  exports: [EncryptionService],
 })
 export class AppModule {}

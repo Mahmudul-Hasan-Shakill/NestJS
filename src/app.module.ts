@@ -5,7 +5,6 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 import { getDatabaseConfig } from '../ormconfig';
 import { RoleModule } from './role/role.module';
-import { ServerModule } from './core_system/server/server.module';
 import { AmcModule } from './core_system/amc/amc.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
@@ -14,13 +13,17 @@ import { DynamicSchemaEntity } from './dynamic_schema/entity/dynamic-schema.enti
 import { DynamicSchemaController } from './dynamic_schema/dynamic-schema.controller';
 import { DynamicSchemaService } from './dynamic_schema/dynamic-schema.service';
 import { EncryptionService } from './auth/strategies/encryption.service';
+import { VmModule } from './core_system/vm/vm.module';
+import { ApplicationModule } from './core_system/application/application.module';
+import { DatabaseModule } from './core_system/database/database.module';
+import { PhysicalModule } from './core_system/physical/physical.module';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
       throttlers: [
         {
-          ttl: 60000, //60 seconds
-          limit: 10,
+          ttl: 5000, //5 seconds
+          limit: 100,
         },
       ],
     }),
@@ -37,8 +40,11 @@ import { EncryptionService } from './auth/strategies/encryption.service';
     AuthModule,
     UserModule,
     RoleModule,
-    ServerModule,
     AmcModule,
+    VmModule,
+    ApplicationModule,
+    DatabaseModule,
+    PhysicalModule,
   ],
   controllers: [AppController, DynamicSchemaController],
   providers: [

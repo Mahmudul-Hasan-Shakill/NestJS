@@ -1,10 +1,13 @@
 import { ConfigService } from '@nestjs/config';
 import { AmcEntity } from './src/core_system/amc/entity/amc.entity';
-import { ServerEntity } from './src/core_system/server/entity/server.entity';
 import { RoleEntity } from './src/role/entities/role.entity';
 import { UserEntity } from './src/user/entity/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { DynamicSchemaEntity } from './src/dynamic_schema/entity/dynamic-schema.entity';
+import { VmEntity } from 'src/core_system/vm/entity/vm.entity';
+import { ApplicationEntity } from 'src/core_system/application/entity/application.entity';
+import { DatabaseEntity } from 'src/core_system/database/entity/database.entity';
+import { PhysicalEntity } from 'src/core_system/physical/entity/physical.entity';
 
 export const getDatabaseConfig = (
   configService: ConfigService,
@@ -19,9 +22,12 @@ export const getDatabaseConfig = (
     entities: [
       UserEntity,
       RoleEntity,
-      ServerEntity,
       AmcEntity,
       DynamicSchemaEntity,
+      VmEntity,
+      ApplicationEntity,
+      DatabaseEntity,
+      PhysicalEntity,
     ],
     synchronize: true,
   };

@@ -18,9 +18,18 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
+  @IsString()
+  division: string;
+
+  @IsString()
+  department: string;
+
+  @IsString()
+  unit: string;
+
   @IsOptional()
   @IsString()
-  password?: string = 'Bbl@12345';
+  password?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -47,6 +56,17 @@ export class CreateUserDto {
   @IsOptional()
   @IsBoolean()
   isReset: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isLogin?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isLocked?: boolean;
+
+  @IsOptional()
+  loginAttempts?: number;
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {

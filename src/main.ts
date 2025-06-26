@@ -64,18 +64,6 @@ async function bootstrap() {
   // Enable shutdown hooks for graceful shutdown
   app.enableShutdownHooks();
 
-  // Middleware to set a timeout for requests
-  // app.use(
-  //   (
-  //     _req: any,
-  //     res: { setTimeout: (arg0: number) => void },
-  //     next: () => void,
-  //   ) => {
-  //     res.setTimeout(5000); // Set timeout to 10 seconds
-  //     next();
-  //   },
-  // );
-
   // Swagger Options
   const config = new DocumentBuilder()
     .setTitle('Inventory Management System')
@@ -112,7 +100,7 @@ async function bootstrap() {
   // Handle uncaught exceptions
   process.on('uncaughtException', (err) => {
     logger.error(`Uncaught Exception: ${err.message}`);
-    process.exit(1); // Exit the process with an error code
+    process.exit(1);
   });
 }
 

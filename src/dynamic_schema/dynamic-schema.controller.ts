@@ -11,7 +11,6 @@ import { JwtGuard } from '../auth/guards/jwt-auth.guard';
 import { DynamicSchemaDto } from './dto/dynamic-schema.dto';
 
 @ApiBearerAuth('access-token')
-@ApiSecurity('csrf-token')
 @Controller('dynamic-fields')
 export class DynamicSchemaController {
   constructor(private readonly dynamicSchemaService: DynamicSchemaService) {}

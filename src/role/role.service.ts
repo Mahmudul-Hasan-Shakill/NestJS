@@ -67,7 +67,7 @@ export class RoleService {
     try {
       const guiNames = await this.roleRepository
         .createQueryBuilder('role')
-        .select(['role.hrefGui', 'role.isActive'])
+        .select(['role.hrefGui', 'role.hrefLabel', 'role.isActive'])
         .where('role.roleName = :roleName', { roleName })
         .getMany();
 

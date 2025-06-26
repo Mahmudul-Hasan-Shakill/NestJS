@@ -15,12 +15,11 @@ import { JwtGuard } from '../auth/guards/jwt-auth.guard';
 import { RoleService } from './role.service';
 import { RoleDto } from './dtos/role.dto';
 import { UpdateRoleDto } from './dtos/update-role.dto';
-import { ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiBearerAuth('access-token')
-@ApiSecurity('csrf-token')
 @Controller('roles')
-@UseGuards(JwtGuard) // Secure all routes
+@UseGuards(JwtGuard)
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
@@ -56,7 +55,7 @@ export class RoleController {
     @Param('id', ParseIntPipe) id: number,
     @Body() roleDto: RoleDto,
   ): any {
-    return this.roleService.updateRoleById(id, roleDto); // Use RoleDto for updates
+    return this.roleService.updateRoleById(id, roleDto);
   }
 
   @Put()

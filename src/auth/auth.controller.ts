@@ -28,15 +28,6 @@ export class AuthController {
     private encryptionService: EncryptionService,
   ) {}
 
-  // @Post('login')
-  // async login(@Body() loginDto: LoginDto) {
-  //   const user = await this.authService.validateUser(
-  //     loginDto.pin,
-  //     loginDto.password,
-  //   );
-  //   return this.authService.login(user);
-  // }
-
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Res() res: Response) {
     const user = await this.authService.validateUser(
@@ -49,37 +40,44 @@ export class AuthController {
     const accessToken = loginResult.data.access_token;
     const userRole = this.encryptionService.encrypt(loginResult.data.role);
     const userPin = this.encryptionService.encrypt(loginResult.data.pin);
+    const isReset = loginResult.data.reset;
 
     const accessTime = this.configService.get<string>('ACCESS_TIME');
-    const accessTimeMs = parseInt(accessTime) * 1000;
+    const accessTimeMs = parseInt(accessTime.replace('s', ''), 10) * 1000;
+    const expiryDate = new Date(Date.now() + accessTimeMs);
 
     res.cookie('ACSTKN', accessToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-      maxAge: accessTimeMs,
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
+    });
+
+    res.cookie('RST', isReset, {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
     });
 
     res.cookie('USRROLE', userRole, {
       httpOnly: false,
-      secure: true,
-      sameSite: 'none',
-      maxAge: accessTimeMs,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
     });
 
     res.cookie('USRPIN', userPin, {
       httpOnly: false,
-      secure: true,
-      sameSite: 'none',
-      maxAge: accessTimeMs,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
     });
-
-    const restData = loginResult.data;
 
     return res.send({
       isSuccessful: true,
       message: loginResult.message,
-      data: restData,
+      data: loginResult.data,
     });
   }
 
@@ -90,25 +88,84 @@ export class AuthController {
     return await this.userService.create(createUserDto);
   }
 
-  // @ApiSecurity('csrf-token')
-  // @UseGuards(RefreshJwtGuard)
-  // @Post('refresh')
-  // async refreshToken(@Request() req: any) {
-  //   return this.authService.refreshToken(req.user);
-  // }
-
   @UseGuards(RefreshJwtGuard)
   @Get('refresh/:pin')
-  async refreshToken(@Param('pin') pin: string) {
-    return this.authService.refreshToken(pin);
+  async refreshToken(@Param('pin') pin: string, @Res() res: Response) {
+    const refreshResult = await this.authService.refreshToken(pin);
+
+    const accessToken = refreshResult.data.access_token;
+    const accessTime = refreshResult.data.expiresIn;
+    const accessTimeMs = parseInt(accessTime.replace('s', ''), 10) * 1000;
+    const expiryDate = new Date(Date.now() + accessTimeMs);
+
+    res.cookie('ACSTKN', accessToken, {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
+    });
+
+    const isReset = refreshResult.data.reset;
+    res.cookie('RST', isReset, {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
+    });
+
+    const userRole = this.encryptionService.encrypt(refreshResult.data.role);
+    res.cookie('USRROLE', userRole, {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
+    });
+
+    const userPin = this.encryptionService.encrypt(refreshResult.data.pin);
+    res.cookie('USRPIN', userPin, {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+      expires: expiryDate,
+    });
+
+    return res.send(refreshResult);
   }
 
   @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Post('logout')
-  async logout(@Request() req: any) {
+  async logout(@Request() req: any, @Res() res: Response) {
     const user = req.user;
 
-    return await this.authService.logout(user);
+    const result = await this.authService.logout(user);
+
+    // Clear cookies
+    res.clearCookie('ACSTKN', {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+    });
+    res.clearCookie('RST', {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+    });
+    res.clearCookie('USRROLE', {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+    });
+    res.clearCookie('USRPIN', {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+    });
+
+    return res.send({
+      isSuccessful: true,
+      message: result.message,
+      data: {},
+    });
   }
 }

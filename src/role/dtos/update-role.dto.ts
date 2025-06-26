@@ -13,6 +13,9 @@ class HrefGuiDto {
   @IsString()
   hrefGui: string;
 
+  @IsString()
+  hrefLabel: string;
+
   @IsBoolean()
   isActive: boolean;
 
@@ -31,4 +34,9 @@ export class UpdateRoleDto {
   @ValidateNested({ each: true })
   @Type(() => HrefGuiDto)
   hrefGui: HrefGuiDto[];
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => HrefGuiDto)
+  hrefLabel: HrefGuiDto[];
 }

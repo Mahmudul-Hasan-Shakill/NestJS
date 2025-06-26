@@ -22,26 +22,48 @@ export class AuthService {
   async validateUser(pin: string, password: string): Promise<UserEntity> {
     const userResponse = await this.userService.getUserByPin(pin);
 
-    // Check if the user was found
     if (!userResponse.isSuccessful || !userResponse.data) {
       throw new NotFoundException(`User with PIN ${pin} not found.`);
     }
 
     const user = userResponse.data;
 
-    // Check if the user account is active
     if (!user.isActive) {
+      throw new UnauthorizedException('Account is Inactive.');
+    }
+
+    if (user.isLocked) {
       throw new UnauthorizedException(
-        'Account is Inactive. Contact Pranto for Assistance.',
+        'Account is locked due to too many failed login attempts.',
       );
     }
 
-    // Validate the password
-    if (await bcrypt.compare(password, user.password)) {
-      return user;
+    // if (user.isLogin) {
+    //   throw new UnauthorizedException(
+    //     'User is already logged in from another device.',
+    //   );
+    // }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      user.loginAttempts += 1;
+
+      if (user.loginAttempts >= 5) {
+        user.isLocked = true;
+      }
+
+      await this.userService.save(user);
+      throw new UnauthorizedException('Invalid credentials provided.');
     }
 
-    throw new UnauthorizedException('Invalid credentials provided.'); // Invalid password
+    user.loginAttempts = 0;
+    user.isLocked = false;
+    user.isLogin = true;
+
+    await this.userService.save(user);
+
+    return user;
   }
 
   async login(user: UserEntity) {
@@ -55,7 +77,6 @@ export class AuthService {
       expiresIn: this.configService.get<string>('REFRESH_TIME'),
     });
 
-    // const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
     user.refreshToken = refreshToken;
 
     await this.userService.save(user);
@@ -71,6 +92,8 @@ export class AuthService {
         refreshToken: refreshToken,
         pin: user.pin,
         role: user.userRole,
+        reset: user.isReset,
+        active: user.isActive,
       },
     };
   }
@@ -83,53 +106,26 @@ export class AuthService {
 
     const fullUser = fullUserResponse.data;
     fullUser.refreshToken = null;
-    await this.userService.save(fullUser);
+    fullUser.isLogin = false;
+    fullUser.loginAttempts = 0;
 
-    const token = fullUser.refreshToken;
-    if (token) {
-      this.blacklistedTokens.push(token);
-    }
+    await this.userService.save(fullUser);
 
     return {
       isSuccessful: true,
       message: 'Logout successful',
-      data: {},
     };
   }
 
-  isTokenBlacklisted(token: string): boolean {
-    return this.blacklistedTokens.includes(token);
-  }
-
-  // async refreshToken(user: UserEntity) {
-  //   const payload = {
-  //     pin: user.pin,
-  //     sub: user.id,
-  //   };
-
-  //   return {
-  //     isSuccessful: true,
-  //     message: 'Token refreshed successfully',
-  //     data: {
-  //       access_token: this.jwtService.sign(payload, {
-  //         secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
-  //       }),
-  //     },
-  //   };
-  // }
-
   async refreshToken(pin: string): Promise<any> {
-    // Fetch user by PIN
     const userResponse = await this.userService.getUserByPin(pin);
     const user = userResponse.data;
 
-    // Create payload for access token
     const payload = {
       pin: user.pin,
       sub: user.id,
     };
 
-    // Generate new access token
     const accessToken = this.jwtService.sign(payload, {
       secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
     });
@@ -139,6 +135,11 @@ export class AuthService {
       message: 'Token refreshed successfully',
       data: {
         access_token: accessToken,
+        expiresIn: this.configService.get<string>('ACCESS_TIME'),
+        role: user.userRole,
+        pin: user.pin,
+        reset: user.isReset,
+        active: user.isActive,
       },
     };
   }

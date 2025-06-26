@@ -13,10 +13,9 @@ import { CreateAmcDto } from './dto/amc.dto';
 import { UpdateAmcDto } from './dto/amc.dto';
 import { AmcEntity } from './entity/amc.entity';
 import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
-import { ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiBearerAuth('access-token')
-@ApiSecurity('csrf-token')
 @Controller('amc')
 export class AmcController {
   constructor(private readonly amcService: AmcService) {}

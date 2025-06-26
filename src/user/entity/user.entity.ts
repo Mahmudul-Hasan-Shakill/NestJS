@@ -15,7 +15,16 @@ export class UserEntity {
   @Column({ nullable: false, unique: true })
   email: string;
 
-  @Column({ nullable: false, default: 'Bbl@12345' })
+  @Column({ nullable: true })
+  division: string;
+
+  @Column({ nullable: true })
+  department: string;
+
+  @Column({ nullable: true })
+  unit: string;
+
+  @Column({ nullable: false })
   password: string;
 
   @Column({ nullable: true })
@@ -54,4 +63,13 @@ export class UserEntity {
 
   @Column({ name: 'is_reset', type: 'boolean', default: true })
   isReset: boolean;
+
+  @Column({ name: 'is_login', type: 'boolean', default: false })
+  isLogin: boolean;
+
+  @Column({ name: 'is_locked', type: 'boolean', default: false })
+  isLocked: boolean;
+
+  @Column({ name: 'login_attempts', type: 'int', default: 0 })
+  loginAttempts: number;
 }

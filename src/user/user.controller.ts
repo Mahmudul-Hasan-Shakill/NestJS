@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Post,
   HttpException,
   HttpStatus,
   Param,
@@ -11,24 +12,27 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtGuard } from '../auth/guards/jwt-auth.guard';
-import { UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
-import { Throttle } from '@nestjs/throttler';
-import { ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
-@ApiBearerAuth('access-token')
-@ApiSecurity('csrf-token')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Post('self-register')
+  async registerUser(@Body() createUserDto: CreateUserDto) {
+    return await this.userService.selfRegister(createUserDto);
+  }
+
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.userService.findOne(id);
   }
 
-  @Throttle({ default: { limit: 3, ttl: 60000 } })
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Get()
   async getAllUsers() {
@@ -40,6 +44,7 @@ export class UserController {
     }
   }
 
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Patch(':id')
   async updateUser(
@@ -58,6 +63,7 @@ export class UserController {
     }
   }
 
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Get('pin/:pin')
   async getUserByPin(@Param('pin') pin: string) {
@@ -72,6 +78,7 @@ export class UserController {
     }
   }
 
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Delete(':id')
   async deleteUser(@Param('id', ParseIntPipe) id: number) {
@@ -86,7 +93,6 @@ export class UserController {
     }
   }
 
-  @UseGuards(JwtGuard)
   @Patch('reset-password/:pin')
   async resetPassword(@Param('pin') pin: string) {
     try {
@@ -104,6 +110,7 @@ export class UserController {
     }
   }
 
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Patch('change-password/:pin')
   async changePassword(

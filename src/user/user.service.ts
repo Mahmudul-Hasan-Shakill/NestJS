@@ -524,14 +524,26 @@ export class UserService {
     subject: string,
     introMessage: string,
   ) {
-    const transporter = nodemailer.createTransport({
-      host: this.configService.get<string>('SMTP_IP'),
-      port: this.configService.get<number>('SMTP_PORT'),
-      secure: false,
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
+    const useGmail = this.configService.get<boolean>('USE_GMAIL');
+
+    const transporter = nodemailer.createTransport(
+      useGmail
+        ? {
+            service: 'gmail',
+            auth: {
+              user: this.configService.get<string>('GMAIL_USER'),
+              pass: this.configService.get<string>('GMAIL_PASS'),
+            },
+          }
+        : {
+            host: this.configService.get<string>('SMTP_IP'),
+            port: this.configService.get<number>('SMTP_PORT'),
+            secure: false,
+            tls: {
+              rejectUnauthorized: false,
+            },
+          },
+    );
 
     const htmlTemplate = fs.readFileSync(this.templatePath, 'utf8');
     const htmlContent = htmlTemplate

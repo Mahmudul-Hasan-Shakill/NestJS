@@ -398,7 +398,7 @@ export class UserService {
 
     return {
       isSuccessful: true,
-      message: 'User updated successfully',
+      message: 'User is updated successfully!',
       data: updatedUser,
     };
   }

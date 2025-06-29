@@ -10,11 +10,13 @@ import {
   ParseIntPipe,
   Patch,
   UseGuards,
+  Res,
 } from '@nestjs/common';
 import { JwtGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { Response } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -116,9 +118,17 @@ export class UserController {
   async changePassword(
     @Param('pin') pin: string,
     @Body() updateUserDto: UpdateUserDto,
+    @Res({ passthrough: true }) res: Response,
   ) {
     try {
       const result = await this.userService.changePassword(pin, updateUserDto);
+
+      if (result?.isSuccessful) {
+        res.clearCookie('RST', {
+          path: '/',
+        });
+      }
+
       return result;
     } catch (error) {
       if (error instanceof HttpException) {

@@ -9,8 +9,8 @@ export class RoleDto {
   @IsString()
   hrefGui: string; // Use camelCase to match the entity property
 
-  @IsString()
-  hrefLabel: string; // Use camelCase to match the entity property
+  // @IsString()
+  // hrefLabel: string; // Use camelCase to match the entity property
 
   @IsOptional()
   @IsString()

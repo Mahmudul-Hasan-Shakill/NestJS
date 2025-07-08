@@ -5,8 +5,11 @@ import {
   IsEmail,
   IsNotEmpty,
   IsArray,
+  IsDate,
+  IsBoolean,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
+import { Type } from 'class-transformer';
 
 export class CreateDatabaseDto {
   @IsString()
@@ -51,6 +54,29 @@ export class CreateDatabaseDto {
   @IsOptional()
   @IsString()
   remarks?: string;
+
+  // Common fields
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean = true;
+
+  @IsString()
+  @IsNotEmpty()
+  makeBy: string;
+
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  makeDate?: Date;
+
+  @IsOptional()
+  @IsString()
+  editBy?: string;
+
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  editDate?: Date;
 
   @IsOptional()
   @IsArray()

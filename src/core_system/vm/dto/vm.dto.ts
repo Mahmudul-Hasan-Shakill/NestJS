@@ -37,7 +37,7 @@ export class CreateVmDto {
 
   @IsOptional()
   @IsString()
-  serviceIp?: string;
+  serverType?: string;
 
   @IsOptional()
   @IsString()

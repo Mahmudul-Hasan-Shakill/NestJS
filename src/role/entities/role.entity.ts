@@ -11,8 +11,8 @@ export class RoleEntity {
   @Column({ name: 'href_gui', type: 'varchar', length: 255 })
   hrefGui: string;
 
-  @Column({ name: 'href_label', type: 'varchar', length: 255, nullable: true })
-  hrefLabel: string;
+  // @Column({ name: 'href_label', type: 'varchar', length: 255, nullable: true })
+  // hrefLabel: string;
 
   @Column({ name: 'make_by', type: 'varchar', length: 255, nullable: true })
   makeBy: string;

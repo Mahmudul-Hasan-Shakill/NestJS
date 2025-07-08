@@ -34,6 +34,7 @@ export class RoleService {
       const roleNames = await this.roleRepository
         .createQueryBuilder('role')
         .select('DISTINCT role.role_name')
+        .orderBy('role.role_name', 'ASC')
         .getRawMany();
 
       return this.successResponse(
@@ -51,6 +52,7 @@ export class RoleService {
       const guiNames = await this.roleRepository
         .createQueryBuilder('role')
         .select('DISTINCT role.href_gui')
+        .orderBy('role.href_gui', 'ASC')
         .getRawMany();
 
       return this.successResponse(
@@ -67,7 +69,8 @@ export class RoleService {
     try {
       const guiNames = await this.roleRepository
         .createQueryBuilder('role')
-        .select(['role.hrefGui', 'role.hrefLabel', 'role.isActive'])
+        // .select(['role.hrefGui', 'role.hrefLabel', 'role.isActive'])
+        .select(['role.hrefGui', 'role.isActive'])
         .where('role.roleName = :roleName', { roleName })
         .getMany();
 

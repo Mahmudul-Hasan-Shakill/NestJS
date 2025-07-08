@@ -5,6 +5,7 @@ import {
   IsNumber,
   IsDate,
   IsArray,
+  IsNotEmpty,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PartialType } from '@nestjs/mapped-types';
@@ -179,6 +180,29 @@ export class CreatePhysicalDto {
   @IsOptional()
   @IsString()
   remarks?: string;
+
+  // Common fields
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean = true;
+
+  @IsString()
+  @IsNotEmpty()
+  makeBy: string;
+
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  makeDate?: Date;
+
+  @IsOptional()
+  @IsString()
+  editBy?: string;
+
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  editDate?: Date;
 
   @IsOptional()
   @IsArray()

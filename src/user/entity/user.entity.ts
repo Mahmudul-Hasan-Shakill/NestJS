@@ -24,6 +24,21 @@ export class UserEntity {
   @Column({ nullable: true })
   unit: string;
 
+  @Column({ nullable: true })
+  dob: Date;
+
+  @Column({ nullable: true })
+  marital: string;
+
+  @Column({ nullable: true })
+  nid: string;
+
+  @Column({ nullable: true })
+  phone: string;
+
+  @Column({ nullable: true })
+  address: string;
+
   @Column({ nullable: false })
   password: string;
 

@@ -1,4 +1,13 @@
-import { IsString, IsOptional, IsDate, IsEmail, IsArray, IsNumber } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsDate,
+  IsEmail,
+  IsArray,
+  IsNumber,
+  IsNotEmpty,
+  IsBoolean,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 import { PartialType } from '@nestjs/mapped-types';
 
@@ -64,6 +73,29 @@ export class CreateApplicationDto {
   @IsOptional()
   @IsString()
   remarks?: string;
+
+  // Common fields
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean = true;
+
+  @IsString()
+  @IsNotEmpty()
+  makeBy: string;
+
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  makeDate?: Date;
+
+  @IsOptional()
+  @IsString()
+  editBy?: string;
+
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  editDate?: Date;
 
   @IsOptional()
   @IsArray()

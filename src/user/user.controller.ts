@@ -67,6 +67,25 @@ export class UserController {
 
   @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
+  @Patch('pin/:pin')
+  async updateUserByPin(
+    @Param('pin') pin: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    try {
+      const result = await this.userService.updateUserByPin(pin, updateUserDto);
+      return result;
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      console.error('Unexpected error in updateUser:', error);
+      throw new HttpException('An unexpected error occurred.', 500);
+    }
+  }
+
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtGuard)
   @Get('pin/:pin')
   async getUserByPin(@Param('pin') pin: string) {
     try {

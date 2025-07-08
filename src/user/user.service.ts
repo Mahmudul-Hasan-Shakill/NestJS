@@ -403,6 +403,46 @@ export class UserService {
     };
   }
 
+  async updateUserByPin(pin: string, updateUserDto: UpdateUserDto) {
+    console.log('Received update request for pin:', pin);
+    console.log('Payload:', updateUserDto);
+
+    const user = await this.userRepo.findOne({ where: { pin } });
+
+    if (!user) {
+      console.log('User not found for pin:', pin);
+      return {
+        isSuccessful: false,
+        message: 'User not found',
+        data: null,
+      };
+    }
+
+    for (const key in updateUserDto) {
+      if (updateUserDto[key] !== undefined) {
+        user[key] = updateUserDto[key];
+      }
+    }
+
+    try {
+      const savedUser = await this.userRepo.save(user);
+      console.log('User updated successfully:', savedUser);
+
+      return {
+        isSuccessful: true,
+        message: 'Profile is updated successfully!',
+        data: savedUser,
+      };
+    } catch (error) {
+      console.error('Error saving user:', error);
+      return {
+        isSuccessful: false,
+        message: 'Failed to update user due to internal error.',
+        data: null,
+      };
+    }
+  }
+
   async save(user: UserEntity): Promise<any> {
     const savedUser = await this.userRepo.save(user);
     return {
@@ -415,9 +455,10 @@ export class UserService {
   async getAllUsers(): Promise<any> {
     const users = await this.userRepo.find({
       order: {
-        id: 'ASC',
+        id: 'DESC',
       },
     });
+
     return {
       isSuccessful: true,
       message:
@@ -473,6 +514,7 @@ export class UserService {
     }
 
     const newPassword = this.generateRandomPassword();
+    console.log('========================', newPassword);
 
     try {
       user.password = await bcrypt.hash(newPassword, 10);
@@ -524,12 +566,16 @@ export class UserService {
     subject: string,
     introMessage: string,
   ) {
-    const useGmail = this.configService.get<boolean>('USE_GMAIL');
+    const useGmail = this.configService.get<string>('USE_GMAIL') === 'true';
+
+    const logoBase64 = this.configService.get<string>('LOGO_BASE64');
 
     const transporter = nodemailer.createTransport(
       useGmail
         ? {
-            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: this.configService.get<number>('GMAIL_PORT'),
+            secure: false,
             auth: {
               user: this.configService.get<string>('GMAIL_USER'),
               pass: this.configService.get<string>('GMAIL_PASS'),
@@ -542,6 +588,10 @@ export class UserService {
             tls: {
               rejectUnauthorized: false,
             },
+            auth: {
+              user: this.configService.get<string>('SMTP_USER'),
+              pass: this.configService.get<string>('SMTP_PASS'),
+            },
           },
     );
 
@@ -552,7 +602,9 @@ export class UserService {
       .replace('{{INTRO_MESSAGE}}', introMessage);
 
     const mailOptions = {
-      from: '"Inventory Management System" <noreply@bracbank.com>',
+      from: useGmail
+        ? `"Inventory Management System" <${this.configService.get<string>('GMAIL_USER')}>`
+        : '"Inventory Management System" <inventorymgttest@bracbank.com>',
       to: email,
       subject,
       html: htmlContent,

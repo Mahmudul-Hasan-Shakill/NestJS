@@ -28,6 +28,25 @@ export class CreateUserDto {
   unit: string;
 
   @IsOptional()
+  dob?: Date;
+
+  @IsOptional()
+  @IsString()
+  marital?: string;
+
+  @IsOptional()
+  @IsString()
+  nid?: string;
+
+  @IsOptional()
+  @IsString()
+  phone?: string;
+
+  @IsOptional()
+  @IsString()
+  address?: string;
+
+  @IsOptional()
   @IsString()
   password?: string;
 

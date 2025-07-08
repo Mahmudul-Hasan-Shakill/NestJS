@@ -33,8 +33,8 @@ export class VmEntity {
   @Column({ name: 'os_default_gateway', nullable: true })
   osDefaultGateway: string;
 
-  @Column({ name: 'service_ip', nullable: true })
-  serviceIp: string;
+  @Column({ name: 'server_type', nullable: true })
+  serverType: string;
 
   @Column({ name: 'volume_label', nullable: true })
   volumeLabel: string;

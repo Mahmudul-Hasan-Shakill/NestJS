@@ -64,6 +64,29 @@ export class ApplicationEntity {
   @Column({ nullable: true })
   remarks: string;
 
+  @Column({ default: true, name: 'is_active' })
+  isActive: boolean;
+
+  @Column({
+    name: 'make_date',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  makeDate: Date;
+
+  @Column({ name: 'make_by', nullable: false })
+  makeBy: string;
+
+  @Column({
+    name: 'edit_date',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  editDate: Date;
+
+  @Column({ name: 'edit_by', nullable: true })
+  editBy: string;
+
   @ManyToMany(() => VmEntity, (vm) => vm.applications)
   @JoinTable({ name: 'application_vm' })
   vms: VmEntity[];

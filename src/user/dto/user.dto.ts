@@ -1,6 +1,8 @@
 import { PartialType } from '@nestjs/mapped-types';
+import { Transform, Type } from 'class-transformer';
 import {
   IsBoolean,
+  IsDate,
   IsEmail,
   IsNotEmpty,
   IsOptional,
@@ -28,7 +30,13 @@ export class CreateUserDto {
   unit: string;
 
   @IsOptional()
-  dob?: Date;
+  @Transform(({ value }) => {
+    if (!value || value === '') return null;
+    const date = new Date(value);
+    return isNaN(date.getTime()) ? null : date;
+  })
+  @IsDate({ message: 'dob must be a valid Date instance' })
+  dob?: Date | null;
 
   @IsOptional()
   @IsString()

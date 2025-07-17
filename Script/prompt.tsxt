@@ -1,0 +1,56 @@
+Can you update and regenrate the script having exact below and remove the rest of the data:
+
+=== Server Basic Information ===
+Hostname: losprepoddb03
+IP Address: 172.25.12.47
+Server Environment: Test Server
+CPU Physical Cores: 4
+CPU Virtual Cores: 8
+CPU Model: Intel Core i7 9xx (Nehalem Class Core i7)
+Total RAM: 15 (Always convert in Gi)
+Total Disk Size: 261 (Always convert in Gi)
+OS Version: Oracle Linux Server release 8.6
+Kernel Version: 5.15.0-305.176.4.el8uek.x86_64
+Server Platform: KVM Virtual Machine
+Serial Number: N/A
+SSH Port(s): 7822
+Socket(s): (Need to find)
+Last Patch Installed:  Tue 11 Feb 2025 04:56:11 PM +06
+System Uptime: up 20 weeks, 5 days, 19 hours, 31 minutes
+
+
+=== Security Products ===
+Falcon Sensor: Installed
+Version: 6.41.0-13803.el8
+Install Date: Sun 18 Sep 2022 11:10:06 AM +06
+Service Status: active
+Qualys Cloud Agent: Not installed
+Version: 
+Install Date: 
+Service Status: 
+
+
+=== Disk Information ===
+Total size: (Need to Find, Always convert in Gi)
+Used space: (Need to Find, Always convert in Gi)
+Free space: (Need to Find, Always convert in Gi)
+
+=== Network Details ===
+Subnet Mask: 28
+Gateway: 172.25.12.33
+IP: (Need to Find)
+
+
+=== NTP Status ===
+NTP service: active
+NTP Servers: 10.5.0.250, 10.5.129.19
+Current Sync Source: 10.5.0.250
+
+
+=== User and Group Information ===
+System Users Count: 8
+Users with sudo access: (Need to count)
+
+
+
+

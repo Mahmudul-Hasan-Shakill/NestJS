@@ -9,10 +9,13 @@ import * as compression from 'compression';
 import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
+import { join } from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   // Create the Nest application
-  const app = await NestFactory.create(AppModule);
+  // const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
   const logger = new Logger('Bootstrap');
 
@@ -63,6 +66,10 @@ async function bootstrap() {
 
   // Enable shutdown hooks for graceful shutdown
   app.enableShutdownHooks();
+
+  app.useStaticAssets(configService.get<string>('UPLOAD_ROOT'), {
+    prefix: '/uploads/',
+  });
 
   // Swagger Options
   const config = new DocumentBuilder()

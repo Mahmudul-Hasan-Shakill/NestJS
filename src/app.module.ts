@@ -17,6 +17,8 @@ import { VmModule } from './core_system/vm/vm.module';
 import { ApplicationModule } from './core_system/application/application.module';
 import { DatabaseModule } from './core_system/database/database.module';
 import { PhysicalModule } from './core_system/physical/physical.module';
+import { UploadController } from './upload/upload.controller';
+import { UploadService } from './upload/upload.service';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -46,7 +48,7 @@ import { PhysicalModule } from './core_system/physical/physical.module';
     DatabaseModule,
     PhysicalModule,
   ],
-  controllers: [AppController, DynamicSchemaController],
+  controllers: [AppController, DynamicSchemaController, UploadController],
   providers: [
     {
       provide: APP_GUARD,
@@ -54,6 +56,7 @@ import { PhysicalModule } from './core_system/physical/physical.module';
     },
     DynamicSchemaService,
     EncryptionService,
+    UploadService,
   ],
   exports: [EncryptionService],
 })

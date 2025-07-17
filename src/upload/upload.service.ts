@@ -33,7 +33,7 @@ export class UploadService {
       const filename = `${baseFilename}_${timestamp}${index ? `_${index}` : ''}${ext}`;
       const filePath = path.join(targetDir, filename);
       fs.writeFileSync(filePath, file.buffer);
-      return `/uploads/${folder}/${filename}`;
+      return `uploads/${folder}/${filename}`;
     });
   }
 }

@@ -68,7 +68,7 @@ async function bootstrap() {
   app.enableShutdownHooks();
 
   app.useStaticAssets(configService.get<string>('UPLOAD_ROOT'), {
-    prefix: '/uploads/',
+    prefix: 'uploads/',
   });
 
   // Swagger Options

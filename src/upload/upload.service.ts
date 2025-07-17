@@ -23,14 +23,16 @@ export class UploadService {
       fs.mkdirSync(targetDir, { recursive: true });
     }
 
-    const timestamp = new Date()
-      .toISOString()
-      .replace(/[-:.TZ]/g, '')
-      .slice(0, 12); // e.g., 20250717_1613
-
-    return files.map((file, index) => {
+    return files.map((file) => {
       const ext = path.extname(file.originalname) || '.txt';
-      const filename = `${baseFilename}_${timestamp}${index ? `_${index}` : ''}${ext}`;
+      const now = new Date();
+      const timestamp =
+        now
+          .toISOString()
+          .replace(/[-:.TZ]/g, '')
+          .slice(0, 14) + now.getMilliseconds();
+
+      const filename = `${baseFilename}_${timestamp}${ext}`;
       const filePath = path.join(targetDir, filename);
       fs.writeFileSync(filePath, file.buffer);
       return `/uploads/${folder}/${filename}`;

@@ -16,29 +16,26 @@ import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiBearerAuth('access-token')
+@UseGuards(JwtGuard)
 @Controller('amc')
 export class AmcController {
   constructor(private readonly amcService: AmcService) {}
 
-  @UseGuards(JwtGuard)
   @Post()
   async create(@Body() createAmcDto: CreateAmcDto): Promise<AmcEntity> {
     return this.amcService.create(createAmcDto);
   }
 
-  @UseGuards(JwtGuard)
   @Get()
   async findAll(): Promise<AmcEntity[]> {
     return this.amcService.findAll();
   }
 
-  @UseGuards(JwtGuard)
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<AmcEntity> {
     return this.amcService.findOne(id);
   }
 
-  @UseGuards(JwtGuard)
   @Patch(':id')
   async update(
     @Param('id') id: number,
@@ -47,9 +44,8 @@ export class AmcController {
     return this.amcService.update(id, updateAmcDto);
   }
 
-  @UseGuards(JwtGuard)
   @Delete(':id')
-  async remove(@Param('id') id: number): Promise<void> {
+  async remove(@Param('id') id: number) {
     return this.amcService.remove(id);
   }
 }

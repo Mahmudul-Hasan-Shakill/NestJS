@@ -68,4 +68,9 @@ export class RoleController {
   deleteRoleById(@Param('id', ParseIntPipe) id: number): any {
     return this.roleService.deleteRoleById(id);
   }
+
+  @Delete('/name/:roleName')
+  deleteRoleByName(@Param('roleName') roleName: string): any {
+    return this.roleService.deleteRoleByName(roleName);
+  }
 }

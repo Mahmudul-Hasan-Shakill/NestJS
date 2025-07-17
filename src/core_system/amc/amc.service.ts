@@ -32,15 +32,20 @@ export class AmcService {
   }
 
   async findOne(id: number): Promise<any> {
-    const amc = await this.amcRepository.findOne({ where: { id } });
-    if (!amc) {
-      throw new NotFoundException(`AMC with ID ${id} not found`);
+    try {
+      const amc = await this.amcRepository.findOne({ where: { id } });
+      if (!amc) {
+        throw new NotFoundException(`AMC with ID ${id} not found`);
+      }
+      return {
+        isSuccessful: true,
+        message: 'AMC found',
+        data: amc,
+      };
+    } catch (error) {
+      console.error('Error in findOne:', error);
+      throw error;
     }
-    return {
-      isSuccessful: true,
-      message: 'AMC found',
-      data: amc,
-    };
   }
 
   async update(id: number, updateAmcDto: UpdateAmcDto): Promise<any> {
@@ -55,12 +60,13 @@ export class AmcService {
   }
 
   async remove(id: number): Promise<any> {
-    const amc = await this.findOne(id); // Check if the AMC exists
+    const result = await this.findOne(id);
+    const amc = result.data;
     await this.amcRepository.remove(amc);
     return {
       isSuccessful: true,
       message: 'AMC removed successfully',
-      data: null, // No data to return on delete
+      data: null,
     };
   }
 }

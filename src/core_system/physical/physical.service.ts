@@ -14,23 +14,51 @@ export class PhysicalService {
     private readonly vmRepo: Repository<VmEntity>,
   ) {}
 
+  // async create(dto: CreatePhysicalDto): Promise<any> {
+  //   const physical = this.physicalRepo.create(dto);
+  //   await this.physicalRepo.save(physical);
+
+  //   if (dto.vmIds?.length) {
+  //     const vms = await this.vmRepo.findBy({ id: In(dto.vmIds) });
+  //     for (const vm of vms) {
+  //       vm.physical = physical;
+  //     }
+  //     await this.vmRepo.save(vms);
+  //   }
+
+  //   return {
+  //     isSuccessful: true,
+  //     message: 'Physical server created and VMs assigned',
+  //     data: physical,
+  //   };
+  // }
+
   async create(dto: CreatePhysicalDto): Promise<any> {
-    const physical = this.physicalRepo.create(dto);
-    await this.physicalRepo.save(physical);
+    try {
+      const { vmIds, ...physicalData } = dto;
+      const physical = this.physicalRepo.create(physicalData);
+      await this.physicalRepo.save(physical);
 
-    if (dto.vmIds?.length) {
-      const vms = await this.vmRepo.findBy({ id: In(dto.vmIds) });
-      for (const vm of vms) {
-        vm.physical = physical;
+      if (vmIds?.length) {
+        const vms = await this.vmRepo.findBy({ id: In(vmIds) });
+        for (const vm of vms) {
+          vm.physical = physical;
+        }
+        await this.vmRepo.save(vms);
       }
-      await this.vmRepo.save(vms);
-    }
 
-    return {
-      isSuccessful: true,
-      message: 'Physical server created and VMs assigned',
-      data: physical,
-    };
+      return {
+        isSuccessful: true,
+        message: 'Physical server created and VMs assigned',
+        data: physical,
+      };
+    } catch (error) {
+      console.error('Error creating physical server:', error);
+      return {
+        isSuccessful: false,
+        message: 'Error creating physical server',
+      };
+    }
   }
 
   async update(id: number, dto: UpdatePhysicalDto): Promise<any> {

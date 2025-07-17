@@ -23,9 +23,8 @@ export class CreateVmDto {
   @IsNotEmpty()
   osIpAddress: string;
 
-  @IsNumber()
   @IsNotEmpty()
-  sshPort: number;
+  sshPort: string;
 
   @IsOptional()
   @IsString()

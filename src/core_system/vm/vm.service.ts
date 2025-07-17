@@ -59,6 +59,8 @@ export class VmService {
     };
   }
 
+  
+
   async findOne(id: number): Promise<any> {
     const vm = await this.vmRepository.findOne({
       where: { id },

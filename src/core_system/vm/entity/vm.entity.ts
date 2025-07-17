@@ -25,7 +25,7 @@ export class VmEntity {
   osIpAddress: string;
 
   @Column({ name: 'ssh_port', nullable: false })
-  sshPort: number;
+  sshPort: string;
 
   @Column({ name: 'os_subnet_mask', nullable: true })
   osSubnetMask: string;
@@ -78,7 +78,7 @@ export class VmEntity {
   @Column({ name: 'ram_gb', nullable: true })
   ramGb: number;
 
-  @Column({ name: 'hdd_size', nullable: true })
+  @Column({ name: 'hdd_size', type: 'float', nullable: true })
   hddSize: number;
 
   @Column({ name: 'custodian_info', nullable: true })

@@ -160,6 +160,32 @@ export class RoleService {
     }
   }
 
+  // Delete roles by role name
+  async deleteRoleByName(roleName: string): Promise<any> {
+    try {
+      const rolesToDelete = await this.roleRepository.find({
+        where: { roleName },
+      });
+
+      if (rolesToDelete.length === 0) {
+        throw new NotFoundException(
+          `No roles found with roleName "${roleName}".`,
+        );
+      }
+
+      await this.roleRepository.delete({ roleName });
+
+      return this.successResponse(
+        `All roles with Rolename "${roleName}" deleted successfully.`,
+      );
+    } catch (error) {
+      return this.errorResponse(
+        `Failed to delete roles with roleName "${roleName}".`,
+        error,
+      );
+    }
+  }
+
   // Utility method for success response
   private successResponse(message: string, data: any = null) {
     return {

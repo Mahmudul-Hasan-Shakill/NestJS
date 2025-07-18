@@ -19,6 +19,7 @@ import { DatabaseModule } from './core_system/database/database.module';
 import { PhysicalModule } from './core_system/physical/physical.module';
 import { UploadController } from './upload/upload.controller';
 import { UploadService } from './upload/upload.service';
+import { AutomationModule } from './core_system/automation/automation.module';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -47,6 +48,7 @@ import { UploadService } from './upload/upload.service';
     ApplicationModule,
     DatabaseModule,
     PhysicalModule,
+    AutomationModule,
   ],
   controllers: [AppController, DynamicSchemaController, UploadController],
   providers: [

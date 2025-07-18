@@ -8,6 +8,7 @@ import {
   JoinTable,
 } from 'typeorm';
 import { VmEntity } from '../../vm/entity/vm.entity';
+import { AutomationEntity } from 'src/core_system/automation/entity/automation.entity';
 
 @Entity()
 export class DatabaseEntity {
@@ -73,4 +74,8 @@ export class DatabaseEntity {
   @ManyToMany(() => VmEntity, (vm) => vm.databases)
   @JoinTable({ name: 'database_vm' })
   vms: VmEntity[];
+
+  // In DatabaseEntity
+  @ManyToMany(() => AutomationEntity, (automation) => automation.databases)
+  automations: AutomationEntity[];
 }

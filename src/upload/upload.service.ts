@@ -1,15 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { File } from 'multer';
 import * as fs from 'fs';
 import * as path from 'path';
 import { ConfigService } from '@nestjs/config';
+import { v4 as uuidv4 } from 'uuid';
+
+interface MulterFile {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  buffer: Buffer;
+}
 
 @Injectable()
 export class UploadService {
   constructor(private readonly configService: ConfigService) {}
 
   async saveFiles(
-    files: File[],
+    files: MulterFile[],
     folder: string,
     baseFilename: string,
   ): Promise<string[]> {
@@ -25,6 +34,7 @@ export class UploadService {
 
     return files.map((file) => {
       const ext = path.extname(file.originalname) || '.txt';
+      const uuid = uuidv4().split('-')[0]; // Use first part of UUID for brevity
       const now = new Date();
       const timestamp =
         now
@@ -32,7 +42,7 @@ export class UploadService {
           .replace(/[-:.TZ]/g, '')
           .slice(0, 14) + now.getMilliseconds();
 
-      const filename = `${baseFilename}_${timestamp}${ext}`;
+      const filename = `${baseFilename}_${uuid}_${timestamp}${ext}`;
       const filePath = path.join(targetDir, filename);
       fs.writeFileSync(filePath, file.buffer);
       return `/uploads/${folder}/${filename}`;

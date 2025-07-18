@@ -101,6 +101,11 @@ export class CreateApplicationDto {
   @IsArray()
   @IsNumber({}, { each: true })
   vmIds?: number[];
+
+  @IsOptional()
+  @IsArray()
+  @IsNumber({}, { each: true })
+  automationIds?: number[];
 }
 
 export class UpdateApplicationDto extends PartialType(CreateApplicationDto) {}

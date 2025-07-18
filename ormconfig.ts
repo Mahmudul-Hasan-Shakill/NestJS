@@ -8,6 +8,7 @@ import { VmEntity } from 'src/core_system/vm/entity/vm.entity';
 import { ApplicationEntity } from 'src/core_system/application/entity/application.entity';
 import { DatabaseEntity } from 'src/core_system/database/entity/database.entity';
 import { PhysicalEntity } from 'src/core_system/physical/entity/physical.entity';
+import { AutomationEntity } from 'src/core_system/automation/entity/automation.entity';
 
 export const getDatabaseConfig = (
   configService: ConfigService,
@@ -28,6 +29,7 @@ export const getDatabaseConfig = (
       ApplicationEntity,
       DatabaseEntity,
       PhysicalEntity,
+      AutomationEntity,
     ],
     synchronize: true,
   };

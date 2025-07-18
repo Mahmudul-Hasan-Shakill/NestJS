@@ -82,6 +82,11 @@ export class CreateDatabaseDto {
   @IsArray()
   @IsNumber({}, { each: true })
   vmIds?: number[];
+
+  @IsOptional()
+  @IsArray()
+  @IsNumber({}, { each: true })
+  automationIds?: number[];
 }
 
 export class UpdateDatabaseDto extends PartialType(CreateDatabaseDto) {}

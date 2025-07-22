@@ -7,6 +7,7 @@ import {
   UpdateApplicationDto,
 } from './dto/application.dto';
 import { VmEntity } from '../vm/entity/vm.entity';
+import { AutomationEntity } from '../automation/entity/automation.entity';
 
 @Injectable()
 export class ApplicationService {
@@ -15,6 +16,8 @@ export class ApplicationService {
     private readonly appRepository: Repository<ApplicationEntity>,
     @InjectRepository(VmEntity)
     private readonly vmRepository: Repository<VmEntity>,
+    @InjectRepository(AutomationEntity)
+    private readonly automationRepository: Repository<AutomationEntity>,
   ) {}
 
   async create(dto: CreateApplicationDto): Promise<any> {
@@ -22,12 +25,23 @@ export class ApplicationService {
       ? await this.vmRepository.findBy({ id: In(dto.vmIds) })
       : [];
 
-    const app = this.appRepository.create({
-      ...dto,
-      vms,
-    });
+    const automations = dto.automationIds
+      ? await this.automationRepository.findBy({ id: In(dto.automationIds) })
+      : [];
 
+    // const app = this.appRepository.create({
+    //   ...dto,
+    //   vms,
+    //   automations,
+    // });
+
+    // await this.appRepository.save(app);
+    const app = new ApplicationEntity();
+    Object.assign(app, dto);
+    app.vms = vms;
+    app.automations = automations;
     await this.appRepository.save(app);
+
     return {
       isSuccessful: true,
       message: 'Application created successfully',
@@ -35,8 +49,25 @@ export class ApplicationService {
     };
   }
 
+  // async findAll(): Promise<any> {
+  //   const apps = await this.appRepository.find({
+  //     relations: ['vms', 'automations'],
+  //   });
+  //   return {
+  //     isSuccessful: true,
+  //     message: 'Applications retrieved successfully',
+  //     data: apps,
+  //   };
+  // }
   async findAll(): Promise<any> {
-    const apps = await this.appRepository.find({ relations: ['vms'] });
+    const apps = await this.appRepository
+      .createQueryBuilder('app')
+      .leftJoinAndSelect('app.vms', 'vm')
+      .leftJoinAndSelect('app.automations', 'automation')
+      .getMany();
+
+    console.log('APPS INFO ----------', apps);
+
     return {
       isSuccessful: true,
       message: 'Applications retrieved successfully',
@@ -44,13 +75,30 @@ export class ApplicationService {
     };
   }
 
+  // async findOne(id: number): Promise<any> {
+  //   const app = await this.appRepository.findOne({
+  //     where: { id },
+  //     relations: ['vms', 'automations'],
+  //   });
+  //   if (!app)
+  //     throw new NotFoundException(`Application with ID ${id} not found`);
+  //   return {
+  //     isSuccessful: true,
+  //     message: 'Application found',
+  //     data: app,
+  //   };
+  // }
   async findOne(id: number): Promise<any> {
-    const app = await this.appRepository.findOne({
-      where: { id },
-      relations: ['vms'],
-    });
+    const app = await this.appRepository
+      .createQueryBuilder('app')
+      .leftJoinAndSelect('app.vms', 'vm')
+      .leftJoinAndSelect('app.automations', 'automation')
+      .where('app.id = :id', { id })
+      .getOne();
+
     if (!app)
       throw new NotFoundException(`Application with ID ${id} not found`);
+
     return {
       isSuccessful: true,
       message: 'Application found',
@@ -63,11 +111,15 @@ export class ApplicationService {
     const vms = dto.vmIds
       ? await this.vmRepository.findBy({ id: In(dto.vmIds) })
       : [];
+    const automations = dto.automationIds
+      ? await this.automationRepository.findBy({ id: In(dto.automationIds) })
+      : [];
 
     await this.appRepository.save({
       ...app.data,
       ...dto,
       vms,
+      automations,
     });
 
     const updated = await this.findOne(id);

@@ -187,12 +187,12 @@ export class CreateAutomationDto {
   @IsOptional()
   @IsArray()
   @IsNumber({}, { each: true })
-  applicationIds?: number[];
+  appIds?: number[];
 
   @IsOptional()
   @IsArray()
   @IsNumber({}, { each: true })
-  databaseIds?: number[];
+  dbIds?: number[];
 }
 
 export class UpdateAutomationDto extends PartialType(CreateAutomationDto) {}

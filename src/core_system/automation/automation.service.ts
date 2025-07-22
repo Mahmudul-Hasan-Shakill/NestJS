@@ -19,18 +19,18 @@ export class AutomationService {
   ) {}
 
   async create(dto: CreateAutomationDto): Promise<any> {
-    const applications = dto.applicationIds?.length
-      ? await this.appRepo.findBy({ id: In(dto.applicationIds) })
+    const applications = dto.appIds?.length
+      ? await this.appRepo.findBy({ id: In(dto.appIds) })
       : [];
 
-    const databases = dto.databaseIds?.length
-      ? await this.dbRepo.findBy({ id: In(dto.databaseIds) })
+    const databases = dto.dbIds?.length
+      ? await this.dbRepo.findBy({ id: In(dto.dbIds) })
       : [];
 
     const automation = this.automationRepo.create({
       ...dto,
-      applications,
-      databases,
+      apps: applications,
+      dbs: databases,
     });
 
     await this.automationRepo.save(automation);
@@ -44,7 +44,7 @@ export class AutomationService {
 
   async findAll(): Promise<any> {
     const automations = await this.automationRepo.find({
-      relations: ['applications', 'databases'],
+      relations: ['apps', 'dbs'],
     });
 
     return {
@@ -57,7 +57,7 @@ export class AutomationService {
   async findOne(id: number): Promise<any> {
     const automation = await this.automationRepo.findOne({
       where: { id },
-      relations: ['applications', 'databases'],
+      relations: ['apps', 'dbs'],
     });
 
     if (!automation) {
@@ -74,12 +74,12 @@ export class AutomationService {
   async update(id: number, dto: UpdateAutomationDto): Promise<any> {
     const existing = await this.findOne(id);
 
-    const applications = dto.applicationIds?.length
-      ? await this.appRepo.findBy({ id: In(dto.applicationIds) })
+    const applications = dto.appIds?.length
+      ? await this.appRepo.findBy({ id: In(dto.appIds) })
       : [];
 
-    const databases = dto.databaseIds?.length
-      ? await this.dbRepo.findBy({ id: In(dto.databaseIds) })
+    const databases = dto.dbIds?.length
+      ? await this.dbRepo.findBy({ id: In(dto.dbIds) })
       : [];
 
     await this.automationRepo.save({
@@ -121,19 +121,19 @@ export class AutomationService {
     const automations: AutomationEntity[] = [];
 
     for (const dto of dtos) {
-      const applications = dto.applicationIds?.length
-        ? await this.appRepo.findBy({ id: In(dto.applicationIds) })
+      const applications = dto.appIds?.length
+        ? await this.appRepo.findBy({ id: In(dto.appIds) })
         : [];
 
-      const databases = dto.databaseIds?.length
-        ? await this.dbRepo.findBy({ id: In(dto.databaseIds) })
+      const databases = dto.dbIds?.length
+        ? await this.dbRepo.findBy({ id: In(dto.dbIds) })
         : [];
 
       automations.push(
         this.automationRepo.create({
           ...dto,
-          applications,
-          databases,
+          apps: applications,
+          dbs: databases,
         }),
       );
     }

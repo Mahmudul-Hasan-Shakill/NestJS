@@ -54,7 +54,7 @@ export function parseServerTextFile(
       fromSection: 'Security Products',
     }),
     falconVersion: extract('Version', { fromSection: 'Security Products' }),
-    falconInstallDate: parseDate('Install Date', 'Security Products'),
+    falconInstallDate: parseDate('Falcon Install Date', 'Security Products'),
     falconStatus: extract('Service Status', {
       fromSection: 'Security Products',
     }),
@@ -66,7 +66,7 @@ export function parseServerTextFile(
     qualysVersion:
       extract('Version', { fromSection: 'Security Products' }).split('\n')[1] ||
       '',
-    qualysInstallDate: parseDate('Install Date', 'Security Products'),
+    qualysInstallDate: parseDate('Qualys Install Date', 'Security Products'),
     qualysStatus:
       extract('Service Status', { fromSection: 'Security Products' }).split(
         '\n',
@@ -101,12 +101,12 @@ export function parseServerTextFile(
     // Meta
     remarks: '',
     isActive: true,
-    makeBy: 'auto-parser',
+    makeBy: '',
     makeDate: new Date(),
 
     // Relations
-    applicationIds: [],
-    databaseIds: [],
+    appIds: [],
+    dbIds: [],
   };
 
   // Minimal required validation

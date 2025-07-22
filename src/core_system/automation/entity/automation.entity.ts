@@ -1,5 +1,11 @@
 // automation.entity.ts
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { ApplicationEntity } from 'src/core_system/application/entity/application.entity';
 import { DatabaseEntity } from 'src/core_system/database/entity/database.entity';
 
@@ -82,18 +88,8 @@ export class AutomationEntity {
   editBy: string;
 
   @ManyToMany(() => ApplicationEntity, (app) => app.automations)
-  @JoinTable({
-    name: 'automation_applications',
-    joinColumn: { name: 'automation_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'application_id', referencedColumnName: 'id' },
-  })
-  applications: ApplicationEntity[];
+  apps: ApplicationEntity[];
 
   @ManyToMany(() => DatabaseEntity, (db) => db.automations)
-  @JoinTable({
-    name: 'automation_databases',
-    joinColumn: { name: 'automation_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'database_id', referencedColumnName: 'id' },
-  })
-  databases: DatabaseEntity[];
+  dbs: DatabaseEntity[];
 }

@@ -92,7 +92,7 @@ export class ApplicationEntity {
   @JoinTable({ name: 'application_vm' })
   vms: VmEntity[];
 
-  // In ApplicationEntity
-  @ManyToMany(() => AutomationEntity, (automation) => automation.applications)
+  @ManyToMany(() => AutomationEntity, (automation) => automation.apps)
+  @JoinTable({ name: 'application_automation' })
   automations: AutomationEntity[];
 }

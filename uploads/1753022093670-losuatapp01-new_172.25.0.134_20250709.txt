@@ -1,0 +1,1196 @@
+System Inventory Report - Wed Jul  9 13:53:17 +06 2025
+=========================================
+=== Server Basic Information ===
+Hostname: losuatapp01-new
+IP Address: 172.25.0.134
+Server Environment: Test Server
+CPU Physical Cores: 1
+CPU Virtual Cores: 2
+CPU Model: Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz
+Total RAM: 7.5Gi
+Total Disk Size: 221 GB
+OS Version: Red Hat Enterprise Linux release 8.8 (Ootpa)
+Kernel Version: 4.18.0-513.9.1.el8_9.x86_64
+Server Platform: VMware Virtual Machine
+Serial Number: N/A
+SSH Port(s): 7822
+Last Patch Installed:  Tue 08 Jul 2025 07:21:05 PM +06
+System Uptime: up 51 weeks, 6 days, 1 hour, 44 minutes
+
+
+=========================================
+NATIVE PACKAGES (Name | Version)
+=========================================
+abattis-cantarell-fonts                            0.0.25-6.el8
+acl                                                2.2.53-1.el8
+adcli                                              0.9.2-1.el8
+adobe-mappings-cmap                                20171205-3.el8
+adobe-mappings-cmap-deprecated                     20171205-3.el8
+adobe-mappings-pdf                                 20180407-1.el8
+adwaita-cursor-theme                               3.28.0-3.el8
+adwaita-icon-theme                                 3.28.0-3.el8
+aide                                               0.16-14.el8_5.1
+alsa-lib                                           1.2.8-2.el8
+alsa-sof-firmware                                  2.2.5-2.el8
+at                                                 3.1.20-12.el8
+atk                                                2.28.1-1.el8
+at-spi2-atk                                        2.26.2-1.el8
+at-spi2-core                                       2.28.0-1.el8
+attr                                               2.4.48-3.el8
+audit                                              3.0.7-4.el8
+audit-libs                                         3.0.7-4.el8
+authselect                                         1.2.6-2.el8
+authselect-compat                                  1.2.6-2.el8
+authselect-libs                                    1.2.6-2.el8
+autoconf                                           2.69-29.el8
+automake                                           1.16.1-7.el8
+avahi-libs                                         0.7-20.el8
+basesystem                                         11-5.el8
+bash                                               4.4.20-4.el8_6
+bash-completion                                    2.7-5.el8
+bc                                                 1.07.1-5.el8
+bind-libs                                          9.11.36-11.el8_9
+bind-libs-lite                                     9.11.36-11.el8_9
+bind-license                                       9.11.36-11.el8_9
+bind-utils                                         9.11.36-11.el8_9
+binutils                                           2.30-119.0.1.el8
+biosdevname                                        0.7.3-2.el8
+blktrace                                           1.2.0-10.el8
+bolt                                               0.9.1-1.el8
+bpftool                                            4.18.0-513.9.1.el8_9
+brotli                                             1.0.6-3.el8
+bubblewrap                                         0.4.0-1.el8
+buildah                                            1.31.3-1.module+el8.9.0+20326+387084d0
+bzip2                                              1.0.6-26.el8
+bzip2-libs                                         1.0.6-26.el8
+ca-certificates                                    2023.2.60_v7.0.306-80.0.el8_8
+cairo                                              1.15.12-6.el8
+cairo-gobject                                      1.15.12-6.el8
+c-ares                                             1.13.0-9.el8_9.1
+checkpolicy                                        2.9-1.el8
+chkconfig                                          1.19.1-1.el8
+chrony                                             4.2-1.el8
+clevis                                             15-15.el8
+clevis-luks                                        15-15.el8
+cmake-filesystem                                   3.20.2-5.el8
+cockpit                                            300.1-1.el8_9
+cockpit-bridge                                     300.1-1.el8_9
+cockpit-packagekit                                 300.1-1.el8_9
+cockpit-podman                                     75-1.module+el8.9.0+20326+387084d0
+cockpit-storaged                                   300.1-1.el8_9
+cockpit-system                                     300.1-1.el8_9
+cockpit-ws                                         300.1-1.el8_9
+colord-libs                                        1.4.2-1.el8
+conmon                                             2.1.8-1.module+el8.9.0+20326+387084d0
+containernetworking-plugins                        1.3.0-4.module+el8.9.0+20326+387084d0
+containers-common                                  1-70.module+el8.9.0+20326+387084d0
+container-selinux                                  2.221.0-1.module+el8.9.0+20326+387084d0
+copy-jdk-configs                                   4.0-2.el8
+coreutils                                          8.30-15.el8
+coreutils-common                                   8.30-15.el8
+cpio                                               2.12-11.el8
+cpp                                                8.5.0-18.el8
+cracklib                                           2.9.6-15.el8
+cracklib-dicts                                     2.9.6-15.el8
+criu                                               3.18-4.module+el8.9.0+20326+387084d0
+cronie                                             1.5.2-8.el8
+cronie-anacron                                     1.5.2-8.el8
+crontabs                                           1.11-17.20190603git.el8
+crypto-policies                                    20221215-1.gitece0092.el8
+crypto-policies-scripts                            20221215-1.gitece0092.el8
+cryptsetup                                         2.3.7-5.el8
+cryptsetup-libs                                    2.3.7-5.el8
+cups-libs                                          2.2.6-51.el8
+curl                                               7.61.1-30.el8_8.3
+cyrus-sasl-gssapi                                  2.1.27-6.el8_5
+cyrus-sasl-lib                                     2.1.27-6.el8_5
+cyrus-sasl-plain                                   2.1.27-6.el8_5
+dbus                                               1.12.8-24.el8_8.1
+dbus-common                                        1.12.8-24.el8_8.1
+dbus-daemon                                        1.12.8-24.el8_8.1
+dbus-glib                                          0.110-2.el8
+dbus-libs                                          1.12.8-24.el8_8.1
+dbus-tools                                         1.12.8-24.el8_8.1
+dconf                                              0.28.0-4.0.1.el8
+dejavu-fonts-common                                2.35-7.el8
+dejavu-sans-fonts                                  2.35-7.el8
+dejavu-sans-mono-fonts                             2.35-7.el8
+desktop-file-utils                                 0.26-1.el8
+device-mapper                                      1.02.181-9.el8
+device-mapper-event                                1.02.181-9.el8
+device-mapper-event-libs                           1.02.181-9.el8
+device-mapper-libs                                 1.02.181-9.el8
+device-mapper-multipath                            0.8.4-37.el8
+device-mapper-multipath-libs                       0.8.4-37.el8
+device-mapper-persistent-data                      0.9.0-7.el8
+diffutils                                          3.6-6.el8
+djvulibre-libs                                     3.5.28-3.el8
+dmidecode                                          3.3-5.el8
+dnf                                                4.7.0-19.el8
+dnf-data                                           4.7.0-19.el8
+dnf-plugins-core                                   4.0.21-23.el8
+dnf-plugin-subscription-manager                    1.28.40-1.el8_9
+dnsmasq                                            2.79-31.el8
+dos2unix                                           7.4.0-3.el8
+dosfstools                                         4.1-6.el8
+dracut                                             049-223.git20230119.el8
+dracut-config-rescue                               049-223.git20230119.el8
+dracut-network                                     049-223.git20230119.el8
+dracut-squash                                      049-223.git20230119.el8
+e2fsprogs                                          1.45.6-5.el8
+e2fsprogs-libs                                     1.45.6-5.el8
+ed                                                 1.14.2-4.el8
+efibootmgr                                         16-1.el8
+efi-filesystem                                     3-3.el8
+efivar-libs                                        37-4.el8
+elfutils-debuginfod-client                         0.188-3.el8
+elfutils-default-yama-scope                        0.188-3.el8
+elfutils-libelf                                    0.188-3.el8
+elfutils-libs                                      0.188-3.el8
+emacs-filesystem                                   26.1-10.el8_8.2
+environment-modules                                4.5.2-3.el8
+epel-release                                       8-19.el8
+ethtool                                            5.13-2.el8
+expat                                              2.2.5-11.el8
+falcon-sensor                                      7.11.0-16405.el8
+fftw-libs-double                                   3.3.5-11.el8
+file                                               5.33-24.el8
+file-libs                                          5.33-24.el8
+filesystem                                         3.8-6.el8
+findutils                                          4.6.0-20.el8_8.1
+firewalld                                          0.9.11-1.el8_8
+firewalld-filesystem                               0.9.11-1.el8_8
+fontconfig                                         2.13.1-4.el8
+fontpackages-filesystem                            1.44-22.el8
+fprintd                                            1.90.9-2.el8
+fprintd-pam                                        1.90.9-2.el8
+freetype                                           2.9.1-9.el8
+fribidi                                            1.0.4-9.el8
+fstrm                                              0.6.1-3.el8
+fuse                                               2.9.7-17.el8
+fuse3                                              3.3.0-17.el8
+fuse3-libs                                         3.3.0-17.el8
+fuse-common                                        3.3.0-17.el8
+fuse-libs                                          2.9.7-17.el8
+fuse-overlayfs                                     1.12-1.module+el8.9.0+20326+387084d0
+fwupd                                              1.7.8-2.el8
+gawk                                               4.2.1-4.el8
+gcc                                                8.5.0-18.el8
+gcc-c++                                            8.5.0-18.el8
+gd                                                 2.2.5-7.el8
+gd3php                                             2.3.3-8.el8.remi
+gdbm                                               1.18-2.el8
+gdbm-libs                                          1.18-2.el8
+gdisk                                              1.0.3-11.el8
+gdk-pixbuf2                                        2.36.12-5.el8
+gdk-pixbuf2-modules                                2.36.12-5.el8
+geolite2-city                                      20180605-1.el8
+geolite2-country                                   20180605-1.el8
+gettext                                            0.19.8.1-17.el8
+gettext-libs                                       0.19.8.1-17.el8
+git                                                2.39.3-1.el8_8
+git-core                                           2.39.3-1.el8_8
+git-core-doc                                       2.39.3-1.el8_8
+glib2                                              2.56.4-161.el8
+glibc                                              2.28-225.el8_8.6
+glibc-all-langpacks                                2.28-225.el8_8.6
+glibc-common                                       2.28-225.el8_8.6
+glibc-devel                                        2.28-225.el8_8.6
+glibc-gconv-extra                                  2.28-225.el8_8.6
+glibc-headers                                      2.28-225.el8_8.6
+glibc-langpack-en                                  2.28-225.el8_8.6
+glib-networking                                    2.56.1-1.1.el8
+gmp                                                6.1.2-10.el8
+gnupg2                                             2.2.20-3.el8_6
+gnupg2-smime                                       2.2.20-3.el8_6
+gnutls                                             3.6.16-6.el8_7
+gobject-introspection                              1.56.1-1.el8
+google-droid-sans-fonts                            20120715-13.el8
+gpgme                                              1.13.1-11.el8
+gpg-pubkey                                         2f86d6a1-5cf7cefb
+gpg-pubkey                                         5f11735a-5a58bcd7
+gpg-pubkey                                         7bd9bf62-5762b5f8
+gpg-pubkey                                         d4082792-5b32db75
+gpg-pubkey                                         fd431d51-4ae0493b
+gpm-libs                                           1.20.7-17.el8
+graphite2                                          1.3.10-10.el8
+graphviz                                           2.40.1-44.el8
+grep                                               3.1-6.el8
+groff-base                                         1.22.3-18.el8
+grub2-common                                       2.02-148.el8_8.1
+grub2-efi-x64                                      2.02-148.el8_8.1
+grub2-tools                                        2.02-148.el8_8.1
+grub2-tools-efi                                    2.02-148.el8_8.1
+grub2-tools-extra                                  2.02-148.el8_8.1
+grub2-tools-minimal                                2.02-148.el8_8.1
+grubby                                             8.40-47.el8
+gsettings-desktop-schemas                          3.32.0-6.el8
+gtk2                                               2.24.32-5.el8
+gtk3                                               3.22.30-11.el8
+gtk-update-icon-cache                              3.22.30-11.el8
+gzip                                               1.9-13.el8_5
+hardlink                                           1.3-6.el8
+harfbuzz                                           1.7.5-3.el8
+hdparm                                             9.54-4.el8
+hicolor-icon-theme                                 0.17-2.el8
+hostname                                           3.20-6.el8
+httpd-filesystem                                   2.4.37-62.module+el8.9.0+19699+7a7a2044
+hwdata                                             0.314-8.19.el8
+ilmbase                                            2.2.0-13.el8
+ima-evm-utils                                      1.3.2-12.el8
+ImageMagick7-djvu                                  7.1.1.15-1.el8.remi
+ImageMagick7-libs                                  7.1.1.15-1.el8.remi
+ImageMagick-libs                                   6.9.12.86-1.el8
+info                                               6.5-7.el8
+initscripts                                        10.00.18-1.el8
+insights-client                                    3.2.2-1.el8_9
+ipcalc                                             0.2.4-4.el8
+iproute                                            6.2.0-5.el8_9
+iprutils                                           2.4.19-1.el8
+ipset                                              7.1-1.el8
+ipset-libs                                         7.1-1.el8
+iptables                                           1.8.5-10.el8_9
+iptables-ebtables                                  1.8.5-10.el8_9
+iptables-libs                                      1.8.5-10.el8_9
+iptstate                                           2.2.6-6.el8
+iputils                                            20180629-11.el8
+irqbalance                                         1.9.2-1.el8
+iscsi-initiator-utils                              6.2.1.4-8.git095f59c.el8_8
+iscsi-initiator-utils-iscsiuio                     6.2.1.4-8.git095f59c.el8_8
+isl                                                0.16.1-6.el8
+isns-utils-libs                                    0.99-1.el8
+iwl1000-firmware                                   39.31.5.1-119.el8_9.1
+iwl100-firmware                                    39.31.5.1-119.el8_9.1
+iwl105-firmware                                    18.168.6.1-119.el8_9.1
+iwl135-firmware                                    18.168.6.1-119.el8_9.1
+iwl2000-firmware                                   18.168.6.1-119.el8_9.1
+iwl2030-firmware                                   18.168.6.1-119.el8_9.1
+iwl3160-firmware                                   25.30.13.0-119.el8_9.1
+iwl5000-firmware                                   8.83.5.1_1-119.el8_9.1
+iwl5150-firmware                                   8.24.2.2-119.el8_9.1
+iwl6000-firmware                                   9.221.4.1-119.el8_9.1
+iwl6000g2a-firmware                                18.168.6.1-119.el8_9.1
+iwl6000g2b-firmware                                18.168.6.1-119.el8_9.1
+iwl6050-firmware                                   41.28.5.1-119.el8_9.1
+iwl7260-firmware                                   25.30.13.0-119.el8_9.1
+jansson                                            2.14-1.el8
+jasper-libs                                        2.0.14-5.el8
+java-11-openjdk                                    11.0.20.0.8-3.0.1.el8
+java-11-openjdk-devel                              11.0.20.0.8-3.0.1.el8
+java-11-openjdk-headless                           11.0.20.0.8-3.0.1.el8
+java-1.8.0-openjdk                                 1.8.0.382.b05-2.0.1.el8
+java-1.8.0-openjdk-devel                           1.8.0.382.b05-2.0.1.el8
+java-1.8.0-openjdk-headless                        1.8.0.382.b05-2.0.1.el8
+javapackages-filesystem                            5.3.0-1.module+el8+5136+7ff78f74
+jbig2dec-libs                                      0.16-1.el8
+jbigkit-libs                                       2.1-14.el8
+jimtcl                                             0.77-6.el8
+jose                                               10-2.el8
+jq                                                 1.6-7.el8
+json-c                                             0.13.1-3.el8
+json-glib                                          1.4.4-1.el8
+kbd                                                2.0.4-10.el8
+kbd-legacy                                         2.0.4-10.el8
+kbd-misc                                           2.0.4-10.el8
+kernel                                             4.18.0-477.10.1.el8_8
+kernel                                             4.18.0-477.27.1.el8_8
+kernel                                             4.18.0-513.9.1.el8_9
+kernel-core                                        4.18.0-477.10.1.el8_8
+kernel-core                                        4.18.0-477.27.1.el8_8
+kernel-core                                        4.18.0-513.9.1.el8_9
+kernel-headers                                     4.18.0-477.15.1.el8_8
+kernel-modules                                     4.18.0-477.10.1.el8_8
+kernel-modules                                     4.18.0-477.27.1.el8_8
+kernel-modules                                     4.18.0-513.9.1.el8_9
+kernel-tools                                       4.18.0-513.9.1.el8_9
+kernel-tools-libs                                  4.18.0-513.9.1.el8_9
+kexec-tools                                        2.0.26-8.el8
+keyutils-libs                                      1.5.10-9.el8
+keyutils-libs-devel                                1.5.10-9.el8
+kmod                                               25-19.el8
+kmod-kvdo                                          6.2.8.7-92.el8
+kmod-libs                                          25-19.el8
+kpartx                                             0.8.4-37.el8
+kpatch                                             0.9.7-2.el8
+kpatch-dnf                                         0.9.7_0.4-2.el8
+krb5-devel                                         1.18.2-25.el8_8
+krb5-libs                                          1.18.2-25.el8_8
+langpacks-en                                       1.0-12.el8
+lcms2                                              2.9-2.el8
+ledmon                                             0.97-1.el8
+less                                               530-1.el8
+libacl                                             2.2.53-1.el8
+libaio                                             0.3.112-1.el8
+libaom                                             3.6.1-1.el8
+libappstream-glib                                  0.7.14-3.el8
+libarchive                                         3.3.3-5.el8
+libassuan                                          2.5.1-3.el8
+libatasmart                                        0.19-14.el8
+libattr                                            2.4.48-3.el8
+libavif                                            0.10.1-3.el8
+libbasicobjects                                    0.1.1-40.el8
+libblkid                                           2.32.1-42.el8_8
+libblockdev                                        2.28-4.el8
+libblockdev-crypto                                 2.28-4.el8
+libblockdev-fs                                     2.28-4.el8
+libblockdev-loop                                   2.28-4.el8
+libblockdev-lvm                                    2.28-4.el8
+libblockdev-mdraid                                 2.28-4.el8
+libblockdev-part                                   2.28-4.el8
+libblockdev-swap                                   2.28-4.el8
+libblockdev-utils                                  2.28-4.el8
+libbpf                                             0.5.0-1.el8
+libbson                                            1.24.2-1.el8
+libbytesize                                        1.4-3.el8
+libcap                                             2.48-5.el8_8
+libcap-ng                                          0.7.11-1.el8
+libcollection                                      0.7.0-40.el8
+libcom_err                                         1.45.6-5.el8
+libcom_err-devel                                   1.45.6-5.el8
+libcomps                                           0.1.18-1.el8
+libconfig                                          1.5-9.el8
+libcroco                                           0.6.12-4.el8_2.1
+libcurl                                            7.61.1-30.el8_8.3
+libdaemon                                          0.14-15.el8
+libdatrie                                          0.2.9-7.el8
+libdav1d                                           0.5.2-2.el8
+libdb                                              5.3.28-42.el8_4
+libdb-utils                                        5.3.28-42.el8_4
+libdhash                                           0.5.0-40.el8
+libdnf                                             0.63.0-17.el8_9
+libdrm                                             2.4.115-2.el8
+libedit                                            3.1-23.20170329cvs.el8
+libepoxy                                           1.5.8-1.el8
+libertas-usb8388-firmware                          20230824-119.git0e048b06.el8_9
+libestr                                            0.1.10-3.el8
+libevent                                           2.1.8-5.el8
+libfastjson                                        0.99.9-2.el8
+libfdisk                                           2.32.1-42.el8_8
+libffi                                             3.1-24.el8
+libfontenc                                         1.1.3-8.el8
+libfprint                                          1.90.7-1.el8
+libgcab1                                           1.1-1.el8
+libgcc                                             8.5.0-18.el8
+libgcrypt                                          1.8.5-7.el8_6
+libgomp                                            8.5.0-18.el8
+libgpg-error                                       1.31-1.el8
+libgs                                              9.27-6.el8
+libgudev                                           232-4.el8
+libgusb                                            0.3.0-1.el8
+libibverbs                                         46.0-1.el8.1
+libICE                                             1.0.9-15.el8
+libicu                                             60.3-2.el8_1
+libicu72                                           72.1-1.el8.remi
+libidn                                             1.34-5.el8
+libidn2                                            2.2.0-1.el8
+libijs                                             0.35-5.el8
+libimagequant                                      2.12.5-1.el8
+libini_config                                      1.3.1-40.el8
+libipa_hbac                                        2.9.1-4.el8_9
+libjose                                            10-2.el8
+libjpeg-turbo                                      1.5.3-12.el8
+libkadm5                                           1.18.2-25.el8_8
+libkcapi                                           1.2.0-2.el8
+libkcapi-hmaccalc                                  1.2.0-2.el8
+libksba                                            1.3.5-9.el8_7
+libldb                                             2.7.2-3.el8
+liblqr-1                                           0.4.2-11.el8.remi
+libluksmeta                                        9-4.el8
+libmaxminddb                                       1.2.0-10.el8
+libmcpp                                            2.7.2-20.el8
+libmcrypt                                          2.5.8-26.el8
+libmcrypt-devel                                    2.5.8-26.el8
+libmetalink                                        0.1.3-7.el8
+libmicrohttpd                                      0.9.59-3.el8
+libmnl                                             1.0.4-6.el8
+libmodman                                          2.0.1-17.el8
+libmodulemd                                        2.13.0-1.el8
+libmongocrypt                                      1.8.1-1.el8
+libmount                                           2.32.1-42.el8_8
+libmpc                                             1.1.0-9.1.el8
+libmspack                                          0.7-0.3.alpha.el8.4
+libndp                                             1.7-6.el8
+libnet                                             1.1.6-15.el8
+libnetfilter_conntrack                             1.0.6-5.el8
+libnfnetlink                                       1.0.1-13.el8
+libnfsidmap                                        2.3.3-59.el8
+libnftnl                                           1.2.2-3.el8
+libnghttp2                                         1.33.0-5.el8_8
+libnl3                                             3.7.0-1.el8
+libnl3-cli                                         3.7.0-1.el8
+libnsl2                                            1.2.0-2.20180605git4a062cf.el8
+libpaper                                           1.1.24-22.el8
+libpath_utils                                      0.2.1-40.el8
+libpcap                                            1.9.1-5.el8
+libpciaccess                                       0.14-1.el8
+libpipeline                                        1.5.0-2.el8
+libpkgconf                                         1.4.2-1.el8
+libpng                                             1.6.34-5.el8
+libproxy                                           0.4.15-5.2.el8
+libpsl                                             0.20.2-6.el8
+libpwquality                                       1.4.4-6.el8
+libraqm                                            0.7.0-4.el8
+LibRaw                                             0.19.5-3.el8
+libref_array                                       0.1.5-40.el8
+librelp                                            1.9.0-1.el8
+librepo                                            1.14.2-4.el8
+libreport-filesystem                               2.9.5-15.el8
+librhsm                                            0.0.3-5.el8
+librsvg2                                           2.42.7-4.el8
+libseccomp                                         2.5.2-1.el8
+libsecret                                          0.18.6-1.el8
+libselinux                                         2.9-8.el8
+libselinux-devel                                   2.9-8.el8
+libselinux-utils                                   2.9-8.el8
+libsemanage                                        2.9-9.el8_6
+libsepol                                           2.9-3.el8
+libsepol-devel                                     2.9-3.el8
+libsigsegv                                         2.11-5.el8
+libslirp                                           4.4.0-1.module+el8.9.0+20326+387084d0
+libSM                                              1.2.3-1.el8
+libsmartcols                                       2.32.1-42.el8_8
+libsmbclient                                       4.18.6-2.el8_9
+libsmbios                                          2.4.1-2.el8
+libsodium                                          1.0.18-2.el8
+libsolv                                            0.7.20-6.el8
+libsoup                                            2.62.3-3.el8
+libss                                              1.45.6-5.el8
+libssh                                             0.9.6-10.el8_8
+libssh-config                                      0.9.6-10.el8_8
+libsss_autofs                                      2.9.1-4.el8_9
+libsss_certmap                                     2.9.1-4.el8_9
+libsss_idmap                                       2.9.1-4.el8_9
+libsss_nss_idmap                                   2.9.1-4.el8_9
+libsss_sudo                                        2.9.1-4.el8_9
+libstdc++                                          8.5.0-18.el8
+libstdc++-devel                                    8.5.0-18.el8
+libstemmer                                         0-10.585svn.el8
+libstoragemgmt                                     1.9.1-7.el8
+libsysfs                                           2.1.0-25.el8
+libtalloc                                          2.4.0-3.el8
+libtasn1                                           4.13-4.el8_7
+libtdb                                             1.4.8-3.el8
+libteam                                            1.31-4.el8
+libtevent                                          0.14.1-3.el8
+libthai                                            0.1.27-2.el8
+libtidy                                            5.6.0-5.el8
+libtiff                                            4.0.9-28.el8_8
+libtirpc                                           1.1.4-8.el8
+libtool                                            2.4.6-25.el8
+libtool-ltdl                                       2.4.6-25.el8
+libudisks2                                         2.9.0-16.el8
+libunistring                                       0.9.9-3.el8
+libusbx                                            1.0.23-4.el8
+libuser                                            0.62-25.el8
+libutempter                                        1.1.6-14.el8
+libuuid                                            2.32.1-42.el8_8
+libverto                                           0.3.2-2.el8
+libverto-devel                                     0.3.2-2.el8
+libwayland-client                                  1.21.0-1.el8
+libwayland-cursor                                  1.21.0-1.el8
+libwayland-egl                                     1.21.0-1.el8
+libwbclient                                        4.18.6-2.el8_9
+libwebp                                            1.0.0-8.el8_7
+libwmf-lite                                        0.2.9-8.el8_0
+libX11                                             1.6.8-6.el8
+libX11-common                                      1.6.8-6.el8
+libXau                                             1.0.9-3.el8
+libXaw                                             1.0.13-10.el8
+libxcb                                             1.13.1-1.el8
+libXcomposite                                      0.4.4-14.el8
+libxcrypt                                          4.1.1-6.el8
+libxcrypt-devel                                    4.1.1-6.el8
+libXcursor                                         1.1.15-3.el8
+libXdamage                                         1.1.4-14.el8
+libXext                                            1.3.4-1.el8
+libXfixes                                          5.0.3-7.el8
+libXft                                             2.3.3-1.el8
+libXi                                              1.7.10-1.el8
+libXinerama                                        1.1.4-1.el8
+libxkbcommon                                       0.9.1-1.el8
+libxml2                                            2.9.7-16.el8_8.1
+libxml2-devel                                      2.9.7-16.el8_8.1
+libxmlb                                            0.1.15-1.el8
+libXmu                                             1.1.3-1.el8
+libXpm                                             3.5.12-9.el8_7
+libXrandr                                          1.5.2-1.el8
+libXrender                                         0.9.10-7.el8
+libxslt                                            1.1.32-6.0.1.el8
+libXt                                              1.1.5-12.el8
+libXtst                                            1.2.3-7.el8
+libXxf86misc                                       1.0.4-1.el8
+libXxf86vm                                         1.1.4-9.el8
+libyaml                                            0.1.7-5.el8
+libzip                                             1.7.3-1.module+el8.6.0+20568+84712317
+libzstd                                            1.4.4-1.el8
+linux-firmware                                     20230824-119.git0e048b06.el8_9
+lksctp-tools                                       1.0.18-3.el8
+lmdb-libs                                          0.9.24-2.el8
+logrotate                                          3.14.0-6.el8
+lshw                                               B.02.19.2-6.el8
+lsof                                               4.93.2-1.el8
+lsscsi                                             0.32-3.el8
+lua                                                5.3.4-12.el8
+lua-libs                                           5.3.4-12.el8
+luksmeta                                           9-4.el8
+lvm2                                               2.03.14-9.el8
+lvm2-libs                                          2.03.14-9.el8
+lz4-libs                                           1.8.3-3.el8_4
+lzo                                                2.08-14.el8
+m4                                                 1.4.18-7.el8
+mailcap                                            2.1.48-3.el8
+make                                               4.2.1-11.el8
+man-db                                             2.7.6.1-18.el8
+man-pages                                          4.15-7.el8
+man-pages-overrides                                8.9.0.0-1.el8
+mariadb-connector-c-config                         3.1.11-2.el8_3
+mcelog                                             194-1.el8
+mcpp                                               2.7.2-20.el8
+mdadm                                              4.2-8.el8
+memstrack                                          0.2.4-2.el8
+microcode_ctl                                      20230808-2.20231009.1.el8_9
+mlocate                                            0.26-20.el8
+mokutil                                            0.3.0-12.el8
+mongo-c-driver-libs                                1.24.2-1.el8
+mongodb-database-tools                             100.10.0-1
+mozjs60                                            60.9.0-4.el8
+mpfr                                               3.1.6-1.el8
+mtr                                                0.92-3.el8
+mysql                                              8.0.32-1.module+el8.8.0+18446+fca6280e
+mysql-common                                       8.0.32-1.module+el8.8.0+18446+fca6280e
+nano                                               2.9.8-1.el8
+ncurses                                            6.1-9.20180224.el8_8.1
+ncurses-base                                       6.1-9.20180224.el8_8.1
+ncurses-libs                                       6.1-9.20180224.el8_8.1
+nettle                                             3.4.1-7.el8
+net-tools                                          2.0-0.52.20160912git.el8
+NetworkManager                                     1.40.16-9.el8
+NetworkManager-config-server                       1.40.16-9.el8
+NetworkManager-libnm                               1.40.16-9.el8
+NetworkManager-team                                1.40.16-9.el8
+NetworkManager-tui                                 1.40.16-9.el8
+network-scripts                                    10.00.18-1.el8
+network-scripts-team                               1.31-4.el8
+newt                                               0.52.20-11.el8
+nftables                                           1.0.4-3.el8_9
+nginx                                              1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nginx-all-modules                                  1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nginx-filesystem                                   1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nginx-mod-http-image-filter                        1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nginx-mod-http-perl                                1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nginx-mod-http-xslt-filter                         1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nginx-mod-mail                                     1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nginx-mod-stream                                   1.14.1-9.0.1.module+el8.0.0+5347+9282027e
+nmap-ncat                                          7.92-1.el8
+nmon                                               16m-1.el8
+npth                                               1.5-4.el8
+nspr                                               4.34.0-3.el8_6
+nss                                                3.79.0-11.el8_7
+nss-softokn                                        3.79.0-11.el8_7
+nss-softokn-freebl                                 3.79.0-11.el8_7
+nss-sysinit                                        3.79.0-11.el8_7
+nss-util                                           3.79.0-11.el8_7
+numactl-libs                                       2.0.16-1.el8
+nvme-cli                                           1.16-9.el8
+oddjob                                             0.34.7-3.el8
+oddjob-mkhomedir                                   0.34.7-3.el8
+oniguruma5php                                      6.9.8-1.el8.remi
+oniguruma                                          6.8.2-2.el8
+OpenEXR-libs                                       2.2.0-12.el8
+openjpeg2                                          2.4.0-5.el8
+openldap                                           2.4.46-18.el8
+open-sans-fonts                                    1.10-6.el8
+openssh                                            8.0p1-19.el8_8
+openssh-clients                                    8.0p1-19.el8_8
+openssh-server                                     8.0p1-19.el8_8
+openssl                                            1.1.1k-9.el8_7
+openssl-devel                                      1.1.1k-9.el8_7
+openssl-libs                                       1.1.1k-9.el8_7
+openssl-pkcs11                                     0.4.10-3.el8
+open-vm-tools                                      12.2.5-3.el8_9.1
+os-prober                                          1.74-9.el8
+p11-kit                                            0.23.22-1.el8
+p11-kit-trust                                      0.23.22-1.el8
+PackageKit                                         1.1.12-7.el8
+PackageKit-glib                                    1.1.12-7.el8
+pam                                                1.3.1-25.el8
+pango                                              1.42.4-8.el8
+parted                                             3.2-39.el8
+passwd                                             0.80-4.el8
+pciutils                                           3.7.0-3.el8
+pciutils-libs                                      3.7.0-3.el8
+pcre2                                              10.32-3.el8_6
+pcre2-devel                                        10.32-3.el8_6
+pcre2-utf16                                        10.32-3.el8_6
+pcre2-utf32                                        10.32-3.el8_6
+pcre                                               8.42-6.el8
+perl-Carp                                          1.42-396.el8
+perl-constant                                      1.33-396.el8
+perl-Data-Dumper                                   2.167-399.el8
+perl-Digest                                        1.17-395.el8
+perl-Digest-MD5                                    2.55-396.el8
+perl-Encode                                        2.97-3.el8
+perl-Errno                                         1.28-422.el8
+perl-Error                                         0.17025-2.el8
+perl-Exporter                                      5.72-396.el8
+perl-File-Path                                     2.15-2.el8
+perl-File-Temp                                     0.230.600-1.el8
+perl-Getopt-Long                                   2.50-4.el8
+perl-Git                                           2.39.3-1.el8_8
+perl-HTTP-Tiny                                     0.074-1.el8
+perl-interpreter                                   5.26.3-422.el8
+perl-IO                                            1.38-422.el8
+perl-IO-Socket-IP                                  0.39-5.el8
+perl-IO-Socket-SSL                                 2.066-4.module+el8.6.0+20623+f0897f98
+perl-libnet                                        3.11-3.el8
+perl-libs                                          5.26.3-422.el8
+perl-macros                                        5.26.3-422.el8
+perl-MIME-Base64                                   3.15-396.el8
+perl-Mozilla-CA                                    20160104-7.0.1.module+el8.3.0+21136+b437fca9
+perl-Net-SSLeay                                    1.88-2.module+el8.6.0+20623+f0897f98
+perl-parent                                        0.237-1.el8
+perl-PathTools                                     3.74-1.el8
+perl-Pod-Escapes                                   1.07-395.el8
+perl-podlators                                     4.11-1.el8
+perl-Pod-Perldoc                                   3.28-396.el8
+perl-Pod-Simple                                    3.35-395.el8
+perl-Pod-Usage                                     1.69-395.el8
+perl-Scalar-List-Utils                             1.49-2.el8
+perl-Socket                                        2.027-3.el8
+perl-Storable                                      3.11-3.el8
+perl-Term-ANSIColor                                4.06-396.el8
+perl-Term-Cap                                      1.17-395.el8
+perl-TermReadKey                                   2.37-7.el8
+perl-Text-ParseWords                               3.30-395.el8
+perl-Text-Tabs+Wrap                                2013.0523-395.el8
+perl-Thread-Queue                                  3.13-1.el8
+perl-threads                                       2.21-2.el8
+perl-threads-shared                                1.58-2.el8
+perl-Time-Local                                    1.280-1.el8
+perl-Unicode-Normalize                             1.25-396.el8
+perl-URI                                           1.73-3.el8
+php82-php-cli                                      8.2.9-2.el8.remi
+php82-php-common                                   8.2.9-2.el8.remi
+php82-php-devel                                    8.2.9-2.el8.remi
+php82-php-fpm                                      8.2.9-2.el8.remi
+php82-php-gd                                       8.2.9-2.el8.remi
+php82-php-gmp                                      8.2.9-2.el8.remi
+php82-php-intl                                     8.2.9-2.el8.remi
+php82-php-ldap                                     8.2.9-2.el8.remi
+php82-php-mbstring                                 8.2.9-2.el8.remi
+php82-php-mysqlnd                                  8.2.9-2.el8.remi
+php82-php-oci8                                     8.2.9-2.el8.remi
+php82-php-pdo                                      8.2.9-2.el8.remi
+php82-php-pear                                     1.10.13-5.el8.remi
+php82-php-pecl-imagick-im6                         3.7.0-7.el8.remi
+php82-php-pecl-mcrypt                              1.0.6-1.el8.remi
+php82-php-pecl-mongodb                             1.16.1-2.el8.remi
+php82-php-pecl-mysql                               1.0.0-0.25.20210423.ca514c4.el8.remi
+php82-php-pecl-recode                              1.0.0~DEV.20190723-6.el8.remi
+php82-php-pecl-xmlrpc                              1.0.0~rc3-2.el8.remi
+php82-php-pecl-zip                                 1.22.1-1.el8.remi
+php82-php-process                                  8.2.9-2.el8.remi
+php82-php-soap                                     8.2.9-2.el8.remi
+php82-php-sodium                                   8.2.9-2.el8.remi
+php82-php-tidy                                     8.2.9-2.el8.remi
+php82-php-xml                                      8.2.9-2.el8.remi
+php82-runtime                                      8.2-5.el8.remi
+pigz                                               2.4-4.el8
+pinentry                                           1.1.0-2.el8
+pinfo                                              0.6.10-18.el8
+pixman                                             0.38.4-2.el8
+pkgconf                                            1.4.2-1.el8
+pkgconf-m4                                         1.4.2-1.el8
+pkgconf-pkg-config                                 1.4.2-1.el8
+platform-python                                    3.6.8-51.el8_8.2
+platform-python-pip                                9.0.3-22.el8
+platform-python-setuptools                         39.2.0-7.el8
+plymouth                                           0.9.4-11.20200615git1e36e30.el8
+plymouth-core-libs                                 0.9.4-11.20200615git1e36e30.el8
+plymouth-scripts                                   0.9.4-11.20200615git1e36e30.el8
+podman                                             4.6.1-4.module+el8.9.0+20326+387084d0
+podman-catatonit                                   4.6.1-4.module+el8.9.0+20326+387084d0
+podman-gvproxy                                     4.6.1-4.module+el8.9.0+20326+387084d0
+podman-plugins                                     4.6.1-4.module+el8.9.0+20326+387084d0
+policycoreutils                                    2.9-24.0.1.el8
+policycoreutils-python-utils                       2.9-24.0.1.el8
+polkit                                             0.115-15.el8
+polkit-libs                                        0.115-15.el8
+polkit-pkla-compat                                 0.1-12.el8
+popt                                               1.18-1.el8
+prefixdevname                                      0.1.0-6.el8
+procps-ng                                          3.3.15-13.el8
+protobuf-c                                         1.3.0-8.el8
+psacct                                             6.6.3-4.el8
+psmisc                                             23.1-5.el8
+publicsuffix-list-dafsa                            20180723-1.el8
+python36                                           3.6.8-38.module+el8.5.0+20329+5c5719bc
+python3-audit                                      3.0.7-4.el8
+python3-bind                                       9.11.36-11.el8_9
+python3-cairo                                      1.16.3-6.el8
+python3-chardet                                    3.0.4-7.el8
+python3-cloud-what                                 1.28.40-1.el8_9
+python3-dateutil                                   2.6.1-6.el8
+python3-dbus                                       1.2.4-15.el8
+python3-decorator                                  4.2.1-2.el8
+python3-dmidecode                                  3.12.3-2.el8
+python3-dnf                                        4.7.0-19.el8
+python3-dnf-plugins-core                           4.0.21-23.el8
+python3-ethtool                                    0.14-5.el8
+python3-firewall                                   0.9.11-1.el8_8
+python3-gobject                                    3.28.3-2.el8
+python3-gobject-base                               3.28.3-2.el8
+python3-gpg                                        1.13.1-11.el8
+python3-hawkey                                     0.63.0-17.el8_9
+python3-html5lib                                   0.999999999-6.el8
+python3-idna                                       2.5-5.el8
+python3-iniparse                                   0.4-31.el8
+python3-inotify                                    0.9.6-13.el8
+python3-libcomps                                   0.1.18-1.el8
+python3-libdnf                                     0.63.0-17.el8_9
+python3-librepo                                    1.14.2-4.el8
+python3-libs                                       3.6.8-51.el8_8.2
+python3-libselinux                                 2.9-8.el8
+python3-libsemanage                                2.9-9.el8_6
+python3-libstoragemgmt                             1.9.1-7.el8
+python3-libxml2                                    2.9.7-16.el8_8.1
+python3-linux-procfs                               0.7.1-1.el8
+python3-lxml                                       4.2.3-4.el8
+python3-magic                                      5.33-24.el8
+python3-nftables                                   1.0.4-3.el8_9
+python3-perf                                       4.18.0-513.9.1.el8_9
+python3-pexpect                                    4.3.1-3.el8
+python3-pip                                        9.0.3-22.el8
+python3-pip-wheel                                  9.0.3-22.el8
+python3-ply                                        3.9-9.el8
+python3-policycoreutils                            2.9-24.0.1.el8
+python3-psutil                                     5.4.3-11.el8
+python3-ptyprocess                                 0.5.2-4.el8
+python3-pydbus                                     0.6.0-5.el8
+python3-pysocks                                    1.6.8-3.el8
+python3-pyudev                                     0.21.0-7.el8
+python3-pyyaml                                     3.12-12.el8
+python3-requests                                   2.20.0-3.el8_8
+python3-rpm                                        4.14.3-26.el8
+python3-setools                                    4.3.0-3.el8
+python3-setuptools                                 39.2.0-7.el8
+python3-setuptools-wheel                           39.2.0-7.el8
+python3-six                                        1.11.0-8.el8
+python3-slip                                       0.6.4-13.el8
+python3-slip-dbus                                  0.6.4-13.el8
+python3-sssdconfig                                 2.9.1-4.el8_9
+python3-subscription-manager-rhsm                  1.28.40-1.el8_9
+python3-syspurpose                                 1.28.40-1.el8_9
+python3-systemd                                    234-8.el8
+python3-tracer                                     0.7.5-2.el8
+python3-unbound                                    1.16.2-5.el8
+python3-urllib3                                    1.24.2-5.el8
+python3-webencodings                               0.5.1-6.el8
+quota                                              4.04-14.el8
+quota-nls                                          4.04-14.el8
+readline                                           7.0-10.el8
+realmd                                             0.17.1-1.el8
+recode                                             3.6-47.el8
+redhat-logos                                       84.5-2.el8
+redhat-release                                     8.8-0.8.el8
+redhat-release-eula                                8.8-0.8.el8
+remi-libzip                                        1.10.1-1.el8.remi
+remi-release                                       8.8-1.el8.remi
+rest                                               0.8.1-2.el8
+rhc                                                0.2.4-3.el8_9
+rhsm-icons                                         1.28.40-1.el8_9
+rootfiles                                          8.1-22.el8
+rpm                                                4.14.3-26.el8
+rpm-build-libs                                     4.14.3-26.el8
+rpm-libs                                           4.14.3-26.el8
+rpm-plugin-selinux                                 4.14.3-26.el8
+rpm-plugin-systemd-inhibit                         4.14.3-26.el8
+rsync                                              3.1.3-19.el8_7.1
+rsyslog                                            8.2102.0-15.el8
+rsyslog-gnutls                                     8.2102.0-15.el8
+rsyslog-gssapi                                     8.2102.0-15.el8
+rsyslog-relp                                       8.2102.0-15.el8
+runc                                               1.1.9-1.module+el8.9.0+20326+387084d0
+samba-client-libs                                  4.18.6-2.el8_9
+samba-common                                       4.18.6-2.el8_9
+samba-common-libs                                  4.18.6-2.el8_9
+scl-utils                                          2.0.2-16.0.1.el8
+sed                                                4.5-5.el8
+selinux-policy                                     3.14.3-128.el8
+selinux-policy-targeted                            3.14.3-128.el8
+setroubleshoot-plugins                             3.3.14-1.el8
+setroubleshoot-server                              3.3.26-5.el8
+setup                                              2.12.2-9.el8
+sg3_utils                                          1.44-6.el8
+sg3_utils-libs                                     1.44-6.el8
+shadow-utils                                       4.6-17.el8
+shadow-utils-subid                                 4.6-19.el8
+shared-mime-info                                   1.9-3.el8
+shim-x64                                           15.6-1.el8
+slang                                              2.3.2-3.el8
+slirp4netns                                        1.2.1-1.module+el8.9.0+20326+387084d0
+smartmontools                                      7.1-2.el8
+snappy                                             1.1.8-3.el8
+sos                                                4.6.0-5.el8
+sqlite                                             3.26.0-18.el8_8
+sqlite-libs                                        3.26.0-18.el8_8
+squashfs-tools                                     4.3-20.el8
+sscg                                               3.0.0-7.el8
+sssd                                               2.9.1-4.el8_9
+sssd-ad                                            2.9.1-4.el8_9
+sssd-client                                        2.9.1-4.el8_9
+sssd-common                                        2.9.1-4.el8_9
+sssd-common-pac                                    2.9.1-4.el8_9
+sssd-ipa                                           2.9.1-4.el8_9
+sssd-kcm                                           2.9.1-4.el8_9
+sssd-krb5                                          2.9.1-4.el8_9
+sssd-krb5-common                                   2.9.1-4.el8_9
+sssd-ldap                                          2.9.1-4.el8_9
+sssd-nfs-idmap                                     2.9.1-4.el8_9
+sssd-proxy                                         2.9.1-4.el8_9
+strace                                             5.18-2.el8
+subscription-manager                               1.28.40-1.el8_9
+subscription-manager-cockpit                       1.28.40-1.el8_9
+subscription-manager-rhsm-certificates             20220623-1.el8
+sudo                                               1.9.5p2-1.el8_10.1
+supervisor                                         4.2.2-1.el8
+svt-av1-libs                                       0.8.7-1.el8
+symlinks                                           1.4-19.el8
+systemd                                            239-74.el8_8.5
+systemd-journal-remote                             239-74.el8_8.5
+systemd-libs                                       239-74.el8_8.5
+systemd-pam                                        239-74.el8_8.5
+systemd-udev                                       239-74.el8_8.5
+tar                                                1.30-9.el8
+tcl                                                8.6.8-2.el8
+tcpdump                                            4.9.3-3.el8
+teamd                                              1.31-4.el8
+time                                               1.9-3.el8
+timedatex                                          0.5-3.el8
+tpm2-tools                                         4.1.1-5.el8
+tpm2-tss                                           2.3.2-5.el8
+tracer-common                                      0.7.5-2.el8
+tree                                               1.7.0-15.el8
+trousers                                           0.3.15-1.el8
+trousers-lib                                       0.3.15-1.el8
+ttmkfdir                                           3.0.9-54.el8
+tuned                                              2.21.0-1.el8_9
+tzdata                                             2023c-1.el8
+tzdata-java                                        2023c-1.el8
+udisks2                                            2.9.0-16.el8
+udisks2-iscsi                                      2.9.0-16.el8
+udisks2-lvm2                                       2.9.0-16.el8
+unbound-libs                                       1.16.2-5.el8
+unzip                                              6.0-46.el8
+urw-base35-bookman-fonts                           20170801-10.el8
+urw-base35-c059-fonts                              20170801-10.el8
+urw-base35-d050000l-fonts                          20170801-10.el8
+urw-base35-fonts                                   20170801-10.el8
+urw-base35-fonts-common                            20170801-10.el8
+urw-base35-gothic-fonts                            20170801-10.el8
+urw-base35-nimbus-mono-ps-fonts                    20170801-10.el8
+urw-base35-nimbus-roman-fonts                      20170801-10.el8
+urw-base35-nimbus-sans-fonts                       20170801-10.el8
+urw-base35-p052-fonts                              20170801-10.el8
+urw-base35-standard-symbols-ps-fonts               20170801-10.el8
+urw-base35-z003-fonts                              20170801-10.el8
+usb_modeswitch                                     2.5.2-1.el8
+usb_modeswitch-data                                20191128-1.el8
+usbutils                                           010-3.el8
+usermode                                           1.113-2.el8
+userspace-rcu                                      0.10.1-4.el8
+util-linux                                         2.32.1-42.el8_8
+util-linux-user                                    2.32.1-42.el8_8
+vdo                                                6.2.9.7-14.el8
+vim-common                                         8.0.1763-19.el8_6.4
+vim-enhanced                                       8.0.1763-19.el8_6.4
+vim-filesystem                                     8.0.1763-19.el8_6.4
+vim-minimal                                        8.0.1763-19.el8_6.4
+virt-what                                          1.25-4.el8
+volume_key-libs                                    0.3.11-6.el8
+wget                                               1.19.5-11.el8
+which                                              2.21-18.el8
+words                                              3.0-28.el8
+xdg-utils                                          1.1.2-5.el8
+xfsdump                                            3.1.8-6.el8
+xfsprogs                                           5.0.0-12.el8
+xkeyboard-config                                   2.28-1.el8
+xmlsec1                                            1.2.25-4.el8
+xmlsec1-openssl                                    1.2.25-4.el8
+xorg-x11-fonts-ISO8859-1-100dpi                    7.5-19.el8
+xorg-x11-fonts-Type1                               7.5-19.el8
+xorg-x11-font-utils                                7.5-41.el8
+xorg-x11-server-utils                              7.7-27.el8
+xz                                                 5.2.4-4.el8_6
+xz-devel                                           5.2.4-4.el8_6
+xz-libs                                            5.2.4-4.el8_6
+yum                                                4.7.0-19.el8
+yum-utils                                          4.0.21-23.el8
+zabbix-agent                                       6.4.9-release1.el8
+zip                                                3.0-23.el8
+zlib                                               1.2.11-21.el8_7
+zlib-devel                                         1.2.11-21.el8_7
+
+=========================================
+WEB SERVERS (Name | Installed | Version | Path)
+=========================================
+nginx        Yes        1.14.1       /usr/sbin
+
+=========================================
+APP SERVERS (Name | Installed | Version | Path)
+=========================================
+tomcat       Yes        8.5.82       /app/tomcat_08022024
+tomcat       Yes        8.5.98       /app/tomcat_8.5_29072024
+tomcat       Yes        9.0.91       /app/tomcat
+
+=========================================
+MIDDLEWARE (Name | Installed | Version | Path)
+=========================================
+No MIDDLEWARE found
+
+=========================================
+DATABASES (Name | Installed | Version | Path)
+=========================================
+mysql        Yes        8.0.28       /u01/mysql_old/mysql
+mysql        Yes        8.0.32       /usr/bin
+
+=========================================
+SYSTEM SOFTWARE (Name | Version)
+=========================================
+openssl         OpenSSL 1.1.1k  FIPS 25 Mar 2021
+java            11.0.20
+kernel          4.18.0-513.9.1.el8_9.x86_64
+bash            4.4.20(1)-release
+perl            5.026003
+git             2.39.3
+curl            7.61.1
+docker          Not installed
+python          Not installed
+
+=== Service Information ===
+Service Type: Application Server
+Running Services: java,nginx:1.14.1,tomcat,node,python,php
+
+Active Non-OS Services:
+UNIT                      LOAD   ACTIVE SUB     DESCRIPTION                                            
+atd.service               loaded active running Job spooling tools                                     
+dm-event.service          loaded active running Device-mapper event daemon                             
+falcon-sensor.service     loaded active running CrowdStrike Falcon Sensor                              
+getty@tty1.service        loaded active running Getty on tty1                                          
+libstoragemgmt.service    loaded active running libstoragemgmt plug-in server daemon                   
+los-wrapper.service       loaded active running Veefin LOS Wrapper Service                             
+mcelog.service            loaded active running Machine Check Exception Logging Daemon                 
+nginx.service             loaded active running The nginx HTTP and reverse proxy server                
+php82-php-fpm.service     loaded active running The PHP FastCGI Process Manager                        
+rhsmcertd.service         loaded active running Enable periodic update of entitlement certificates.    
+smartd.service            loaded active running Self Monitoring and Reporting Technology (SMART) Daemon
+user@0.service            loaded active running User Manager for UID 0                                 
+user@1000.service         loaded active running User Manager for UID 1000                              
+user@1002.service         loaded active running User Manager for UID 1002                              
+vgauthd.service           loaded active running VGAuth Service for open-vm-tools                       
+vmtoolsd.service          loaded active running Service for virtual machines hosted on VMware          
+zabbix-agent.service      loaded active running Zabbix Agent                                           
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+
+To show all installed unit files use 'systemctl list-unit-files'.
+
+
+=== Security Products ===
+Falcon Sensor: Installed
+  Version: 7.11.0-16405.el8
+  Install Date: Thu 14 Nov 2024 01:08:34 PM +06
+  Service Status: active
+Qualys Cloud Agent: Not installed
+
+
+=== Disk Information ===
+Mount Points:
+devtmpfs devtmpfs 3.8G 0 3.8G 0% /dev
+tmpfs tmpfs 3.8G 53M 3.7G 2% /dev/shm
+tmpfs tmpfs 3.8G 1.1M 3.8G 1% /run
+tmpfs tmpfs 3.8G 0 3.8G 0% /sys/fs/cgroup
+/dev/mapper/rootvg-root xfs 25G 4.3G 21G 17% /
+tmpfs tmpfs 20G 1.2M 20G 1% /tmp
+/dev/mapper/mysqvg-mysqllv xfs 50G 29G 22G 58% /u01
+/dev/mapper/datavg-applv xfs 60G 45G 16G 75% /app
+/dev/sda2 xfs 2.0G 371M 1.7G 19% /boot
+/dev/sda1 vfat 2.0G 5.8M 2.0G 1% /boot/efi
+/dev/mapper/rootvg-home xfs 10G 7.5G 2.5G 76% /home
+/dev/mapper/rootvg-var xfs 26G 19G 7.5G 72% /var
+/dev/mapper/rootvg-nmonlv xfs 5.0G 209M 4.8G 5% /nmon
+tmpfs tmpfs 766M 0 766M 0% /run/user/0
+tmpfs tmpfs 766M 0 766M 0% /run/user/1002
+tmpfs tmpfs 766M 0 766M 0% /run/user/1000
+
+Disk Usage:
+Filesystem                  Size  Used Avail Use% Mounted on
+devtmpfs                    3.8G     0  3.8G   0% /dev
+tmpfs                       3.8G   53M  3.7G   2% /dev/shm
+tmpfs                       3.8G  1.1M  3.8G   1% /run
+tmpfs                       3.8G     0  3.8G   0% /sys/fs/cgroup
+/dev/mapper/rootvg-root      25G  4.3G   21G  17% /
+tmpfs                        20G  1.2M   20G   1% /tmp
+/dev/mapper/mysqvg-mysqllv   50G   29G   22G  58% /u01
+/dev/mapper/datavg-applv     60G   45G   16G  75% /app
+/dev/sda2                   2.0G  371M  1.7G  19% /boot
+/dev/sda1                   2.0G  5.8M  2.0G   1% /boot/efi
+/dev/mapper/rootvg-home      10G  7.5G  2.5G  76% /home
+/dev/mapper/rootvg-var       26G   19G  7.5G  72% /var
+/dev/mapper/rootvg-nmonlv   5.0G  209M  4.8G   5% /nmon
+tmpfs                       766M     0  766M   0% /run/user/0
+tmpfs                       766M     0  766M   0% /run/user/1002
+tmpfs                       766M     0  766M   0% /run/user/1000
+
+
+=== Network Details ===
+Subnet Mask: 26
+Gateway: 172.25.0.129
+
+Network Interfaces:
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens192           UP             172.25.0.134/26 fe80::250:56ff:fe81:91a4/64 
+
+Listening Ports:
+udp   UNCONN 0      0               127.0.0.1:323        0.0.0.0:*          
+udp   UNCONN 0      0                   [::1]:323           [::]:*          
+tcp   LISTEN 0      511               0.0.0.0:443        0.0.0.0:*          
+tcp   LISTEN 0      128               0.0.0.0:10050      0.0.0.0:*          
+tcp   LISTEN 0      2048            127.0.0.1:9000       0.0.0.0:*          
+tcp   LISTEN 0      128               0.0.0.0:7822       0.0.0.0:*          
+tcp   LISTEN 0      511               0.0.0.0:80         0.0.0.0:*          
+tcp   LISTEN 0      100                     *:8091             *:*          
+tcp   LISTEN 0      511                  [::]:443           [::]:*          
+tcp   LISTEN 0      128                  [::]:10050         [::]:*          
+tcp   LISTEN 0      1      [::ffff:127.0.0.1]:8005             *:*          
+tcp   LISTEN 0      128                  [::]:7822          [::]:*          
+tcp   LISTEN 0      100                     *:8080             *:*          
+tcp   LISTEN 0      511                  [::]:80            [::]:*          
+
+
+=== NTP Status ===
+              NTP service: active
+
+NTP Servers:
+10.5.0.250
+10.5.129.19
+
+Current Sync Source:
+10.5.0.250
+
+Detailed NTP Sources:
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+^* 10.5.0.250                    2   6   377    62   -108us[ -119us] +/-   27ms
+^? 10.5.129.19                   0  10     0     -     +0ns[   +0ns] +/-    0ns
+
+=== User and Group Information ===
+/etc/passwd contents:
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-coredump:x:999:997:systemd Core Dumper:/:/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/sbin/nologin
+tss:x:59:59:Account used for TPM access:/dev/null:/sbin/nologin
+polkitd:x:998:996:User for polkitd:/:/sbin/nologin
+clevis:x:997:993:Clevis Decryption Framework unprivileged user:/var/cache/clevis:/sbin/nologin
+unbound:x:996:992:Unbound DNS resolver:/etc/unbound:/sbin/nologin
+libstoragemgmt:x:995:991:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+setroubleshoot:x:994:990::/var/lib/setroubleshoot:/sbin/nologin
+cockpit-ws:x:993:989:User for cockpit web service:/nonexisting:/sbin/nologin
+cockpit-wsinstance:x:992:988:User for cockpit-ws instances:/nonexisting:/sbin/nologin
+sssd:x:991:987:User for sssd:/:/sbin/nologin
+chrony:x:990:986::/var/lib/chrony:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+pamadm:x:1000:1000:PAM Admin User:/home/pamadm:/bin/bash
+autonom:x:1001:1001:Automation User:/home/autonom:/bin/bash
+vls:x:1002:1002::/home/vls:/bin/bash
+apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
+nginx:x:989:985:nginx user:/var/cache/nginx:/sbin/nologin
+mysql:x:1003:1003::/home/mysql:/bin/bash
+dbuser:x:1004:1004::/home/dbuser:/bin/bash
+nazmul30923:x:1005:1005::/home/nazmul30923:/bin/bash
+farhan30927:x:1006:1006::/home/farhan30927:/bin/bash
+mir32863:x:1007:1007::/home/mir32863:/bin/bash
+dnsmasq:x:984:984:Dnsmasq DHCP and DNS server:/var/lib/dnsmasq:/sbin/nologin
+zabbix:x:983:983:Zabbix Monitoring System:/var/lib/zabbix:/sbin/nologin
+systemd-journal-remote:x:982:982:Journal Remote:/var/log/journal/remote:/sbin/nologin
+isecmon:x:1008:1008::/home/isecmon:/bin/bash
+mongod:x:981:981:mongod:/var/lib/mongo:/bin/false
+
+Current User Crontab:
+00 00 * * * sh /nmon/nmon.sh
+0 */6 * * * sh /opt/drop_cache.sh
+*/5 * * * * ntpdate -u 10.5.0.250
+0 0 */28 * *  sh /opt/remove_from_wheel.sh
+
+#### AIDE Check
+0 5 * * * /usr/sbin/aide --check
+## Resources Monitor
+30 10 * * * /opt/monitor_resources.sh
+### Remove Old Wrapper Log
+0 8 * * * /opt/cleanup_logs.sh
+
+System Users Count: 13
+
+Sudoers configuration:
+root	ALL=(ALL) 	ALL
+%wheel	ALL=(ALL)	ALL
+pamadm        ALL=(ALL)       NOPASSWD: /usr/bin/su
+autonom        ALL=(ALL)       NOPASSWD: /usr/bin/su
+vls	       ALL=(ALL)       NOPASSWD: /usr/bin/su
+zabbix          ALL=(ALL)       NOPASSWD: ALL
+
+Users with sudo access:
+
+
+=== Resource Utilization ===
+CPU Utilization:
+  45.7%
+  Load Average: 1.36, 0.79, 0.74
+
+Memory Utilization:
+              total        used        free      shared  buff/cache   available
+Mem:          7.5Gi       6.2Gi       240Mi       0.0Ki       1.0Gi       1.0Gi
+Swap:          15Gi       1.6Gi        14Gi
+
+Top Processes by CPU:
+    PID    PPID CMD                         %MEM %CPU
+  91537   82915 sh /tmp/collect_hostinfo_fi  0.0 19.6
+2718558       1 /usr/lib/jvm/jre-11-openjdk 22.1 14.8
+3749107       1 /usr/bin/java -jar -Dproper 28.9  1.4
+ 138159 3540405 falcon-sensor-bpf            2.1  0.9
+  91560       1 /usr/lib/systemd/systemd-ho  0.0  0.4
+3732810       1 /usr/lib/systemd/systemd-jo  0.3  0.2
+      1       0 /usr/lib/systemd/systemd --  0.1  0.1
+   1121       1 /usr/libexec/platform-pytho  0.0  0.1
+      2       0 [kthreadd]                   0.0  0.0
+
+Top Processes by Memory:
+    PID    PPID CMD                         %MEM %CPU
+3749107       1 /usr/bin/java -jar -Dproper 28.9  1.4
+2718558       1 /usr/lib/jvm/jre-11-openjdk 22.1 14.8
+ 136418       1 /usr/sbin/rsyslogd -n        7.6  0.0
+ 138159 3540405 falcon-sensor-bpf            2.1  0.9
+  73626 1742669 php-fpm: pool www            0.6  0.0
+  77350 1742669 php-fpm: pool www            0.6  0.0
+ 335341 1742669 php-fpm: pool www            0.6  0.0
+ 335075 1742669 php-fpm: pool www            0.6  0.0
+ 335071 1742669 php-fpm: pool www            0.6  0.0
+
+
+Inventory completed. Results saved to /opt/inventory/losuatapp01-new_172.25.0.134_20250709.txt

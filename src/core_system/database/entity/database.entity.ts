@@ -76,6 +76,7 @@ export class DatabaseEntity {
   vms: VmEntity[];
 
   // In DatabaseEntity
-  @ManyToMany(() => AutomationEntity, (automation) => automation.databases)
+  @ManyToMany(() => AutomationEntity, (automation) => automation.dbs)
+  @JoinTable({ name: 'database_automation' })
   automations: AutomationEntity[];
 }

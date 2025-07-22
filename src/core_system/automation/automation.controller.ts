@@ -1,5 +1,6 @@
 // automation.controller.ts
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -19,13 +20,18 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as fs from 'fs';
 import { parseServerTextFile } from './parser/text-parser.util';
+import { ConfigService } from '@nestjs/config';
+
 
 @ApiBearerAuth('access-token')
 @ApiTags('Automation')
 @UseGuards(JwtGuard)
 @Controller('automation')
 export class AutomationController {
-  constructor(private readonly automationService: AutomationService) {}
+  constructor(
+    private readonly automationService: AutomationService,
+    private configService: ConfigService,
+  ) {}
 
   @Post()
   async create(@Body() dto: CreateAutomationDto) {
@@ -53,10 +59,66 @@ export class AutomationController {
   }
 
   // Upload + Parse + Deduplicate + Bulk Insert
+  // @Post('upload-parse')
+  // @ApiConsumes('multipart/form-data')
+  // @UseInterceptors(
+  //   FilesInterceptor('files', 100, {
+  //     storage: diskStorage({
+  //       destination: './uploads',
+  //       filename: (req, file, cb) =>
+  //         cb(null, `${Date.now()}-${file.originalname}`),
+  //     }),
+  //   }),
+  // )
+  // async uploadParse(@UploadedFiles() files: Express.Multer.File[]) {
+  //   const validDtos: CreateAutomationDto[] = [];
+
+  //   for (const file of files) {
+  //     try {
+  //       const content = fs.readFileSync(file.path, 'utf-8');
+  //       const parsed = parseServerTextFile(content);
+
+  //       // Reject files with missing required fields
+  //       if (!parsed?.hostname || !parsed?.ipAddress) continue;
+
+  //       const isDuplicate = await this.automationService.exists(
+  //         parsed.hostname,
+  //         parsed.ipAddress,
+  //       );
+
+  //       if (!isDuplicate) validDtos.push(parsed);
+  //     } catch (error) {
+  //       console.warn(`File parse error: ${file.originalname}`, error);
+  //     }
+  //   }
+
+  //   if (validDtos.length === 0) {
+  //     return {
+  //       isSuccessful: false,
+  //       message: 'No valid or non-duplicate automation records found',
+  //       data: [],
+  //     };
+  //   }
+
+  //   if (files.length > 100) {
+  //     throw new BadRequestException(
+  //       'Too many files uploaded. Maximum allowed is 10.',
+  //     );
+  //   }
+
+  //   const results = await this.automationService.bulkCreate(validDtos);
+
+  //   return {
+  //     isSuccessful: true,
+  //     message: `${results.length} automation records created`,
+  //     data: results,
+  //   };
+  // }
+
   @Post('upload-parse')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
-    FilesInterceptor('files', 10, {
+    FilesInterceptor('files', 100, {
       storage: diskStorage({
         destination: './uploads',
         filename: (req, file, cb) =>
@@ -64,7 +126,10 @@ export class AutomationController {
       }),
     }),
   )
-  async uploadParse(@UploadedFiles() files: Express.Multer.File[]) {
+  async uploadParse(
+    @UploadedFiles() files: Express.Multer.File[],
+    @Body() body: any,
+  ) {
     const validDtos: CreateAutomationDto[] = [];
 
     for (const file of files) {
@@ -72,7 +137,6 @@ export class AutomationController {
         const content = fs.readFileSync(file.path, 'utf-8');
         const parsed = parseServerTextFile(content);
 
-        // Reject files with missing required fields
         if (!parsed?.hostname || !parsed?.ipAddress) continue;
 
         const isDuplicate = await this.automationService.exists(
@@ -80,7 +144,10 @@ export class AutomationController {
           parsed.ipAddress,
         );
 
-        if (!isDuplicate) validDtos.push(parsed);
+        if (!isDuplicate) {
+          parsed.makeBy = body.makeBy || 'unknown';
+          validDtos.push(parsed);
+        }
       } catch (error) {
         console.warn(`File parse error: ${file.originalname}`, error);
       }
@@ -92,6 +159,12 @@ export class AutomationController {
         message: 'No valid or non-duplicate automation records found',
         data: [],
       };
+    }
+
+    if (files.length > 100) {
+      throw new BadRequestException(
+        'Too many files uploaded. Maximum allowed is 100.',
+      );
     }
 
     const results = await this.automationService.bulkCreate(validDtos);

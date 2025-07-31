@@ -17,9 +17,11 @@ import { VmModule } from './core_system/vm/vm.module';
 import { ApplicationModule } from './core_system/application/application.module';
 import { DatabaseModule } from './core_system/database/database.module';
 import { PhysicalModule } from './core_system/physical/physical.module';
-import { UploadController } from './upload/upload.controller';
 import { UploadService } from './upload/upload.service';
 import { AutomationModule } from './core_system/automation/automation.module';
+import { ClusterModule } from './core_system/cluster/cluster.module';
+import { UploadModule } from './upload/upload.module';
+import { DocumentModule } from './document/document.module';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -49,8 +51,11 @@ import { AutomationModule } from './core_system/automation/automation.module';
     DatabaseModule,
     PhysicalModule,
     AutomationModule,
+    ClusterModule,
+    UploadModule,
+    DocumentModule,
   ],
-  controllers: [AppController, DynamicSchemaController, UploadController],
+  controllers: [AppController, DynamicSchemaController],
   providers: [
     {
       provide: APP_GUARD,

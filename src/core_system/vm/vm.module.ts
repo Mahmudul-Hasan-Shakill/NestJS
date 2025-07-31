@@ -6,6 +6,8 @@ import { DatabaseEntity } from '../database/entity/database.entity';
 import { VmService } from './vm.service';
 import { VmController } from './vm.controller';
 import { PhysicalEntity } from '../physical/entity/physical.entity';
+import { UserEntity } from 'src/user/entity/user.entity';
+import { RoleEntity } from 'src/role/entity/role.entity';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { PhysicalEntity } from '../physical/entity/physical.entity';
       ApplicationEntity,
       DatabaseEntity,
       PhysicalEntity,
+      RoleEntity,
+      UserEntity,
     ]),
   ],
   controllers: [VmController],

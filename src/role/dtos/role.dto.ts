@@ -1,4 +1,11 @@
-import { IsNotEmpty, IsString, IsOptional, IsBoolean } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+  IsBoolean,
+  IsObject,
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class RoleDto {
   @IsNotEmpty()
@@ -11,6 +18,10 @@ export class RoleDto {
 
   // @IsString()
   // hrefLabel: string; // Use camelCase to match the entity property
+  @ApiProperty()
+  @IsOptional()
+  @IsObject()
+  permissions?: Record<string, Record<string, boolean>>;
 
   @IsOptional()
   @IsString()

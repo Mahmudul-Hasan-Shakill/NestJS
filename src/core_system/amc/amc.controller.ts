@@ -6,46 +6,50 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { AmcService } from './amc.service';
-import { CreateAmcDto } from './dto/amc.dto';
-import { UpdateAmcDto } from './dto/amc.dto';
-import { AmcEntity } from './entity/amc.entity';
+import { CreateAmcDto, UpdateAmcDto, AmcQueryDto } from './dto/amc.dto';
 import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, ApiQuery } from '@nestjs/swagger';
 
 @ApiBearerAuth('access-token')
+@ApiTags('AMC')
 @UseGuards(JwtGuard)
 @Controller('amc')
 export class AmcController {
   constructor(private readonly amcService: AmcService) {}
 
   @Post()
-  async create(@Body() createAmcDto: CreateAmcDto): Promise<AmcEntity> {
-    return this.amcService.create(createAmcDto);
+  async create(@Body() createAmcDto: CreateAmcDto) {
+    return await this.amcService.create(createAmcDto);
   }
 
   @Get()
-  async findAll(): Promise<AmcEntity[]> {
-    return this.amcService.findAll();
+  @ApiQuery({ name: 'productName', required: false, type: String })
+  @ApiQuery({ name: 'status', required: false, type: String })
+  @ApiQuery({ name: 'vendorName', required: false, type: String })
+  @ApiQuery({ name: 'underAmc', required: false, type: Boolean })
+  @ApiQuery({ name: 'location', required: false, type: String })
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  async findAll(@Query() queryDto: AmcQueryDto) {
+    return await this.amcService.findAll(queryDto);
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<AmcEntity> {
-    return this.amcService.findOne(id);
+  async findOne(@Param('id') id: number) {
+    return await this.amcService.findOne(id);
   }
 
   @Patch(':id')
-  async update(
-    @Param('id') id: number,
-    @Body() updateAmcDto: UpdateAmcDto,
-  ): Promise<AmcEntity> {
-    return this.amcService.update(id, updateAmcDto);
+  async update(@Param('id') id: number, @Body() updateAmcDto: UpdateAmcDto) {
+    return await this.amcService.update(id, updateAmcDto);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    return this.amcService.remove(id);
+    return await this.amcService.remove(id);
   }
 }

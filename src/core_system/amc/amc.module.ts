@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AmcEntity } from './entity/amc.entity';
 import { AmcService } from './amc.service';
 import { AmcController } from './amc.controller';
-import { AmcEntity } from './entity/amc.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigService } from '@nestjs/config';
+import { DocumentModule } from 'src/document/document.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AmcEntity])],
+  imports: [TypeOrmModule.forFeature([AmcEntity]), DocumentModule],
   controllers: [AmcController],
-  providers: [AmcService, ConfigService],
+  providers: [AmcService],
+  exports: [AmcService],
 })
 export class AmcModule {}

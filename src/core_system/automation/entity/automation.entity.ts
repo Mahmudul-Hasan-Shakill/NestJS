@@ -4,7 +4,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   ManyToMany,
-  JoinTable,
 } from 'typeorm';
 import { ApplicationEntity } from 'src/core_system/application/entity/application.entity';
 import { DatabaseEntity } from 'src/core_system/database/entity/database.entity';

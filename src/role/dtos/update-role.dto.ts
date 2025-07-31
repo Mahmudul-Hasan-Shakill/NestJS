@@ -5,8 +5,10 @@ import {
   ValidateNested,
   IsArray,
   IsOptional,
+  IsObject,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
 
 // Define the DTO for each item in hrefGui[]
 class HrefGuiDto {
@@ -39,4 +41,8 @@ export class UpdateRoleDto {
   // @ValidateNested({ each: true })
   // @Type(() => HrefGuiDto)
   // hrefLabel: HrefGuiDto[];
+  @ApiProperty()
+  @IsOptional()
+  @IsObject()
+  permissions?: Record<string, Record<string, boolean>>;
 }

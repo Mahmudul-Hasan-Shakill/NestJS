@@ -14,6 +14,9 @@ export class RoleEntity {
   // @Column({ name: 'href_label', type: 'varchar', length: 255, nullable: true })
   // hrefLabel: string;
 
+  @Column({ type: 'jsonb', nullable: true, default: {} })
+  permissions: Record<string, Record<string, boolean>>;
+
   @Column({ name: 'make_by', type: 'varchar', length: 255, nullable: true })
   makeBy: string;
 

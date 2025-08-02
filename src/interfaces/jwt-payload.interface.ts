@@ -2,4 +2,5 @@
 export interface JwtPayload {
   pin: string;
   sub: number;
+  userRole: string;
 }

@@ -70,6 +70,7 @@ export class AuthService {
     const payload = {
       pin: user.pin,
       sub: user.id,
+      userRole: user.userRole,
     };
 
     const refreshToken = this.jwtService.sign(payload, {

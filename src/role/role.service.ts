@@ -284,43 +284,22 @@ export class RoleService {
     }
   }
 
-  private processPermissions(
-    inputPermissions?: Record<string, Record<string, boolean>>,
-  ): Record<string, Record<string, boolean>> {
-    const processed: Record<string, Record<string, boolean>> = {};
-    if (inputPermissions) {
-      for (const module in inputPermissions) {
-        if (inputPermissions.hasOwnProperty(module)) {
-          processed[module] = { ...inputPermissions[module] };
-          if (processed[module][PermissionActions.READ] !== false) {
-            processed[module][PermissionActions.READ] = true;
-          }
-        }
-      }
-    }
-    return processed;
-  }
-
   async createRoles(roleDtos: RoleDto[]): Promise<any> {
     try {
       const savedRoles = [];
       for (const roleDto of roleDtos) {
-        const existingRole = await this.roleRepository.findOne({
+        // Check for existing (roleName + hrefGui)
+        const exists = await this.roleRepository.findOne({
           where: { roleName: roleDto.roleName, hrefGui: roleDto.hrefGui },
         });
-
-        if (existingRole) {
-          throw new ConflictException(
-            `The page "${roleDto.hrefGui}" is already assigned to the role "${roleDto.roleName}".`,
-          );
+        if (exists) {
+          throw new ConflictException(`Already exists.`);
         }
-
-        const roleEntity = this.roleRepository.create({
-          ...roleDto,
-          permissions: this.processPermissions(roleDto.permissions),
-        });
-        const savedRole = await this.roleRepository.save(roleEntity);
-        savedRoles.push(savedRole);
+        // Save
+        const saved = await this.roleRepository.save(
+          this.roleRepository.create(roleDto),
+        );
+        savedRoles.push(saved);
       }
       return this.successResponse('Roles inserted successfully.', savedRoles);
     } catch (error) {
@@ -332,49 +311,24 @@ export class RoleService {
   }
 
   async updateRole(roleData: UpdateRoleDto): Promise<any> {
-    try {
-      const { roleName, hrefGui, permissions } = roleData;
+    const { roleName, guiPermissions } = roleData;
 
-      const existingRolesForRoleName = await this.roleRepository.find({
-        where: { roleName },
+    for (const guiPerm of guiPermissions) {
+      const row = await this.roleRepository.findOne({
+        where: { roleName, hrefGui: guiPerm.hrefGui },
       });
-
-      if (existingRolesForRoleName.length === 0) {
-        throw new NotFoundException(`Role with name "${roleName}" not found.`);
-      }
-
-      for (const gui of hrefGui) {
-        const foundEntry = existingRolesForRoleName.find(
-          (er) => er.hrefGui === gui.hrefGui,
-        );
-        if (foundEntry) {
-          await this.roleRepository.update(
-            { id: foundEntry.id },
-            {
-              isActive: gui.isActive,
-              editBy: gui.editBy,
-              editDate: gui.editDate,
-            },
-          );
-        }
-      }
-
-      if (permissions !== undefined) {
-        const processedPermissions = this.processPermissions(permissions);
-        await this.roleRepository.update(
-          { roleName },
-          {
-            permissions: processedPermissions,
-            editBy: hrefGui[0]?.editBy || 'System',
-            editDate: hrefGui[0]?.editDate || new Date(),
-          },
-        );
-      }
-      return this.successResponse('Role updated successfully.');
-    } catch (error) {
-      console.error('Error updating role:', error);
-      return this.errorResponse('Failed to update role.', error);
+      if (!row) continue;
+      await this.roleRepository.update(
+        { id: row.id },
+        {
+          isActive: guiPerm.isActive,
+          editBy: guiPerm.editBy,
+          editDate: guiPerm.editDate,
+          permissions: guiPerm.permissions,
+        },
+      );
     }
+    return this.successResponse('Role updated successfully.');
   }
 
   async updateRoleById(id: number, roleDto: RoleDto): Promise<any> {
@@ -385,7 +339,7 @@ export class RoleService {
       }
       const updatedData = {
         ...roleDto,
-        permissions: this.processPermissions(roleDto.permissions),
+        permissions: roleDto.permissions, // Directly assign the CRUD object
         editDate: new Date(),
       };
       Object.assign(roleToUpdate, updatedData);

@@ -8,6 +8,7 @@ import { VmController } from './vm.controller';
 import { PhysicalEntity } from '../physical/entity/physical.entity';
 import { UserEntity } from 'src/user/entity/user.entity';
 import { RoleEntity } from 'src/role/entity/role.entity';
+import { PermissionsGuard } from 'src/common/guards/permissions.guard';
 
 @Module({
   imports: [
@@ -21,6 +22,6 @@ import { RoleEntity } from 'src/role/entity/role.entity';
     ]),
   ],
   controllers: [VmController],
-  providers: [VmService],
+  providers: [VmService, PermissionsGuard],
 })
 export class VmModule {}

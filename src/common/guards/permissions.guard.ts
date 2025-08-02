@@ -8,12 +8,11 @@ import {
 import { Reflector } from '@nestjs/core';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import {
-  PERMISSIONS_KEY,
-  RequiredPermissions,
-} from '../decorators/require-permissions.decorator';
+import { GUI_PERMISSIONS_KEY } from '../decorators/require-gui-permissions.decorator';
 import { RoleEntity } from '../../role/entity/role.entity';
 import { UserEntity } from 'src/user/entity/user.entity';
+import { PermissionActions } from '../enums/permissions.enum';
+import { getGuiPathsFromRequest } from '../helpers/api-to-gui-map';
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
@@ -28,93 +27,53 @@ export class PermissionsGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const requiredPermissions = this.reflector.get<RequiredPermissions[]>(
-      PERMISSIONS_KEY,
-      context.getHandler(),
-    );
+    // Get metadata: which actions, maybe which GUI path explicitly
+    const { actions, guiPath: metaGuiPath } =
+      this.reflector.get<{ actions: PermissionActions[]; guiPath?: string }>(
+        GUI_PERMISSIONS_KEY,
+        context.getHandler(),
+      ) || {};
 
-    if (!requiredPermissions || requiredPermissions.length === 0) {
-      return true;
-    }
+    if (!actions) return true; // No permission metadata? Allow.
 
     const request = context.switchToHttp().getRequest();
     const user = request.user;
+    if (!user || !user.userRole) {
+      throw new ForbiddenException('No user details found.');
+    }
 
-    if (!user || !user.id || !user.userRole) {
+    // Which GUI paths do we check permissions for?
+    let guiPaths: string[] = [];
+    if (metaGuiPath) {
+      guiPaths = [metaGuiPath];
+    } else {
+      guiPaths = getGuiPathsFromRequest(request);
+    }
+    if (!guiPaths.length) {
+      this.logger.warn('Cannot auto-map API to GUI path(s). Check mapping.');
       throw new ForbiddenException(
-        'User authentication details missing for permission check.',
+        'Unable to determine GUI path for permission.',
       );
     }
 
-    const userRoleEntities = await this.roleRepository.find({
-      where: { roleName: user.userRole, isActive: true },
-    });
-
-    if (!userRoleEntities || userRoleEntities.length === 0) {
-      this.logger.warn(
-        `User ${user.id} (${user.userRole}) has no active role definitions.`,
-      );
-      throw new ForbiddenException(
-        'User has no active roles or permissions defined.',
-      );
+    // Try all mapped GUI paths for the user's role. Allow if ANY one is permitted.
+    for (const guiPath of guiPaths) {
+      // Find the active role entry for this GUI
+      const roleRow = await this.roleRepository.findOne({
+        where: { roleName: user.userRole, hrefGui: guiPath, isActive: true },
+      });
+      if (!roleRow) continue;
+      const perms = roleRow.permissions || {};
+      const hasAll = actions.every((action) => !!perms[action]);
+      if (hasAll) return true; // ALLOW on first positive match!
     }
 
-    const aggregatedUserPermissions: Record<
-      string,
-      Record<string, boolean>
-    > = {};
-    userRoleEntities.forEach((roleEntity) => {
-      if (roleEntity.permissions) {
-        for (const moduleName in roleEntity.permissions) {
-          if (roleEntity.permissions.hasOwnProperty(moduleName)) {
-            if (!aggregatedUserPermissions[moduleName]) {
-              aggregatedUserPermissions[moduleName] = {};
-            }
-            for (const actionName in roleEntity.permissions[moduleName]) {
-              if (
-                roleEntity.permissions[moduleName].hasOwnProperty(actionName) &&
-                roleEntity.permissions[moduleName][actionName]
-              ) {
-                aggregatedUserPermissions[moduleName][actionName] = true;
-              }
-            }
-          }
-        }
-      }
-    });
-
-    let hasAllRequiredPermissions = true;
-    for (const reqPermObject of requiredPermissions) {
-      for (const moduleName in reqPermObject) {
-        if (reqPermObject.hasOwnProperty(moduleName)) {
-          const requiredActions =
-            reqPermObject[moduleName as keyof RequiredPermissions];
-          if (requiredActions) {
-            for (const actionName of requiredActions) {
-              if (
-                !aggregatedUserPermissions[moduleName] ||
-                !aggregatedUserPermissions[moduleName][actionName]
-              ) {
-                this.logger.warn(
-                  `User ${user.id} (${user.userRole}) missing permission: ${moduleName}:${actionName} for route ${context.getHandler().name}`,
-                );
-                hasAllRequiredPermissions = false;
-                break;
-              }
-            }
-          }
-        }
-        if (!hasAllRequiredPermissions) break;
-      }
-      if (!hasAllRequiredPermissions) break;
-    }
-
-    if (!hasAllRequiredPermissions) {
-      throw new ForbiddenException(
-        'You do not have sufficient permissions to perform this action.',
-      );
-    }
-
-    return true;
+    // If NONE of the mapped GUI paths are permitted
+    this.logger.warn(
+      `Role "${user.userRole}" lacks required permissions "${actions}" for any GUI assigned to this API. GUIs: ${guiPaths.join(', ')}`,
+    );
+    throw new ForbiddenException(
+      'Insufficient permissions for any GUI mapped to this API.',
+    );
   }
 }

@@ -8,7 +8,6 @@ import {
   IsObject,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
 
 // Define the DTO for each item in hrefGui[]
 class HrefGuiDto {
@@ -28,21 +27,48 @@ class HrefGuiDto {
   editDate: Date;
 }
 
+// export class UpdateRoleDto {
+//   @IsString()
+//   roleName: string;
+
+//   @IsArray()
+//   @ValidateNested({ each: true })
+//   @Type(() => HrefGuiDto)
+//   hrefGui: HrefGuiDto[];
+
+//   // @IsArray()
+//   // @ValidateNested({ each: true })
+//   // @Type(() => HrefGuiDto)
+//   // hrefLabel: HrefGuiDto[];
+//   @ApiProperty()
+//   @IsOptional()
+//   @IsObject()
+//   permissions?: Record<string, Record<string, boolean>>;
+// }
+
+export class UpdateGuiPermissionDto {
+  @IsString()
+  hrefGui: string;
+
+  @IsBoolean()
+  isActive: boolean;
+
+  @IsObject()
+  permissions: { [k: string]: boolean }; // { read: true, ... }
+
+  @IsString()
+  editBy: string;
+
+  @IsOptional()
+  editDate?: Date;
+}
+
 export class UpdateRoleDto {
   @IsString()
   roleName: string;
 
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => HrefGuiDto)
-  hrefGui: HrefGuiDto[];
-
-  // @IsArray()
-  // @ValidateNested({ each: true })
-  // @Type(() => HrefGuiDto)
-  // hrefLabel: HrefGuiDto[];
-  @ApiProperty()
-  @IsOptional()
-  @IsObject()
-  permissions?: Record<string, Record<string, boolean>>;
+  @Type(() => UpdateGuiPermissionDto)
+  guiPermissions: UpdateGuiPermissionDto[]; // Not 'hrefGui', more descriptive
 }

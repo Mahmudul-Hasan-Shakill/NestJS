@@ -21,7 +21,7 @@ export class RoleDto {
   @ApiProperty()
   @IsOptional()
   @IsObject()
-  permissions?: Record<string, Record<string, boolean>>;
+  permissions: { [k: string]: boolean };
 
   @IsOptional()
   @IsString()

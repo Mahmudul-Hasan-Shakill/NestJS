@@ -1,3 +1,4 @@
+import { PermissionActions } from 'src/common/enums/permissions.enum';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -14,8 +15,13 @@ export class RoleEntity {
   // @Column({ name: 'href_label', type: 'varchar', length: 255, nullable: true })
   // hrefLabel: string;
 
-  @Column({ type: 'jsonb', nullable: true, default: {} })
-  permissions: Record<string, Record<string, boolean>>;
+  @Column({
+    type: 'jsonb',
+    nullable: false,
+    default: () =>
+      `'{"read":false,"create":false,"update":false,"delete":false}'`,
+  })
+  permissions: { [k in PermissionActions]?: boolean };
 
   @Column({ name: 'make_by', type: 'varchar', length: 255, nullable: true })
   makeBy: string;

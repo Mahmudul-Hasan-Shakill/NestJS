@@ -1,0 +1,46 @@
+=== Server Basic Information ===
+Hostname: dr-contractmgt-mz-app
+IP Address: 10.5.171.201
+Server Environment: Test Server
+CPU Physical Cores: 2
+CPU Virtual Cores: 2
+CPU Model: Intel(R) Xeon(R) Gold 6152 CPU @ 2.10GHz
+Total RAM: 7 Gi
+Total Disk Size: 291 Gi
+OS Version: Red Hat Enterprise Linux 8.8 (Ootpa)
+Kernel Version: 4.18.0-513.5.1.el8_9.x86_64
+Server Platform: vmware Virtual Machine
+Serial Number: N/A
+SSH Port(s): 22,9222
+Socket(s): 2
+Last Patch Installed: Unavailable
+System Uptime: up 28 weeks, 2 days, 5 hours, 28 minutes (since 2025-01-21 10:06:53)
+
+=== Security Products ===
+Falcon Sensor: Installed
+Version: 6.41.0-13803.el8
+Install Date: 
+Service Status: active
+Qualys Cloud Agent: Not installed
+Version:
+Install Date:
+Service Status:
+
+=== Disk Information ===
+Total size: 25 Gi
+Used space: 5 Gi
+Free space: 20 Gi
+
+=== Network Details ===
+Subnet Mask: 26
+Gateway: 10.5.171.193
+IP: 10.5.171.201
+
+=== NTP Status ===
+NTP service: active
+NTP Servers: 10.5.0.250
+Current Sync Source: ntp.bracbank.com
+
+=== User and Group Information ===
+System Users Count: 9
+Users with sudo access: None

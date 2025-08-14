@@ -118,32 +118,6 @@ export class AuthService {
     };
   }
 
-  // async refreshToken(pin: string): Promise<any> {
-  //   const userResponse = await this.userService.getUserByPin(pin);
-  //   const user = userResponse.data;
-
-  //   const payload = {
-  //     pin: user.pin,
-  //     sub: user.id,
-  //   };
-
-  //   const accessToken = this.jwtService.sign(payload, {
-  //     secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
-  //   });
-
-  //   return {
-  //     isSuccessful: true,
-  //     message: 'Token refreshed successfully',
-  //     data: {
-  //       access_token: accessToken,
-  //       expiresIn: this.configService.get<string>('ACCESS_TIME'),
-  //       role: user.userRole,
-  //       pin: user.pin,
-  //       reset: user.isReset,
-  //       active: user.isActive,
-  //     },
-  //   };
-  // }
   async refreshToken(pin: string): Promise<any> {
     const userResponse = await this.userService.getUserByPin(pin);
     const user = userResponse.data;
@@ -161,6 +135,7 @@ export class AuthService {
     const payload = {
       pin: user.pin,
       sub: user.id,
+      userRole: user.userRole,
     };
 
     const accessToken = this.jwtService.sign(payload, {

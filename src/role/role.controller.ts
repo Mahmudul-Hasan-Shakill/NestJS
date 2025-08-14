@@ -75,7 +75,6 @@
 //   }
 // }
 
-
 import {
   Controller,
   Body,
@@ -100,6 +99,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+
+// RBAC Imports
+import { PermissionsGuard } from '../common/guards/permissions.guard';
+import { RequireGuiPermissions } from 'src/common/decorators/require-gui-permissions.decorator';
+import { PermissionActions } from '../common/enums/permissions.enum';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Roles')
@@ -132,6 +136,7 @@ export class RoleController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Failed to retrieve role names.',
   })
+  @RequireGuiPermissions([PermissionActions.READ])
   getRoleNames(): any {
     return this.roleService.getRoleNames();
   }
@@ -146,6 +151,7 @@ export class RoleController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Failed to retrieve GUI names.',
   })
+  @RequireGuiPermissions([PermissionActions.READ])
   getGuiNames(): any {
     return this.roleService.getGuiNames();
   }
@@ -160,6 +166,7 @@ export class RoleController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Failed to retrieve GUI by role name.',
   })
+  @RequireGuiPermissions([PermissionActions.READ])
   getGuiByRoleName(@Param('roleName') roleName: string): any {
     return this.roleService.getGuiByRoleName(roleName);
   }
@@ -182,6 +189,7 @@ export class RoleController {
     description: 'Validation failed.',
   })
   @UsePipes(new ValidationPipe())
+  @RequireGuiPermissions([PermissionActions.CREATE])
   createRoles(@Body() roleDtos: RoleDto[]): any {
     return this.roleService.createRoles(roleDtos);
   }
@@ -203,6 +211,7 @@ export class RoleController {
     description: 'Validation failed.',
   })
   @UsePipes(new ValidationPipe())
+  @RequireGuiPermissions([PermissionActions.UPDATE])
   updateRoleById(
     @Param('id', ParseIntPipe) id: number,
     @Body() roleDto: RoleDto,
@@ -225,6 +234,7 @@ export class RoleController {
     description: 'Validation failed.',
   })
   @UsePipes(new ValidationPipe())
+  @RequireGuiPermissions([PermissionActions.UPDATE])
   updateRole(@Body() roleData: UpdateRoleDto): any {
     return this.roleService.updateRole(roleData);
   }
@@ -239,6 +249,7 @@ export class RoleController {
     status: HttpStatus.NOT_FOUND,
     description: 'Role not found for deletion.',
   })
+  @RequireGuiPermissions([PermissionActions.DELETE])
   deleteRoleById(@Param('id', ParseIntPipe) id: number): any {
     return this.roleService.deleteRoleById(id);
   }
@@ -255,6 +266,7 @@ export class RoleController {
     status: HttpStatus.NOT_FOUND,
     description: 'No roles found with the given role name.',
   })
+  @RequireGuiPermissions([PermissionActions.DELETE])
   deleteRoleByName(@Param('roleName') roleName: string): any {
     return this.roleService.deleteRoleByName(roleName);
   }

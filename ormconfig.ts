@@ -11,6 +11,7 @@ import { PhysicalEntity } from 'src/core_system/physical/entity/physical.entity'
 import { AutomationEntity } from 'src/core_system/automation/entity/automation.entity';
 import { ClusterEntity } from 'src/core_system/cluster/entity/cluster.entity';
 import { DocumentEntity } from 'src/document/entity/document.entity';
+import { PhysicalHostEntity } from 'src/core_system/physical_host/entity/physical-host.entity';
 
 export const getDatabaseConfig = (
   configService: ConfigService,
@@ -34,6 +35,7 @@ export const getDatabaseConfig = (
       PhysicalEntity,
       AutomationEntity,
       ClusterEntity,
+      PhysicalHostEntity,
     ],
     synchronize: true,
   };

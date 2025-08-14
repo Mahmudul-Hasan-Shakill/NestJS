@@ -38,6 +38,7 @@ export class PermissionsGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
     const user = request.user;
+    console.log('++++++++++++++++++++++++++++', user);
     if (!user || !user.userRole) {
       throw new ForbiddenException('No user details found.');
     }

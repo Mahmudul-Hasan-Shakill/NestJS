@@ -5,6 +5,9 @@ import { ApplicationEntity } from '../application/entity/application.entity';
 import { DatabaseEntity } from '../database/entity/database.entity';
 import { AutomationService } from './automation.service';
 import { AutomationController } from './automation.controller';
+import { PermissionsGuard } from 'src/common/guards/permissions.guard';
+import { RoleEntity } from 'src/role/entity/role.entity';
+import { UserEntity } from 'src/user/entity/user.entity';
 
 @Module({
   imports: [
@@ -12,9 +15,11 @@ import { AutomationController } from './automation.controller';
       AutomationEntity,
       ApplicationEntity,
       DatabaseEntity,
+      RoleEntity,
+      UserEntity,
     ]),
   ],
   controllers: [AutomationController],
-  providers: [AutomationService],
+  providers: [AutomationService, PermissionsGuard],
 })
 export class AutomationModule {}

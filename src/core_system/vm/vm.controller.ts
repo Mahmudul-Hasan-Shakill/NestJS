@@ -67,7 +67,6 @@ export class VmController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Failed to retrieve VMs.',
   })
-  @RequireGuiPermissions([PermissionActions.READ])
   async findAll() {
     return this.vmService.findAll();
   }

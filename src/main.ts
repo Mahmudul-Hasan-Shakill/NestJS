@@ -9,7 +9,6 @@ import * as compression from 'compression';
 import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
-import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
@@ -96,7 +95,8 @@ async function bootstrap() {
 
   // Start the application on the specified port
   const port = configService.get<number>('PORT');
-  await app.listen(port);
+  // await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   logger.log(`Application is running on: http://localhost:${port}`);
 
   // Handle unhandled promise rejections

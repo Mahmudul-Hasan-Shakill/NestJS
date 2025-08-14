@@ -22,6 +22,7 @@ import { AutomationModule } from './core_system/automation/automation.module';
 import { ClusterModule } from './core_system/cluster/cluster.module';
 import { UploadModule } from './upload/upload.module';
 import { DocumentModule } from './document/document.module';
+import { PhysicalHostModule } from './core_system/physical_host/physical-host.module';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -54,6 +55,7 @@ import { DocumentModule } from './document/document.module';
     ClusterModule,
     UploadModule,
     DocumentModule,
+    PhysicalHostModule,
   ],
   controllers: [AppController, DynamicSchemaController],
   providers: [

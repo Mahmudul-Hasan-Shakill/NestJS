@@ -22,98 +22,47 @@ import * as fs from 'fs';
 import { parseServerTextFile } from './parser/text-parser.util';
 import { ConfigService } from '@nestjs/config';
 
+// RBAC Imports
+import { PermissionsGuard } from '../../common/guards/permissions.guard';
+import { RequireGuiPermissions } from 'src/common/decorators/require-gui-permissions.decorator';
+import { PermissionActions } from '../../common/enums/permissions.enum';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Automation')
-@UseGuards(JwtGuard)
+@UseGuards(JwtGuard, PermissionsGuard)
 @Controller('automation')
 export class AutomationController {
-  constructor(
-    private readonly automationService: AutomationService,
-    private configService: ConfigService,
-  ) {}
+  constructor(private readonly automationService: AutomationService) {}
 
   @Post()
+  @RequireGuiPermissions([PermissionActions.CREATE])
   async create(@Body() dto: CreateAutomationDto) {
     return this.automationService.create(dto);
   }
 
   @Get()
+  @RequireGuiPermissions([PermissionActions.READ])
   async findAll() {
     return this.automationService.findAll();
   }
 
   @Get(':id')
+  @RequireGuiPermissions([PermissionActions.READ])
   async findOne(@Param('id') id: number) {
     return this.automationService.findOne(id);
   }
 
   @Patch(':id')
+  @RequireGuiPermissions([PermissionActions.UPDATE])
   async update(@Param('id') id: number, @Body() dto: UpdateAutomationDto) {
     return this.automationService.update(id, dto);
   }
 
   @Delete(':id')
+  @RequireGuiPermissions([PermissionActions.DELETE])
   async remove(@Param('id') id: number) {
     return this.automationService.remove(id);
   }
-
-  // Upload + Parse + Deduplicate + Bulk Insert
-  // @Post('upload-parse')
-  // @ApiConsumes('multipart/form-data')
-  // @UseInterceptors(
-  //   FilesInterceptor('files', 100, {
-  //     storage: diskStorage({
-  //       destination: './uploads',
-  //       filename: (req, file, cb) =>
-  //         cb(null, `${Date.now()}-${file.originalname}`),
-  //     }),
-  //   }),
-  // )
-  // async uploadParse(@UploadedFiles() files: Express.Multer.File[]) {
-  //   const validDtos: CreateAutomationDto[] = [];
-
-  //   for (const file of files) {
-  //     try {
-  //       const content = fs.readFileSync(file.path, 'utf-8');
-  //       const parsed = parseServerTextFile(content);
-
-  //       // Reject files with missing required fields
-  //       if (!parsed?.hostname || !parsed?.ipAddress) continue;
-
-  //       const isDuplicate = await this.automationService.exists(
-  //         parsed.hostname,
-  //         parsed.ipAddress,
-  //       );
-
-  //       if (!isDuplicate) validDtos.push(parsed);
-  //     } catch (error) {
-  //       console.warn(`File parse error: ${file.originalname}`, error);
-  //     }
-  //   }
-
-  //   if (validDtos.length === 0) {
-  //     return {
-  //       isSuccessful: false,
-  //       message: 'No valid or non-duplicate automation records found',
-  //       data: [],
-  //     };
-  //   }
-
-  //   if (files.length > 100) {
-  //     throw new BadRequestException(
-  //       'Too many files uploaded. Maximum allowed is 10.',
-  //     );
-  //   }
-
-  //   const results = await this.automationService.bulkCreate(validDtos);
-
-  //   return {
-  //     isSuccessful: true,
-  //     message: `${results.length} automation records created`,
-  //     data: results,
-  //   };
-  // }
 
   @Post('upload-parse')
   @ApiConsumes('multipart/form-data')
@@ -126,6 +75,7 @@ export class AutomationController {
       }),
     }),
   )
+  @RequireGuiPermissions([PermissionActions.CREATE])
   async uploadParse(
     @UploadedFiles() files: Express.Multer.File[],
     @Body() body: any,

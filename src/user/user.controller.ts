@@ -18,6 +18,11 @@ import { UserService } from './user.service';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Response } from 'express';
 
+// RBAC Imports
+import { PermissionsGuard } from '../common/guards/permissions.guard';
+import { RequireGuiPermissions } from 'src/common/decorators/require-gui-permissions.decorator';
+import { PermissionActions } from '../common/enums/permissions.enum';
+
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -100,8 +105,9 @@ export class UserController {
   }
 
   @ApiBearerAuth('access-token')
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, PermissionsGuard)
   @Delete(':id')
+  @RequireGuiPermissions([PermissionActions.DELETE])
   async deleteUser(@Param('id', ParseIntPipe) id: number) {
     try {
       return await this.userService.deleteUser(id);
@@ -132,8 +138,9 @@ export class UserController {
   }
 
   @ApiBearerAuth('access-token')
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, PermissionsGuard)
   @Patch('change-password/:pin')
+  @RequireGuiPermissions([PermissionActions.UPDATE])
   async changePassword(
     @Param('pin') pin: string,
     @Body() updateUserDto: UpdateUserDto,

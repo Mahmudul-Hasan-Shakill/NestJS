@@ -14,6 +14,7 @@ import {
 import { UploadService } from 'src/upload/upload.service';
 import * as path from 'path';
 import * as fs from 'fs';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class DocumentService {
@@ -21,11 +22,14 @@ export class DocumentService {
     @InjectRepository(DocumentEntity)
     private readonly documentRepository: Repository<DocumentEntity>,
     private readonly uploadService: UploadService,
+    private readonly configService: ConfigService,
   ) {}
 
   /**
    * Create a document record manually (metadata only).
    */
+  file_path = this.configService.get<string>('FILE_PATH');
+
   async create(createDocumentDto: CreateDocumentDto): Promise<DocumentEntity> {
     const document = this.documentRepository.create(createDocumentDto);
     return await this.documentRepository.save(document);
@@ -218,7 +222,7 @@ export class DocumentService {
       relatedId: document.relatedId,
       relatedType: document.relatedType,
       // downloadUrl: `/api/documents/${document.id}/download`,
-      downloadUrl: `http://localhost:4000${document.storedFilePath.replace(/\\/g, '/')}`,
+      downloadUrl: `${this.file_path}${document.storedFilePath.replace(/\\/g, '/')}`,
     };
   }
 }

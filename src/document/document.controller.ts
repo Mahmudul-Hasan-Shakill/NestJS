@@ -29,58 +29,6 @@ import { Response } from 'express';
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
 
-  // @Post('upload/:relatedType/:relatedId')
-  // @UseInterceptors(
-  //   FileInterceptor('file', {
-  //     limits: { fileSize: 25 * 1024 * 1024 },
-  //     fileFilter: (req, file, callback) => {
-  //       if (
-  //         !file.mimetype.match(/\/(jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx)$/)
-  //       ) {
-  //         return callback(
-  //           new Error('Only image, PDF, or common document files are allowed!'),
-  //           false,
-  //         );
-  //       }
-  //       callback(null, true);
-  //     },
-  //   }),
-  // )
-  // @ApiConsumes('multipart/form-data')
-  // @ApiBody({
-  //   schema: {
-  //     type: 'object',
-  //     properties: {
-  //       file: {
-  //         type: 'string',
-  //         format: 'binary',
-  //         description: 'The document file to upload',
-  //       },
-  //     },
-  //   },
-  // })
-  // async uploadDocument(
-  //   @Param('relatedType') relatedType: string,
-  //   @Param('relatedId') relatedId: number,
-  //   @UploadedFile() file: Express.Multer.File,
-  // ) {
-  //   if (!file) {
-  //     throw new HttpException('No file provided', HttpStatus.BAD_REQUEST);
-  //   }
-
-  //   const document = await this.documentService.uploadFileForEntity(
-  //     relatedType,
-  //     relatedId,
-  //     file,
-  //   );
-
-  //   return {
-  //     isSuccessful: true,
-  //     message: 'Document uploaded successfully',
-  //     data: document,
-  //   };
-  // }
-
   @Post('upload/:relatedType/:relatedId')
   @UseInterceptors(
     FileInterceptor('file', {

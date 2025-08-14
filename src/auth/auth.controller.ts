@@ -88,50 +88,6 @@ export class AuthController {
     return await this.userService.create(createUserDto);
   }
 
-  // @UseGuards(RefreshJwtGuard)
-  // @Get('refresh/:pin')
-  // async refreshToken(@Param('pin') pin: string, @Res() res: Response) {
-  //   const refreshResult = await this.authService.refreshToken(pin);
-
-  //   const accessToken = refreshResult.data.access_token;
-  //   const accessTime = refreshResult.data.expiresIn;
-  //   const accessTimeMs = parseInt(accessTime.replace('s', ''), 10) * 1000;
-  //   const expiryDate = new Date(Date.now() + accessTimeMs);
-
-  //   res.cookie('ACSTKN', accessToken, {
-  //     httpOnly: false,
-  //     secure: false,
-  //     sameSite: 'lax',
-  //     expires: expiryDate,
-  //   });
-
-  //   const isReset = refreshResult.data.reset;
-  //   res.cookie('RST', isReset, {
-  //     httpOnly: false,
-  //     secure: false,
-  //     sameSite: 'lax',
-  //     expires: expiryDate,
-  //   });
-
-  //   const userRole = this.encryptionService.encrypt(refreshResult.data.role);
-  //   res.cookie('USRROLE', userRole, {
-  //     httpOnly: false,
-  //     secure: false,
-  //     sameSite: 'lax',
-  //     expires: expiryDate,
-  //   });
-
-  //   const userPin = this.encryptionService.encrypt(refreshResult.data.pin);
-  //   res.cookie('USRPIN', userPin, {
-  //     httpOnly: false,
-  //     secure: false,
-  //     sameSite: 'lax',
-  //     expires: expiryDate,
-  //   });
-
-  //   return res.send(refreshResult);
-  // }
-
   @UseGuards(RefreshJwtGuard)
   @Get('refresh/:pin')
   async refreshToken(@Param('pin') pin: string, @Res() res: Response) {

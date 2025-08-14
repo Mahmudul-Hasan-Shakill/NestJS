@@ -23,9 +23,14 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 
+// RBAC Imports
+import { PermissionsGuard } from '../../common/guards/permissions.guard';
+import { RequireGuiPermissions } from 'src/common/decorators/require-gui-permissions.decorator';
+import { PermissionActions } from '../../common/enums/permissions.enum';
+
 @ApiBearerAuth('access-token')
 @ApiTags('AMC')
-@UseGuards(JwtGuard)
+@UseGuards(JwtGuard, PermissionsGuard)
 @Controller('amc')
 export class AmcController {
   constructor(private readonly amcService: AmcService) {}
@@ -45,6 +50,7 @@ export class AmcController {
     status: HttpStatus.FORBIDDEN,
     description: 'Insufficient permissions.',
   })
+  @RequireGuiPermissions([PermissionActions.CREATE])
   async create(@Body() createAmcDto: CreateAmcDto) {
     return await this.amcService.create(createAmcDto);
   }
@@ -66,6 +72,7 @@ export class AmcController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Failed to retrieve AMC records.',
   })
+  @RequireGuiPermissions([PermissionActions.READ])
   async findAll(@Query() queryDto: AmcQueryDto) {
     return await this.amcService.findAll(queryDto);
   }
@@ -81,6 +88,7 @@ export class AmcController {
     status: HttpStatus.NOT_FOUND,
     description: 'AMC record not found.',
   })
+  @RequireGuiPermissions([PermissionActions.READ])
   async findOne(@Param('id') id: number) {
     return await this.amcService.findOne(id);
   }
@@ -101,6 +109,7 @@ export class AmcController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Validation or update failed.',
   })
+  @RequireGuiPermissions([PermissionActions.UPDATE])
   async update(@Param('id') id: number, @Body() updateAmcDto: UpdateAmcDto) {
     return await this.amcService.update(id, updateAmcDto);
   }
@@ -120,6 +129,7 @@ export class AmcController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Failed to delete AMC record.',
   })
+  @RequireGuiPermissions([PermissionActions.DELETE])
   async remove(@Param('id') id: number) {
     return await this.amcService.remove(id);
   }

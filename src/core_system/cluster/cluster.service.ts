@@ -74,4 +74,29 @@ export class ClusterService {
       data: null,
     };
   }
+
+  async getClusterNames(): Promise<any> {
+    try {
+      const clusterName = await this.clusterRepository
+        .createQueryBuilder('cluster')
+        .select('DISTINCT cluster.cluster_name')
+        .orderBy('cluster.cluster_name', 'ASC')
+        .getRawMany();
+      return this.successResponse(
+        'Cluster names retrieved successfully.',
+        clusterName.map((cluster) => cluster.cluster_name),
+      );
+    } catch (error) {
+      return this.errorResponse('Failed to retrieve cluster names.', error);
+    }
+  }
+
+  private successResponse(message: string, data: any = null) {
+    return { isSuccessful: true, message, data };
+  }
+
+  private errorResponse(message: string, error?: any) {
+    console.error(error);
+    return { isSuccessful: false, message, data: null };
+  }
 }

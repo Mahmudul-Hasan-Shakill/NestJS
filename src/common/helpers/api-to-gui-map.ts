@@ -50,6 +50,13 @@ export const apiToGuiMap: Record<string, string[]> = {
   'PATCH /api/database/:id': ['/core-systems/database-server-update'],
   'DELETE /api/database/:id': ['/core-systems/database-server-update'],
 
+  // FILESYSTEM APIs
+  'POST /api/filesystem': ['/core-systems/filesystem-creation'],
+  'GET /api/filesystem': ['/core-systems/filesystem-update'],
+  'GET /api/filesystem/:id': ['/core-systems/filesystem-update'],
+  'PATCH /api/filesystem/:id': ['/core-systems/filesystem-update'],
+  'DELETE /api/filesystem/:id': ['/core-systems/filesystem-update'],
+
   // PHYSICAL APIs
   'POST /api/physical': ['/core-systems/physical-server-creation'],
   'GET /api/physical': ['/core-systems/physical-server-update'],

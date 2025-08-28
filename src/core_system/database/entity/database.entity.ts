@@ -2,8 +2,6 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
   ManyToMany,
   JoinTable,
 } from 'typeorm';
@@ -70,6 +68,9 @@ export class DatabaseEntity {
 
   @Column({ name: 'edit_by', nullable: true })
   editBy: string;
+
+  @Column({ type: 'jsonb', default: () => `'{}'::jsonb` })
+  extras: Record<string, any>;
 
   @ManyToMany(() => VmEntity, (vm) => vm.databases)
   @JoinTable({ name: 'database_vm' })

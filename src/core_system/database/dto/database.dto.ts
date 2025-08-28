@@ -7,6 +7,7 @@ import {
   IsArray,
   IsDate,
   IsBoolean,
+  IsObject,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
@@ -87,6 +88,14 @@ export class CreateDatabaseDto {
   @IsArray()
   @IsNumber({}, { each: true })
   automationIds?: number[];
+
+  @IsOptional()
+  @IsObject()
+  extras?: Record<string, any>;
+
+  @IsOptional()
+  @IsArray()
+  extrasRemove?: string[];
 }
 
 export class UpdateDatabaseDto extends PartialType(CreateDatabaseDto) {}

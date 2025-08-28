@@ -9,6 +9,7 @@ import { JwtStrategy } from './strategies/jwt-strategy';
 import { RefreshJwtStrategy } from './strategies/refreshToken.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EncryptionService } from './strategies/encryption.service';
+import { CookiesService } from 'src/common/cookies/cookies.service';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { EncryptionService } from './strategies/encryption.service';
     RefreshJwtStrategy,
     ConfigService,
     EncryptionService,
+    CookiesService,
   ],
   controllers: [AuthController],
 })

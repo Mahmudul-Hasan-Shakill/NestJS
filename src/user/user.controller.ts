@@ -17,6 +17,7 @@ import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Response } from 'express';
+import { CookiesService } from 'src/common/cookies/cookies.service';
 
 // RBAC Imports
 import { PermissionsGuard } from '../common/guards/permissions.guard';
@@ -25,7 +26,10 @@ import { PermissionActions } from '../common/enums/permissions.enum';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly cookiesService: CookiesService,
+  ) {}
 
   @Post('self-register')
   async registerUser(@Body() createUserDto: CreateUserDto) {
@@ -150,9 +154,10 @@ export class UserController {
       const result = await this.userService.changePassword(pin, updateUserDto);
 
       if (result?.isSuccessful) {
-        res.clearCookie('RST', {
-          path: '/',
-        });
+        // res.clearCookie('RST', {
+        //   path: '/',
+        // });
+        res.clearCookie('RST', this.cookiesService.clearMisc());
       }
 
       return result;

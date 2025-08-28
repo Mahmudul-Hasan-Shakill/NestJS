@@ -8,6 +8,8 @@ import { AutomationEntity } from '../automation/entity/automation.entity';
 import { PermissionsGuard } from 'src/common/guards/permissions.guard';
 import { RoleEntity } from 'src/role/entity/role.entity';
 import { UserEntity } from 'src/user/entity/user.entity';
+import { DynamicFieldEntity } from 'src/dynamic_schema/entity/dynamic-field.entity';
+import { DynamicSchemaService } from 'src/dynamic_schema/dynamic-schema.service';
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { UserEntity } from 'src/user/entity/user.entity';
       VmEntity,
       AutomationEntity,
       RoleEntity,
-      UserEntity
+      UserEntity,
+      DynamicFieldEntity,
     ]),
   ],
   controllers: [DatabaseController],
-  providers: [DatabaseService, PermissionsGuard],
+  providers: [DatabaseService, PermissionsGuard, DynamicSchemaService],
 })
 export class DatabaseModule {}

@@ -6,10 +6,11 @@ import { UserService } from './user.service';
 import { ConfigService } from '@nestjs/config';
 import { PermissionsGuard } from 'src/common/guards/permissions.guard';
 import { RoleEntity } from 'src/role/entity/role.entity';
+import { CookiesService } from '../common/cookies/cookies.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, RoleEntity])],
   controllers: [UserController],
-  providers: [UserService, ConfigService, PermissionsGuard],
+  providers: [UserService, ConfigService, CookiesService, PermissionsGuard],
 })
 export class UserModule {}

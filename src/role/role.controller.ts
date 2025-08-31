@@ -88,6 +88,7 @@ import {
   ValidationPipe,
   Post,
   HttpStatus,
+  Req,
 } from '@nestjs/common';
 import { JwtGuard } from '../auth/guards/jwt-auth.guard';
 import { RoleService } from './role.service';
@@ -137,8 +138,12 @@ export class RoleController {
     description: 'Failed to retrieve role names.',
   })
   @RequireGuiPermissions([PermissionActions.READ])
-  getRoleNames(): any {
-    return this.roleService.getRoleNames();
+  // getRoleNames(): any {
+  //   return this.roleService.getRoleNames();
+  // }
+  async getRoleNames(@Req() req: any) {
+    const actor = { role: req.user?.userRole };
+    return this.roleService.getRoleNames(actor);
   }
 
   @Get('/gui')

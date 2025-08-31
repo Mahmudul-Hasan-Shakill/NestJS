@@ -17,6 +17,7 @@ import { PhysicalHostEntity } from './src/core_system/physical_host/entity/physi
 import { DynamicFieldEntity } from './src/dynamic_schema/entity/dynamic-field.entity';
 import { FilesystemEntity } from 'src/core_system/filesystem/entity/filesystem.entity';
 import { AppLogEntity } from 'src/logging/entity/app-log.entity';
+import { DeviceEntity } from 'src/device/entity/device.entity';
 
 export const getDatabaseConfig = (
   config: ConfigService,
@@ -49,6 +50,7 @@ export const getDatabaseConfig = (
     DynamicFieldEntity,
     FilesystemEntity,
     AppLogEntity,
+    DeviceEntity,
   ],
 });
 

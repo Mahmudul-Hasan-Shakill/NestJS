@@ -105,6 +105,7 @@ import { AppLogModule } from './logging/app-log.module';
 import { RequestContextMiddleware } from './logging/middlewares/request-context.middleware';
 import { HttpLoggerMiddleware } from './logging/middlewares/http-logger.middleware';
 import { CookiesModule } from './common/cookies/cookies.module';
+import { DeviceModule } from './device/device.module';
 
 @Module({
   imports: [
@@ -147,6 +148,7 @@ import { CookiesModule } from './common/cookies/cookies.module';
     FilesystemModule,
     AppLogModule,
     CookiesModule,
+    DeviceModule,
   ],
   controllers: [AppController],
   providers: [

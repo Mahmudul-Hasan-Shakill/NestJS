@@ -21,7 +21,7 @@ import { PermissionActions } from '../../common/enums/permissions.enum';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Filesystem')
-@UseGuards(JwtGuard /*, PermissionsGuard */)
+@UseGuards(JwtGuard, PermissionsGuard)
 @Controller('filesystem')
 export class FilesystemController {
   constructor(private readonly svc: FilesystemService) {}

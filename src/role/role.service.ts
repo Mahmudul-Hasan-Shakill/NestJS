@@ -236,16 +236,41 @@ export class RoleService {
     }
   }
 
-  async getRoleNames(): Promise<any> {
+  // async getRoleNames(): Promise<any> {
+  //   try {
+  //     const roleNames = await this.roleRepository
+  //       .createQueryBuilder('role')
+  //       .select('DISTINCT role.role_name')
+  //       .orderBy('role.role_name', 'ASC')
+  //       .getRawMany();
+  //     return this.successResponse(
+  //       'Role names retrieved successfully.',
+  //       roleNames.map((role) => role.role_name),
+  //     );
+  //   } catch (error) {
+  //     return this.errorResponse('Failed to retrieve role names.', error);
+  //   }
+  // }
+
+  // src/role/role.service.ts
+  async getRoleNames(actor?: { role?: string }): Promise<any> {
     try {
-      const roleNames = await this.roleRepository
+      const isRoot = (actor?.role ?? '').trim().toLowerCase() === 'root';
+
+      const qb = this.roleRepository
         .createQueryBuilder('role')
-        .select('DISTINCT role.role_name')
-        .orderBy('role.role_name', 'ASC')
-        .getRawMany();
+        .select('DISTINCT role.role_name', 'role_name')
+        .orderBy('role.role_name', 'ASC');
+
+      // Non-root callers must NOT see "root" in the list
+      if (!isRoot) {
+        qb.where('LOWER(role.role_name) <> :root', { root: 'root' });
+      }
+
+      const rows = await qb.getRawMany();
       return this.successResponse(
         'Role names retrieved successfully.',
-        roleNames.map((role) => role.role_name),
+        rows.map((r) => r.role_name),
       );
     } catch (error) {
       return this.errorResponse('Failed to retrieve role names.', error);

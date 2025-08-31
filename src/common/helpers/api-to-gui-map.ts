@@ -91,6 +91,13 @@ export const apiToGuiMap: Record<string, string[]> = {
   'GET /api/physical-hosts/summary': ['/core-systems/physical-host-update'],
   'PATCH /api/physical-hosts/:id': ['/core-systems/physical-host-update'],
   'DELETE /api/physical-hosts/:id': ['/core-systems/physical-host-update'],
+
+  // DEVICE APIs
+  'POST /api/device': ['/device-inventory/device-creation'],
+  'GET /api/device': ['/device-inventory/device-update'],
+  'GET /api/device/:id': ['/device-inventory/device-update'],
+  'PATCH /api/device/:id': ['/device-inventory/device-update'],
+  'DELETE /api/device/:id': ['/device-inventory/device-update'],
 };
 
 // Helper: get ALL GUI paths mapped to this API request

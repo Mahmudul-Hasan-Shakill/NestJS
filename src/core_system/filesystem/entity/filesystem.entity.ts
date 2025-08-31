@@ -16,6 +16,9 @@ export class FilesystemEntity {
   @Column({ name: 'ip_address', nullable: true })
   ipAddress: string;
 
+  @Column({ name: 'os', nullable: true })
+  os: string;
+
   @Column({ name: 'backup_environment', nullable: true })
   backupEnvironment: string;
 

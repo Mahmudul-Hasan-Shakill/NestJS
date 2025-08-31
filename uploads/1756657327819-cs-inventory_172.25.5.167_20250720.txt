@@ -1,0 +1,46 @@
+=== Server Basic Information ===
+Hostname: cs-inventory
+IP Address: 172.25.5.167
+Server Environment: Test Server
+CPU Physical Cores: 2
+CPU Virtual Cores: 2
+CPU Model: Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz
+Total RAM: 4 Gi
+Total Disk Size: 281 Gi
+OS Version: Red Hat Enterprise Linux 8.8 (Ootpa)
+Kernel Version: 4.18.0-477.15.1.el8_8.x86_64
+Server Platform: vmware Virtual Machine
+Serial Number: N/A
+SSH Port(s): 9222,7822
+Socket(s): 2
+Last Patch Installed: Mon 14 Jul 2025 06:32:52 PM +06
+System Uptime: up 20 weeks, 40 minutes (since 2025-03-02 14:11:22)
+
+=== Security Products ===
+Falcon Sensor: Installed
+Version: 7.24.0-17706.el8
+Falcon Install Date: Thu 08 May 2025 04:37:21 PM +06
+Service Status: active
+Qualys Cloud Agent: Not installed
+Version:
+Qualys Install Date: Thu 08 May 2025 08:37:21 PM +06
+Service Status:
+
+=== Disk Information ===
+Total size: 28 Gi
+Used space: 5 Gi
+Free space: 23 Gi
+
+=== Network Details ===
+Subnet Mask: 26
+Gateway: 172.25.5.129
+IP: 172.25.5.167
+
+=== NTP Status ===
+NTP service: active
+NTP Servers: 10.5.0.250,10.5.129.19
+Current Sync Source: 10.5.0.250
+
+=== User and Group Information ===
+System Users Count: 7
+Users with sudo access: appuser,autonom pamadm,root zabbix

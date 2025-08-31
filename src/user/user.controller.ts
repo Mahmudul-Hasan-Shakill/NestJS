@@ -357,9 +357,8 @@ export class UserController {
   }
 
   @ApiBearerAuth('access-token')
-  @UseGuards(JwtGuard, PermissionsGuard)
+  @UseGuards(JwtGuard)
   @Patch('change-password/:pin')
-  @RequireGuiPermissions([PermissionActions.UPDATE])
   async changePassword(
     @Param('pin') pin: string,
     @Body() updateUserDto: UpdateUserDto,
